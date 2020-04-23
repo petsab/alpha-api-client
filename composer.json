@@ -1,0 +1,50 @@
+{
+  "name": "teas/alpha-api-client",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "autoload": {
+    "psr-4": {
+      "Teas\\AlphaApiClient\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TeasTest\\AlphaApiClient\\": "./tests"
+    }
+  },
+  "require": {
+    "php": "^7.2",
+    "ext-json": "*",
+    "bootiq/service-layer": "^1.0"
+  },
+  "require-dev": {
+    "povils/phpmnd": "^2.2",
+    "phpmd/phpmd": "^2.8",
+    "phpstan/phpstan": "^0.12.18",
+    "php-parallel-lint/php-parallel-lint": "^1.2",
+    "sebastian/phpcpd": "^4.1",
+    "php-parallel-lint/php-var-dump-check": "^0.3.0",
+    "squizlabs/php_codesniffer": "^3.5",
+    "slevomat/coding-standard": "^6.2",
+    "phpunit/phpunit": "^8.5"
+  },
+  "scripts": {
+    "phpcs": "php vendor/bin/phpcs --standard=rulesetCS.xml --parallel=8 --extensions=php --encoding=utf-8 --tab-width=4 -sp src",
+    "phpcbf": "php vendor/bin/phpcbf --standard=rulesetCS.xml --parallel=8 --extensions=php --encoding=utf-8 --tab-width=4 -sp src",
+    "phplint": "php vendor/bin/parallel-lint -j 10 src",
+    "phpstan": "php vendor/bin/phpstan analyse src --level max --configuration=./phpstan.neon",
+    "phpmd": "php vendor/bin/phpmd src text rulesetMD.xml",
+    "phpcpd": "php vendor/bin/phpcpd --progress src",
+    "phpvdc": "php vendor/bin/var-dump-check --symfony src",
+    "test": "php vendor/bin/phpunit tests",
+    "test-coverage": "php vendor/bin/phpunit tests --coverage-html web/_coverage",
+    "check-code": [
+      "@phplint",
+      "@phpstan",
+      "@phpcs",
+      "@phpmd",
+      "@phpcpd",
+      "@phpvdc"
+    ]
+  }
+}

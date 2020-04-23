@@ -1,0 +1,6 @@
+.idea
+web
+demo
+vendor
+.phpunit*
+composer.lock
