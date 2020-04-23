@@ -1,5 +1,5 @@
 {
-  "name": "teas/alpha-api-client",
+  "name": "petsab/alpha-api-client",
   "minimum-stability": "stable",
   "license": "Apache-2.0",
   "autoload": {
