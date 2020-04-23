@@ -188,6 +188,17 @@ class SourcingCar implements DataObjectInterface
     }
 
     /**
+     * @param string $id
+     * @return SourcingCar
+     */
+    public function setId(string $id): SourcingCar
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getId(): string

@@ -107,7 +107,8 @@ class SourcingCarService
         $car = $mapper->map($data);
         $result = [];
 
-        for ($i = 1; $i <= $size; $i++) {
+        for ($i = $offset; $i <= $offset + $size; $i++) {
+            $car->setId((string)$i);
             $result[] = $car;
         }
 
@@ -122,8 +123,10 @@ class SourcingCarService
     {
         $data = json_decode($this->getMockData(), true);
         $mapper = $this->responseMapperFactory->createSourcingCarResponseMapper();
+        $car = $mapper->map($data);
+        $car->setId($id);
 
-        return $mapper->map($data);
+        return $car;
     }
 
     /**
