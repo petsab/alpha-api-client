@@ -15,7 +15,7 @@
   "require": {
     "php": "^7.2",
     "ext-json": "*",
-    "bootiq/service-layer": "^1.0"
+    "bootiq/service-layer": "^1.0.5"
   },
   "require-dev": {
     "povils/phpmnd": "^2.2",
