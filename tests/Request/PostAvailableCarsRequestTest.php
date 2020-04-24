@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\Request\Response;
 
 use BootIq\ServiceLayer\Enum\HttpMethod;

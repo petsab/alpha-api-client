@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="Naming Rules"
-         xmlns="http://pmd.sf.net/ruleset/1.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
-         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
-    <description>
-        Mess detector custom rule set.
-    </description>
-    <!-- Import the entire code rule sets -->
-    <rule ref="rulesets/cleancode.xml"/>
+<ruleset>
+
+    <exclude-pattern>src/App/Migration</exclude-pattern>
+    <exclude-pattern>src/App/Kernel.php</exclude-pattern>
+
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess"/>
+    </rule>
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
     <rule ref="rulesets/design.xml"/>
@@ -33,4 +31,5 @@
             <property name="maximum" description="Maximum length for a variable, property or parameter name" value="30"/>
         </properties>
     </rule>
+
 </ruleset>

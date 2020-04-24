@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\Request\Response;
 
 use PHPUnit\Framework\TestCase;
@@ -14,6 +16,4 @@ class SourcingCarRequestFactoryTest extends TestCase
         $request = $factory->createPostAvailableCarsRequest([]);
         $this->assertInstanceOf(PostAvailableCarsRequest::class, $request);
     }
-
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [[
     '{
       "PK": "CZ-sauto-16100000",

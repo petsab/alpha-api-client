@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\ResponseMapper;
 
 use PHPUnit\Framework\TestCase;
@@ -103,4 +105,3 @@ class UrlTest extends TestCase
         return include $path;
     }
 }
-

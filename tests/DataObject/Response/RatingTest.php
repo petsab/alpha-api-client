@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\DataObject\Response;
 
 use PHPUnit\Framework\TestCase;
@@ -21,4 +23,3 @@ class RatingTest extends TestCase
         $this->assertSame($data, $rating->toArray());
     }
 }
-

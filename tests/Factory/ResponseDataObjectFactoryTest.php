@@ -1,13 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\Request\Response;
 
-use BootIq\ServiceLayer\Enum\HttpMethod;
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
-use Teas\AlphaApiClient\Request\PostAvailableCarsRequest;
-use Teas\AlphaApiClient\Request\SourcingCarRequestFactory;
 
 class ResponseDataObjectFactoryTest extends TestCase
 {

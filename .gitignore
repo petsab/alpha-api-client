@@ -2,5 +2,5 @@
 web
 demo
 vendor
-.phpunit*
 composer.lock
+*.cache
