@@ -10,8 +10,8 @@ use Teas\AlphaApiClient\DataObject\Response\SourcingCar;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
 use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
+use Teas\AlphaApiClient\Factory\SourcingCarRequestFactory;
 use Teas\AlphaApiClient\Request\PostAvailableCarsRequest;
-use Teas\AlphaApiClient\Request\SourcingCarRequestFactory;
 
 use function json_decode;
 

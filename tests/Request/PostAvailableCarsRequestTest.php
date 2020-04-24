@@ -4,8 +4,8 @@ namespace TeasTest\AlphaApiClient\Request\Response;
 
 use BootIq\ServiceLayer\Enum\HttpMethod;
 use PHPUnit\Framework\TestCase;
+use Teas\AlphaApiClient\Factory\SourcingCarRequestFactory;
 use Teas\AlphaApiClient\Request\PostAvailableCarsRequest;
-use Teas\AlphaApiClient\Request\SourcingCarRequestFactory;
 
 class PostAvailableCarsRequestTest extends TestCase
 {

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Teas\AlphaApiClient\Request;
+namespace Teas\AlphaApiClient\Factory;
+
+use Teas\AlphaApiClient\Request\PostAvailableCarsRequest;
 
 class SourcingCarRequestFactory
 {
