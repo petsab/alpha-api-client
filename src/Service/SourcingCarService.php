@@ -108,8 +108,9 @@ class SourcingCarService
         $result = [];
 
         for ($i = $offset; $i <= $offset + $size; $i++) {
-            $car->setId((string)$i);
-            $result[] = $car;
+            $obj = clone $car;
+            $obj->setId((string) $i);
+            $result[] = $obj;
         }
 
         return $this->responseDataObjectFactory->createSimpleList($result);
