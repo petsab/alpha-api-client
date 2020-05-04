@@ -8,9 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
 use Teas\AlphaApiClient\ResponseMapper\SourcingCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
+use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
 class UrlTest extends TestCase
 {
+    use NullableDateTimeTrait;
+
     /**
      * @var ResponseDataObjectFactory
      */
@@ -49,10 +52,10 @@ class UrlTest extends TestCase
         $this->assertSame($response['feature_score'], $car->getFeatureScore());
         $this->assertSame($response['features'], $car->getFeatures());
         $this->assertSame($response['currency'], $car->getPrice()->getCurrency());
-        $this->assertSame($response['first_occurence'], $car->getOccurrence()->getFirst()->format('Y-m-d'));
-        $this->assertSame($response['fueltype'], $car->getFuelType());
+        $this->assertSame($response['first_occurrence'], $car->getOccurrence()->getFirst()->format('Y-m-d'));
+        $this->assertSame($response['fuel_type'], $car->getFuelType());
         $this->assertSame($response['interior_material'], $car->getInteriorMaterial());
-        $this->assertSame($response['last_occurence'], $car->getOccurrence()->getLast()->format('Y-m-d'));
+        $this->assertSame($response['last_occurrence'], $car->getOccurrence()->getLast()->format('Y-m-d'));
         $this->assertSame($response['make'], $car->getMake());
         $this->assertSame($response['mileage'], $car->getMileage());
         $this->assertSame($response['meta_updated_timestamp'], $car->getMetaUpdated()->format(DATE_ATOM));
@@ -60,6 +63,7 @@ class UrlTest extends TestCase
         $this->assertSame($response['model'], $car->getModel());
         $this->assertSame($response['number_of_seats'], $car->getNumberOfSeats());
         $this->assertSame($response['power'], $car->getPower());
+        $this->assertSame($response['premium_features'], $car->getPremiumFeatures());
         $this->assertSame($response['price_change'], $car->getPrice()->getChange());
         $this->assertSame($response['price_with_vat'], $car->getPrice()->getWithVat());
         $this->assertSame($response['price_with_vat_czk'], $car->getPrice()->getWithVatCzk());
@@ -77,8 +81,9 @@ class UrlTest extends TestCase
         $this->assertSame($response['seller']['type'], $car->getSeller()->getType());
         $this->assertSame($response['seller_country'], $car->getSeller()->getCountry());
         $this->assertSame($response['server'], $car->getServer());
-        $this->assertSame($response['technical_inspection_valid_to'], $car->getTechnicalInspectionValidTo()
-            ->format('Y-m-d'));
+        $this->assertSame($response['technical_inspection_valid_to'], $this->nullableDateTimeToString(
+            $car->getTechnicalInspectionValidTo(),
+            'Y-m-d'));
         $this->assertSame($response['transmission'], $car->getTransmission());
         $this->assertSame($response['url']['full'], $car->getUrl()->getFull());
         $this->assertSame($response['vat_rate'], $car->getPrice()->getVatRate());
@@ -93,6 +98,7 @@ class UrlTest extends TestCase
         $this->assertSame($response['measure_retail_price_position'], $car->getMeasure()->getRetailPricePosition());
         $this->assertSame($response['measure_sold_range_category'], $car->getMeasure()->getSoldRangeCategory());
         $this->assertSame($response['measure_total_score'], $car->getMeasure()->getTotalScore());
+        $this->assertSame($response['thumbnail_url']['full'], $car->getThumbnailUrl()->getFull());
     }
 
     /**

@@ -51,17 +51,17 @@ class MeasureTest extends TestCase
         $this->assertSame($totalScore, $measure->getTotalScore());
 
         $data = [
-            'car_rank' => $measure->getCarRank(),
-            'count_relevant_car' => $measure->getCountRelevantCar(),
+            'carRank' => $measure->getCarRank(),
+            'countRelevantCar' => $measure->getCountRelevantCar(),
             'delta' => $measure->getDelta(),
             'level' => $measure->getLevel(),
             'liquidity' => $measure->getLiquidity(),
-            'pp_level' => $measure->getPpLevel(),
+            'ppLevel' => $measure->getPpLevel(),
             'rate' => $measure->getRate(),
-            'relative_price_position' => $measure->getRelativePricePosition(),
-            'retail_price_position' => $measure->getRetailPricePosition(),
-            'sold_range_category' => $measure->getSoldRangeCategory(),
-            'total_score' => $measure->getTotalScore(),
+            'relativePricePosition' => $measure->getRelativePricePosition(),
+            'retailPricePosition' => $measure->getRetailPricePosition(),
+            'soldRangeCategory' => $measure->getSoldRangeCategory(),
+            'totalScore' => $measure->getTotalScore(),
         ];
         $this->assertSame($data, $measure->toArray());
     }

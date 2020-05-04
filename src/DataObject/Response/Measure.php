@@ -278,17 +278,17 @@ class Measure implements DataObjectInterface
     public function toArray(): array
     {
         return [
-            'car_rank' => $this->carRank,
-            'count_relevant_car' => $this->countRelevantCar,
+            'carRank' => $this->carRank,
+            'countRelevantCar' => $this->countRelevantCar,
             'delta' => $this->delta,
             'level' => $this->level,
             'liquidity' => $this->liquidity,
-            'pp_level' => $this->ppLevel,
+            'ppLevel' => $this->ppLevel,
             'rate' => $this->rate,
-            'relative_price_position' => $this->relativePricePosition,
-            'retail_price_position' => $this->retailPricePosition,
-            'sold_range_category' => $this->soldRangeCategory,
-            'total_score' => $this->totalScore,
+            'relativePricePosition' => $this->relativePricePosition,
+            'retailPricePosition' => $this->retailPricePosition,
+            'soldRangeCategory' => $this->soldRangeCategory,
+            'totalScore' => $this->totalScore,
         ];
     }
 }

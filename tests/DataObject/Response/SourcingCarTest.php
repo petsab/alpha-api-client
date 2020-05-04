@@ -27,8 +27,10 @@ class SourcingCarTest extends TestCase
         $drive = uniqid();
         $featureScore = (float) rand(1, 100);
         $features = [];
+        $premiumFeatures = [];
         for ($i = 0; $i < rand(5, 10); $i++) {
             $features[] = uniqid();
+            $premiumFeatures[] = uniqid();
         }
         $fuelType = uniqid();
         $interiorMaterial = uniqid();
@@ -63,12 +65,12 @@ class SourcingCarTest extends TestCase
         $price = $this->createMock(Price::class);
         $priceData = [
             'change' => (float) rand(1, 100),
-            'with_vat' => rand(1, 100),
-            'with_vat_czk' => rand(1, 100),
-            'with_vat_eur' => rand(1, 100),
-            'retail_price_czk' => rand(1, 100),
-            'vat_rate' => rand(1, 100),
-            'vat_reclaimable' => rand(1, 10) > 5,
+            'withVat' => rand(1, 100),
+            'withVatCzk' => rand(1, 100),
+            'withVatEur' => rand(1, 100),
+            'retailPriceCzk' => rand(1, 100),
+            'vatRate' => rand(1, 100),
+            'vatReclaimable' => rand(1, 10) > 5,
             'currency' => uniqid(),
         ];
         $price->expects(self::exactly(2))
@@ -103,21 +105,26 @@ class SourcingCarTest extends TestCase
 
         $measure = $this->createMock(Measure::class);
         $measureData = [
-            'car_rank' => uniqid(),
-            'count_relevant_car' => uniqid(),
+            'carRank' => uniqid(),
+            'countRelevantCar' => uniqid(),
             'delta' => uniqid(),
             'level' => uniqid(),
             'liquidity' => uniqid(),
-            'pp_level' => uniqid(),
+            'ppLevel' => uniqid(),
             'rate' => uniqid(),
-            'relative_price_position' => uniqid(),
-            'retail_price_position' => uniqid(),
-            'sold_range_category' => uniqid(),
-            'total_score' => uniqid(),
+            'relativePricePosition' => uniqid(),
+            'retailPricePosition' => uniqid(),
+            'soldRangeCategory' => uniqid(),
+            'totalScore' => uniqid(),
         ];
         $measure->expects(self::exactly(2))
             ->method('toArray')
             ->willReturn($measureData);
+
+        $thumbUrl = $this->createMock(Url::class);
+        $thumbUrl->expects(self::exactly(2))
+            ->method('toArray')
+            ->willReturn(['full' => uniqid()]);
 
         $sourcingCar = new SourcingCar($id);
         $sourcingCar->setAdId($adId)
@@ -141,6 +148,7 @@ class SourcingCarTest extends TestCase
             ->setNumberOfSeats($numberOfSeats)
             ->setOriginCountry($originCountry)
             ->setPower($power)
+            ->setPremiumFeatures($premiumFeatures)
             ->setPrice($price)
             ->setSAutoUrl($sAutoUrl)
             ->setSeller($seller)
@@ -151,37 +159,40 @@ class SourcingCarTest extends TestCase
             ->setUrl($url)
             ->setVin($vin)
             ->setYear($year)
-            ->setMeasure($measure);
+            ->setMeasure($measure)
+            ->setThumbnailUrl($thumbUrl);
 
         $data = [
             'id' => $sourcingCar->getId(),
-            'ad_id' => $sourcingCar->getAdId(),
-            'body_type' => $sourcingCar->getBodyType(),
-            'buyer_country' => $sourcingCar->getBuyerCountry(),
+            'adId' => $sourcingCar->getAdId(),
+            'bodyType' => $sourcingCar->getBodyType(),
+            'buyerCountry' => $sourcingCar->getBuyerCountry(),
             'condition' => $sourcingCar->getCondition(),
-            'cubic_capacity' => $sourcingCar->getCubicCapacity(),
-            'days_on_stock' => $sourcingCar->getDaysOnStock(),
-            'drive_type' => $sourcingCar->getDriveType(),
-            'feature_score' => $sourcingCar->getFeatureScore(),
+            'cubicCapacity' => $sourcingCar->getCubicCapacity(),
+            'daysOnStock' => $sourcingCar->getDaysOnStock(),
+            'driveType' => $sourcingCar->getDriveType(),
+            'featureScore' => $sourcingCar->getFeatureScore(),
             'features' => $sourcingCar->getFeatures(),
             'occurrence' => $sourcingCar->getOccurrence()->toArray(),
-            'fuel_type' => $sourcingCar->getFuelType(),
-            'interior_material' => $sourcingCar->getInteriorMaterial(),
+            'fuelType' => $sourcingCar->getFuelType(),
+            'interiorMaterial' => $sourcingCar->getInteriorMaterial(),
             'make' => $sourcingCar->getMake(),
             'measure' => $sourcingCar->getMeasure()->toArray(),
-            'meta_updated' => $sourcingCar->getMetaUpdated()->format(DATE_ATOM),
+            'metaUpdated' => $sourcingCar->getMetaUpdated()->format(DATE_ATOM),
             'mileage' => $sourcingCar->getMileage(),
-            'mobile_de_url' => $sourcingCar->getMobileDeUrl()->toArray(),
+            'mobileDeUrl' => $sourcingCar->getMobileDeUrl()->toArray(),
             'model' => $sourcingCar->getModel(),
-            'number_of_seats' => $sourcingCar->getNumberOfSeats(),
-            'origin_country' => $sourcingCar->getOriginCountry(),
+            'numberOfSeats' => $sourcingCar->getNumberOfSeats(),
+            'originCountry' => $sourcingCar->getOriginCountry(),
             'power' => $sourcingCar->getPower(),
+            'premiumFeatures' => $sourcingCar->getPremiumFeatures(),
             'price' => $sourcingCar->getPrice()->toArray(),
-            'sauto_url' => $sourcingCar->getSAutoUrl()->toArray(),
+            'sAutoUrl' => $sourcingCar->getSAutoUrl()->toArray(),
             'seller' => $sourcingCar->getSeller()->toArray(),
             'server' => $sourcingCar->getServer(),
-            'sum_relative_price_difference' => $sourcingCar->getSumRelativePriceDifference(),
-            'technical_inspection_valid_to' => $sourcingCar->getTechnicalInspectionValidTo()->format('Y-m-d'),
+            'sumRelativePriceDifference' => $sourcingCar->getSumRelativePriceDifference(),
+            'technicalInspectionValidTo' => $sourcingCar->getTechnicalInspectionValidTo()->format('Y-m-d'),
+            'thumbnailUrl' => $sourcingCar->getThumbnailUrl()->toArray(),
             'transmission' => $sourcingCar->getTransmission(),
             'url' => $sourcingCar->getUrl()->toArray(),
             'vin' => $sourcingCar->getVin(),

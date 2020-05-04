@@ -178,12 +178,12 @@ class Price implements DataObjectInterface
     {
         return [
             'change' => $this->change,
-            'with_vat' => $this->withVat,
-            'with_vat_czk' => $this->withVatCzk,
-            'with_vat_eur' => $this->withVatEur,
-            'retail_price_czk' => $this->retailPriceCzk,
-            'vat_rate' => $this->vatRate,
-            'vat_reclaimable' => $this->vatReclaimable,
+            'withVat' => $this->withVat,
+            'withVatCzk' => $this->withVatCzk,
+            'withVatEur' => $this->withVatEur,
+            'retailPriceCzk' => $this->retailPriceCzk,
+            'vatRate' => $this->vatRate,
+            'vatReclaimable' => $this->vatReclaimable,
             'currency' => $this->currency,
         ];
     }

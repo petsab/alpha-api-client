@@ -31,12 +31,12 @@ class PriceTest extends TestCase
         $this->assertSame($retailPriceCzk, $price->getRetailPriceCzk());
         $data = [
             'change' => $price->getChange(),
-            'with_vat' => $price->getWithVat(),
-            'with_vat_czk' => $price->getWithVatCzk(),
-            'with_vat_eur' => $price->getWithVatEur(),
-            'retail_price_czk' => $price->getRetailPriceCzk(),
-            'vat_rate' => $price->getVatRate(),
-            'vat_reclaimable' => $price->isVatReclaimable(),
+            'withVat' => $price->getWithVat(),
+            'withVatCzk' => $price->getWithVatCzk(),
+            'withVatEur' => $price->getWithVatEur(),
+            'retailPriceCzk' => $price->getRetailPriceCzk(),
+            'vatRate' => $price->getVatRate(),
+            'vatReclaimable' => $price->isVatReclaimable(),
             'currency' => $price->getCurrency(),
         ];
         $this->assertSame($data, $price->toArray());

@@ -5,78 +5,94 @@ declare(strict_types=1);
 // phpcs:disable
 return '
 {
-      "PK": "CZ-sauto-16367579",
-      "ad_id": "sauto-16367579",
+      "PK": "CZ-sauto-12566614",
+      "ad_id": "sauto-12566614",
+      "available_car": true,
       "body_type": "OTHER",
       "buyer_country": "CZ",
       "condition": "USED",
-      "cubic_capacity": 1998,
+      "cubic_capacity": 1497,
       "currency": "CZK",
-      "days_on_stock": 472,
+      "days_on_stock": 477,
       "drive_type": "4X2",
-      "feature_score": 0.6267332224,
+      "feature_score": 0.9310344828,
       "features": [
+        "feature_alloy_wheels",
+        "feature_bluetooth",
         "feature_esp",
+        "feature_front_seats_heated",
+        "feature_start_stop_system",
         "feature_multifunctional_steering_wheel",
         "feature_air_conditioning"
       ],
-      "first_occurence": "2019-01-04",
-      "fueltype": "PETROL",
+      "first_occurrence": "2019-01-04",
+      "fuel_type": "HYBRID",
       "interior_material": null,
-      "last_occurence": "2020-04-20",
-      "make": "MERCEDES_BENZ",
-      "measure_car_rank": 1,
-      "measure_count_relevant_car": 2,
-      "measure_delta": 2,
+      "last_occurrence": "2020-04-25",
+      "make": "TOYOTA",
+      "measure_car_rank": 9,
+      "measure_count_relevant_car": 9,
+      "measure_delta": 1,
       "measure_level": null,
       "measure_liquidity": null,
-      "measure_percentile_10_price": 86200.0,
-      "measure_rate": 0.33,
-      "measure_relative_price_position": 0.0,
+      "measure_pp_level": 6,
+      "measure_rate": 0.0,
+      "measure_relative_price_position": 1.0,
       "measure_retail_price_position": 80,
-      "measure_sold_range_category": "0-10",
-      "measure_total_score": 0.66,
-      "meta_updated_timestamp": "2020-04-21T14:56:52.302Z",
-      "mileage": 160000,
+      "measure_sold_range_category": null,
+      "measure_total_score": 0.0,
+      "meta_updated_timestamp": "2020-04-27T11:05:03.972Z",
+      "mileage": 189000,
       "mobile_de_url": {
-        "full": "https://suchen.mobile.de/fahrzeuge/search.html?isSearchRequest=true&makeModelVariant1.makeId=17200&makeModelVariant1.modelId=18&fuels=PETROL&transmissions=MANUAL_GEAR&minPowerAsArray=100&minPowerAsArray=KW&maxFirstRegistrationDate=2002&minFirstRegistrationDate=2002&maxMileage=200000"
+        "full": "https://suchen.mobile.de/fahrzeuge/search.html?isSearchRequest=true&makeModelVariant1.makeId=24100&makeModelVariant1.modelId=27&fuels=HYBRID&fuels=HYBRID_DIESEL&transmissions=AUTOMATIC_GEAR&minPowerAsArray=50&minPowerAsArray=KW&maxFirstRegistrationDate=2007&minFirstRegistrationDate=2007&maxMileage=200000"
       },
-      "model": "C_200",
+      "model": "PRIUS",
       "number_of_seats": 5,
-      "origin_country": "FRANCE",
-      "position": 3,
-      "power": 120,
+      "origin_country": "GERMANY",
+      "power": 57,
+      "premium_features": [
+        "feature_alloy_wheels",
+        "feature_bluetooth",
+        "feature_esp",
+        "feature_front_seats_heated",
+        "feature_start_stop_system",
+        "feature_multifunctional_steering_wheel",
+        "feature_air_conditioning"
+      ],
       "price_change": null,
-      "price_with_vat": 79000,
-      "price_with_vat_czk": 79000,
-      "price_with_vat_eur": 2883,
-      "retail_price_czk": 129000,
+      "price_with_vat": 166000,
+      "price_with_vat_czk": 166000,
+      "price_with_vat_eur": 6106,
+      "retail_price_czk": 238000,
       "sauto_url": {
-        "full": "https://www.sauto.cz/hledani#!manufacturer=51&model=430&fuel=1&gearbox=1&powerMin=100&yearMin=2002&yearMax=2002&tachometrMax=200000"
+        "full": "https://www.sauto.cz/hledani#!manufacturer=99&model=727&fuel=5&gearbox=3&powerMin=50&yearMin=2007&yearMax=2007&tachometrMax=200000"
       },
       "seller": {
-        "address": "Rohovladova Bela 163 Rohovladova Bela 533 43",
-        "city": "Rohovladova Bela",
-        "email": "navaze@seznam.cz",
-        "name": "AUTO RP, s.r.o.",
-        "phone": "+420 777 953 159   +420 466 942 064",
+        "address": "Okruzni 485/2 Ceske Budejovice 370 01",
+        "city": "Ceske Budejovice",
+        "email": "chj@centrum.cz",
+        "name": "AutoKS",
+        "phone": "+420 777 666 767   +420 608 124 124",
         "rating_average": null,
         "rating_count": null,
         "type": "DEALERSHIP",
-        "zip": "53343"
+        "zip": "37001"
       },
       "seller_country": "CZ",
       "server": "sauto",
-      "sum_relative_price_difference": 0.93661109,
-      "technical_inspection_valid_to": "2018-07-01",
-      "transmission": "MANUAL",
+      "sum_relative_price_difference": 1.150110741,
+      "technical_inspection_valid_to": "2021-09-01",
+      "thumbnail_url": {
+        "full": "https://i.imgur.com/rqqd8gW.jpg"
+      },
+      "transmission": "AUTOMATIC",
       "url": {
-        "full": "https://www.sauto.cz/osobni/detail/mercedes-benz/tridy-c/16367579"
+        "full": "https://www.sauto.cz/osobni/detail/toyota/prius/12566614"
       },
       "vat_rate": 21,
       "vat_reclaimable": false,
-      "vin": "WDB2037421A396830",
-      "year": 2002
+      "vin": "JTDKB20UX00075774",
+      "year": 2007
     }
 ';
 // phpcs:enable

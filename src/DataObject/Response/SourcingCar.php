@@ -124,6 +124,11 @@ class SourcingCar implements DataObjectInterface
     private $power;
 
     /**
+     * @var array<string>
+     */
+    private $premiumFeatures = [];
+
+    /**
      * @var Price
      */
     private $price;
@@ -152,6 +157,11 @@ class SourcingCar implements DataObjectInterface
      * @var DateTimeImmutable|null
      */
     private $technicalInspectionValidTo;
+
+    /**
+     * @var Url
+     */
+    private $thumbnailUrl;
 
     /**
      * @var string|null
@@ -796,45 +806,85 @@ class SourcingCar implements DataObjectInterface
     }
 
     /**
+     * @return array<string>
+     */
+    public function getPremiumFeatures(): array
+    {
+        return $this->premiumFeatures;
+    }
+
+    /**
+     * @param array<string> $premiumFeatures
+     * @return SourcingCar
+     */
+    public function setPremiumFeatures(array $premiumFeatures): SourcingCar
+    {
+        $this->premiumFeatures = $premiumFeatures;
+
+        return $this;
+    }
+
+    /**
+     * @return Url
+     */
+    public function getThumbnailUrl(): Url
+    {
+        return $this->thumbnailUrl;
+    }
+
+    /**
+     * @param Url $thumbnailUrl
+     * @return SourcingCar
+     */
+    public function setThumbnailUrl(Url $thumbnailUrl): SourcingCar
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray(): array
     {
         return [
             'id' => $this->id,
-            'ad_id' => $this->adId,
-            'body_type' => $this->bodyType,
-            'buyer_country' => $this->buyerCountry,
+            'adId' => $this->adId,
+            'bodyType' => $this->bodyType,
+            'buyerCountry' => $this->buyerCountry,
             'condition' => $this->condition,
-            'cubic_capacity' => $this->cubicCapacity,
-            'days_on_stock' => $this->daysOnStock,
-            'drive_type' => $this->driveType,
-            'feature_score' => $this->featureScore,
+            'cubicCapacity' => $this->cubicCapacity,
+            'daysOnStock' => $this->daysOnStock,
+            'driveType' => $this->driveType,
+            'featureScore' => $this->featureScore,
             'features' => $this->features,
             'occurrence' => $this->occurrence->toArray(),
-            'fuel_type' => $this->fuelType,
-            'interior_material' => $this->interiorMaterial,
+            'fuelType' => $this->fuelType,
+            'interiorMaterial' => $this->interiorMaterial,
             'make' => $this->make,
             'measure' => $this->measure->toArray(),
-            'meta_updated' => $this->nullableDateTimeToString(
+            'metaUpdated' => $this->nullableDateTimeToString(
                 $this->metaUpdated,
                 DATE_ATOM
             ),
             'mileage' => $this->mileage,
-            'mobile_de_url' => $this->mobileDeUrl->toArray(),
+            'mobileDeUrl' => $this->mobileDeUrl->toArray(),
             'model' => $this->model,
-            'number_of_seats' => $this->numberOfSeats,
-            'origin_country' => $this->originCountry,
+            'numberOfSeats' => $this->numberOfSeats,
+            'originCountry' => $this->originCountry,
             'power' => $this->power,
+            'premiumFeatures' => $this->premiumFeatures,
             'price' => $this->price->toArray(),
-            'sauto_url' => $this->sAutoUrl->toArray(),
+            'sAutoUrl' => $this->sAutoUrl->toArray(),
             'seller' => $this->seller->toArray(),
             'server' => $this->server,
-            'sum_relative_price_difference' => $this->sumRelativePriceDifference,
-            'technical_inspection_valid_to' => $this->nullableDateTimeToString(
+            'sumRelativePriceDifference' => $this->sumRelativePriceDifference,
+            'technicalInspectionValidTo' => $this->nullableDateTimeToString(
                 $this->technicalInspectionValidTo,
                 'Y-m-d'
             ),
+            'thumbnailUrl' => $this->thumbnailUrl->toArray(),
             'transmission' => $this->transmission,
             'url' => $this->url->toArray(),
             'vin' => $this->vin,

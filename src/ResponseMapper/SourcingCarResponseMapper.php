@@ -50,7 +50,7 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setDriveType($data['drive_type'])
             ->setFeatureScore($data['feature_score'])
             ->setFeatures($data['features'])
-            ->setFuelType($data['fueltype'])
+            ->setFuelType($data['fuel_type'])
             ->setInteriorMaterial($data['interior_material'])
             ->setMake($data['make'])
             ->setMeasure($this->mapMeasure($data))
@@ -61,6 +61,7 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setNumberOfSeats($data['number_of_seats'])
             ->setOriginCountry($data['origin_country'])
             ->setPower($data['power'])
+            ->setPremiumFeatures($data['premium_features'])
             ->setPrice($this->mapPrice($data))
             ->setSAutoUrl($this->urlResponseMapper->map($data['sauto_url']))
             ->setSeller($this->mapSeller($data))
@@ -70,6 +71,7 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setVin($data['vin'])
             ->setYear($data['year'])
             ->setTechnicalInspectionValidTo($this->stringToDateTime($data['technical_inspection_valid_to']))
+            ->setThumbnailUrl($this->urlResponseMapper->map($data['thumbnail_url']))
             ->setMetaUpdated($this->stringToDateTime($data['meta_updated_timestamp']));
 
         return $car;
@@ -81,8 +83,8 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
      */
     private function mapOccurrence(array $data): Occurrence
     {
-        $first = $this->stringToDateTime($data['first_occurence']);
-        $last = $this->stringToDateTime($data['last_occurence']);
+        $first = $this->stringToDateTime($data['first_occurrence']);
+        $last = $this->stringToDateTime($data['last_occurrence']);
 
         return $this->factory->createOccurrence($first, $last);
     }
@@ -139,6 +141,7 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setDelta($data['measure_delta'])
             ->setLevel($data['measure_level'])
             ->setLiquidity($data['measure_liquidity'])
+            ->setPpLevel($data['measure_pp_level'])
             ->setRate($data['measure_rate'])
             ->setRelativePricePosition($data['measure_relative_price_position'])
             ->setRetailPricePosition($data['measure_retail_price_position'])
