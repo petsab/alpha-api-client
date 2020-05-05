@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\Factory;
 
 use DateTimeImmutable;
+use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
+use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticItem;
+use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticLevel;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
@@ -94,5 +97,41 @@ class ResponseDataObjectFactory
     public function createMeasure(): Measure
     {
         return new Measure();
+    }
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @return AggregatedStatisticLevel
+     */
+    public function createAggregatedStatisticLevel(string $name, string $value): AggregatedStatisticLevel
+    {
+        return new AggregatedStatisticLevel($name, $value);
+    }
+
+    /**
+     * @param string $type
+     * @param int $amount
+     * @param float|null $mileage
+     * @param float|null $price
+     * @return AggregatedStatisticItem
+     */
+    public function createAggregatedStatisticItem(
+        string $type,
+        int $amount,
+        ?float $mileage,
+        ?float $price
+    ): AggregatedStatisticItem {
+        return new AggregatedStatisticItem($type, $amount, $mileage, $price);
+    }
+
+    /**
+     * @param array $levels
+     * @param array $statistics
+     * @return AggregatedStatistic
+     */
+    public function createAggregatedStatistic(array $levels, array $statistics): AggregatedStatistic
+    {
+        return new AggregatedStatistic($levels, $statistics);
     }
 }
