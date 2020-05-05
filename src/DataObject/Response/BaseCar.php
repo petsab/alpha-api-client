@@ -9,185 +9,170 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
 /**
- * Class SourcingCar.
+ * Class BaseCar.
  *
  * @SuppressWarnings(PHPMD.TooManyFields)
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
-class SourcingCar implements DataObjectInterface
+class BaseCar implements DataObjectInterface
 {
     use NullableDateTimeTrait;
 
     /**
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string|null
      */
-    private $adId;
+    protected $adId;
 
     /**
      * @var string|null
      */
-    private $bodyType;
+    protected $bodyType;
 
     /**
      * @var string|null
      */
-    private $buyerCountry;
-
-    /**
-     * @var string|null
-     */
-    private $condition;
+    protected $condition;
 
     /**
      * @var int|null
      */
-    private $cubicCapacity;
+    protected $cubicCapacity;
 
     /**
      * @var int|null
      */
-    private $daysOnStock;
+    protected $daysOnStock;
 
     /**
      * @var string|null
      */
-    private $driveType;
+    protected $driveType;
 
     /**
      * @var float|null
      */
-    private $featureScore;
+    protected $featureScore;
 
     /**
      * @var array<string>
      */
-    private $features = [];
+    protected $features = [];
 
     /**
      * @var Occurrence
      */
-    private $occurrence;
+    protected $occurrence;
 
     /**
      * @var string|null
      */
-    private $fuelType;
+    protected $fuelType;
 
     /**
      * @var string|null
      */
-    private $interiorMaterial;
+    protected $interiorMaterial;
 
     /**
      * @var string
      */
-    private $make;
+    protected $make;
 
     /**
      * @var int|null
      */
-    private $mileage;
+    protected $mileage;
 
     /**
      * @var DateTimeImmutable|null
      */
-    private $metaUpdated;
+    protected $metaUpdated;
 
     /**
      * @var Url
      */
-    private $mobileDeUrl;
+    protected $mobileDeUrl;
 
     /**
      * @var string|null;
      */
-    private $model;
+    protected $model;
 
     /**
      * @var int|null
      */
-    private $numberOfSeats;
+    protected $numberOfSeats;
 
     /**
      * @var string|null
      */
-    private $originCountry;
+    protected $originCountry;
 
     /**
      * @var int|null
      */
-    private $power;
-
-    /**
-     * @var array<string>
-     */
-    private $premiumFeatures = [];
+    protected $power;
 
     /**
      * @var Price
      */
-    private $price;
+    protected $price;
 
     /**
      * @var Url
      */
-    private $sAutoUrl;
+    protected $sAutoUrl;
 
     /**
      * @var Seller
      */
-    private $seller;
+    protected $seller;
 
     /**
      * @var string|null
      */
-    private $server;
+    protected $server;
 
     /**
      * @var float|null
      */
-    private $sumRelativePriceDifference;
+    protected $sumRelativePriceDifference;
 
     /**
      * @var DateTimeImmutable|null
      */
-    private $technicalInspectionValidTo;
+    protected $technicalInspectionValidTo;
 
     /**
      * @var Url
      */
-    private $thumbnailUrl;
+    protected $thumbnailUrl;
 
     /**
      * @var string|null
      */
-    private $transmission;
+    protected $transmission;
 
     /**
      * @var Url
      */
-    private $url;
+    protected $url;
 
     /**
      * @var string|null;
      */
-    private $vin;
+    protected $vin;
 
     /**
      * @var int|null
      */
-    private $year;
-
-    /**
-     * @var Measure
-     */
-    private $measure;
+    protected $year;
 
     /**
      * @param string $pk
@@ -199,9 +184,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string $id
-     * @return SourcingCar
+     * @return self
      */
-    public function setId(string $id): SourcingCar
+    public function setId(string $id): self
     {
         $this->id = $id;
 
@@ -226,9 +211,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $adId
-     * @return SourcingCar
+     * @return self
      */
-    public function setAdId(?string $adId): SourcingCar
+    public function setAdId(?string $adId): self
     {
         $this->adId = $adId;
 
@@ -245,30 +230,11 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $bodyType
-     * @return SourcingCar
+     * @return self
      */
-    public function setBodyType(?string $bodyType): SourcingCar
+    public function setBodyType(?string $bodyType): self
     {
         $this->bodyType = $bodyType;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getBuyerCountry(): ?string
-    {
-        return $this->buyerCountry;
-    }
-
-    /**
-     * @param string|null $buyerCountry
-     * @return SourcingCar
-     */
-    public function setBuyerCountry(?string $buyerCountry): SourcingCar
-    {
-        $this->buyerCountry = $buyerCountry;
 
         return $this;
     }
@@ -283,9 +249,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $condition
-     * @return SourcingCar
+     * @return self
      */
-    public function setCondition(?string $condition): SourcingCar
+    public function setCondition(?string $condition): self
     {
         $this->condition = $condition;
 
@@ -302,9 +268,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $cubicCapacity
-     * @return SourcingCar
+     * @return self
      */
-    public function setCubicCapacity(?int $cubicCapacity): SourcingCar
+    public function setCubicCapacity(?int $cubicCapacity): self
     {
         $this->cubicCapacity = $cubicCapacity;
 
@@ -321,9 +287,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $daysOnStock
-     * @return SourcingCar
+     * @return self
      */
-    public function setDaysOnStock(?int $daysOnStock): SourcingCar
+    public function setDaysOnStock(?int $daysOnStock): self
     {
         $this->daysOnStock = $daysOnStock;
 
@@ -340,9 +306,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $driveType
-     * @return SourcingCar
+     * @return self
      */
-    public function setDriveType(?string $driveType): SourcingCar
+    public function setDriveType(?string $driveType): self
     {
         $this->driveType = $driveType;
 
@@ -359,9 +325,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param float|null $featureScore
-     * @return SourcingCar
+     * @return self
      */
-    public function setFeatureScore(?float $featureScore): SourcingCar
+    public function setFeatureScore(?float $featureScore): self
     {
         $this->featureScore = $featureScore;
 
@@ -378,9 +344,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param array<string> $features
-     * @return SourcingCar
+     * @return self
      */
-    public function setFeatures(array $features): SourcingCar
+    public function setFeatures(array $features): self
     {
         $this->features = $features;
 
@@ -397,9 +363,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Occurrence $occurrence
-     * @return SourcingCar
+     * @return self
      */
-    public function setOccurrence(Occurrence $occurrence): SourcingCar
+    public function setOccurrence(Occurrence $occurrence): self
     {
         $this->occurrence = $occurrence;
 
@@ -416,9 +382,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $fuelType
-     * @return SourcingCar
+     * @return self
      */
-    public function setFuelType(?string $fuelType): SourcingCar
+    public function setFuelType(?string $fuelType): self
     {
         $this->fuelType = $fuelType;
 
@@ -435,9 +401,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $interiorMaterial
-     * @return SourcingCar
+     * @return self
      */
-    public function setInteriorMaterial(?string $interiorMaterial): SourcingCar
+    public function setInteriorMaterial(?string $interiorMaterial): self
     {
         $this->interiorMaterial = $interiorMaterial;
 
@@ -454,9 +420,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string $make
-     * @return SourcingCar
+     * @return self
      */
-    public function setMake(string $make): SourcingCar
+    public function setMake(string $make): self
     {
         $this->make = $make;
 
@@ -473,9 +439,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $mileage
-     * @return SourcingCar
+     * @return self
      */
-    public function setMileage(?int $mileage): SourcingCar
+    public function setMileage(?int $mileage): self
     {
         $this->mileage = $mileage;
 
@@ -492,9 +458,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param DateTimeImmutable|null $metaUpdated
-     * @return SourcingCar
+     * @return self
      */
-    public function setMetaUpdated(?DateTimeImmutable $metaUpdated): SourcingCar
+    public function setMetaUpdated(?DateTimeImmutable $metaUpdated): self
     {
         $this->metaUpdated = $metaUpdated;
 
@@ -511,9 +477,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Url $mobileDeUrl
-     * @return SourcingCar
+     * @return self
      */
-    public function setMobileDeUrl(Url $mobileDeUrl): SourcingCar
+    public function setMobileDeUrl(Url $mobileDeUrl): self
     {
         $this->mobileDeUrl = $mobileDeUrl;
 
@@ -530,9 +496,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $model
-     * @return SourcingCar
+     * @return self
      */
-    public function setModel(?string $model): SourcingCar
+    public function setModel(?string $model): self
     {
         $this->model = $model;
 
@@ -549,9 +515,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $numberOfSeats
-     * @return SourcingCar
+     * @return self
      */
-    public function setNumberOfSeats(?int $numberOfSeats): SourcingCar
+    public function setNumberOfSeats(?int $numberOfSeats): self
     {
         $this->numberOfSeats = $numberOfSeats;
 
@@ -568,9 +534,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $originCountry
-     * @return SourcingCar
+     * @return self
      */
-    public function setOriginCountry(?string $originCountry): SourcingCar
+    public function setOriginCountry(?string $originCountry): self
     {
         $this->originCountry = $originCountry;
 
@@ -587,9 +553,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $power
-     * @return SourcingCar
+     * @return self
      */
-    public function setPower(?int $power): SourcingCar
+    public function setPower(?int $power): self
     {
         $this->power = $power;
 
@@ -606,9 +572,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Price $price
-     * @return SourcingCar
+     * @return self
      */
-    public function setPrice(Price $price): SourcingCar
+    public function setPrice(Price $price): self
     {
         $this->price = $price;
 
@@ -625,9 +591,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Url $sAutoUrl
-     * @return SourcingCar
+     * @return self
      */
-    public function setSAutoUrl(Url $sAutoUrl): SourcingCar
+    public function setSAutoUrl(Url $sAutoUrl): self
     {
         $this->sAutoUrl = $sAutoUrl;
 
@@ -644,9 +610,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Seller $seller
-     * @return SourcingCar
+     * @return self
      */
-    public function setSeller(Seller $seller): SourcingCar
+    public function setSeller(Seller $seller): self
     {
         $this->seller = $seller;
 
@@ -663,9 +629,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $server
-     * @return SourcingCar
+     * @return self
      */
-    public function setServer(?string $server): SourcingCar
+    public function setServer(?string $server): self
     {
         $this->server = $server;
 
@@ -682,9 +648,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param float|null $sumRelativePriceDifference
-     * @return SourcingCar
+     * @return self
      */
-    public function setSumRelativePriceDifference(?float $sumRelativePriceDifference): SourcingCar
+    public function setSumRelativePriceDifference(?float $sumRelativePriceDifference): self
     {
         $this->sumRelativePriceDifference = $sumRelativePriceDifference;
 
@@ -701,9 +667,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param DateTimeImmutable|null $technicalInspectionValidTo
-     * @return SourcingCar
+     * @return self
      */
-    public function setTechnicalInspectionValidTo(?DateTimeImmutable $technicalInspectionValidTo): SourcingCar
+    public function setTechnicalInspectionValidTo(?DateTimeImmutable $technicalInspectionValidTo): self
     {
         $this->technicalInspectionValidTo = $technicalInspectionValidTo;
 
@@ -720,9 +686,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $transmission
-     * @return SourcingCar
+     * @return self
      */
-    public function setTransmission(?string $transmission): SourcingCar
+    public function setTransmission(?string $transmission): self
     {
         $this->transmission = $transmission;
 
@@ -739,9 +705,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Url $url
-     * @return SourcingCar
+     * @return self
      */
-    public function setUrl(Url $url): SourcingCar
+    public function setUrl(Url $url): self
     {
         $this->url = $url;
 
@@ -758,9 +724,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param string|null $vin
-     * @return SourcingCar
+     * @return self
      */
-    public function setVin(?string $vin): SourcingCar
+    public function setVin(?string $vin): self
     {
         $this->vin = $vin;
 
@@ -777,49 +743,11 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param int|null $year
-     * @return SourcingCar
+     * @return self
      */
-    public function setYear(?int $year): SourcingCar
+    public function setYear(?int $year): self
     {
         $this->year = $year;
-
-        return $this;
-    }
-
-    /**
-     * @return Measure
-     */
-    public function getMeasure(): Measure
-    {
-        return $this->measure;
-    }
-
-    /**
-     * @param Measure $measure
-     * @return SourcingCar
-     */
-    public function setMeasure(Measure $measure): SourcingCar
-    {
-        $this->measure = $measure;
-
-        return $this;
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getPremiumFeatures(): array
-    {
-        return $this->premiumFeatures;
-    }
-
-    /**
-     * @param array<string> $premiumFeatures
-     * @return SourcingCar
-     */
-    public function setPremiumFeatures(array $premiumFeatures): SourcingCar
-    {
-        $this->premiumFeatures = $premiumFeatures;
 
         return $this;
     }
@@ -834,9 +762,9 @@ class SourcingCar implements DataObjectInterface
 
     /**
      * @param Url $thumbnailUrl
-     * @return SourcingCar
+     * @return self
      */
-    public function setThumbnailUrl(Url $thumbnailUrl): SourcingCar
+    public function setThumbnailUrl(Url $thumbnailUrl): self
     {
         $this->thumbnailUrl = $thumbnailUrl;
 
@@ -852,7 +780,6 @@ class SourcingCar implements DataObjectInterface
             'id' => $this->id,
             'adId' => $this->adId,
             'bodyType' => $this->bodyType,
-            'buyerCountry' => $this->buyerCountry,
             'condition' => $this->condition,
             'cubicCapacity' => $this->cubicCapacity,
             'daysOnStock' => $this->daysOnStock,
@@ -863,7 +790,6 @@ class SourcingCar implements DataObjectInterface
             'fuelType' => $this->fuelType,
             'interiorMaterial' => $this->interiorMaterial,
             'make' => $this->make,
-            'measure' => $this->measure->toArray(),
             'metaUpdated' => $this->nullableDateTimeToString(
                 $this->metaUpdated,
                 DATE_ATOM
@@ -874,7 +800,6 @@ class SourcingCar implements DataObjectInterface
             'numberOfSeats' => $this->numberOfSeats,
             'originCountry' => $this->originCountry,
             'power' => $this->power,
-            'premiumFeatures' => $this->premiumFeatures,
             'price' => $this->price->toArray(),
             'sAutoUrl' => $this->sAutoUrl->toArray(),
             'seller' => $this->seller->toArray(),

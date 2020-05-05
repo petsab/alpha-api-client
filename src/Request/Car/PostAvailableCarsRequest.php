@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Teas\AlphaApiClient\Request;
+namespace Teas\AlphaApiClient\Request\Car;
 
 use BootIq\ServiceLayer\Request\PostMethod;
 

@@ -6,7 +6,7 @@ namespace TeasTest\AlphaApiClient\ResponseMapper;
 
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
-use Teas\AlphaApiClient\ResponseMapper\SourcingCarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
@@ -39,12 +39,11 @@ class UrlTest extends TestCase
     public function testCreateSourcingCarFromResponse(string $input)
     {
         $response = json_decode($input, true);
-        $mapper = new SourcingCarResponseMapper($this->factory, $this->urlResponseMapper);
+        $mapper = new AvailableCarResponseMapper($this->factory, $this->urlResponseMapper);
         $car = $mapper->map($response);
         $this->assertSame($response['PK'], $car->getId());
         $this->assertSame($response['ad_id'], $car->getAdId());
         $this->assertSame($response['body_type'], $car->getBodyType());
-        $this->assertSame($response['buyer_country'], $car->getBuyerCountry());
         $this->assertSame($response['condition'], $car->getCondition());
         $this->assertSame($response['cubic_capacity'], $car->getCubicCapacity());
         $this->assertSame($response['days_on_stock'], $car->getDaysOnStock());

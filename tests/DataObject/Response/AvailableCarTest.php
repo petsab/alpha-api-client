@@ -10,17 +10,16 @@ use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
-use Teas\AlphaApiClient\DataObject\Response\SourcingCar;
+use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Url;
 
-class SourcingCarTest extends TestCase
+class AvailableCarTest extends TestCase
 {
     public function testAll()
     {
         $id = uniqid();
         $adId = uniqid();
         $bodyType = uniqid();
-        $buyerCountry = uniqid();
         $condition = uniqid();
         $cubicCapacity = rand(1, 100);
         $daysOnStock = rand(1, 100);
@@ -126,11 +125,10 @@ class SourcingCarTest extends TestCase
             ->method('toArray')
             ->willReturn(['full' => uniqid()]);
 
-        $sourcingCar = new SourcingCar($id);
+        $sourcingCar = new AvailableCar($id);
         $sourcingCar->setAdId($adId)
             ->setCondition($condition)
             ->setBodyType($bodyType)
-            ->setBuyerCountry($buyerCountry)
             ->setCondition($condition)
             ->setCubicCapacity($cubicCapacity)
             ->setDaysOnStock($daysOnStock)
@@ -148,7 +146,7 @@ class SourcingCarTest extends TestCase
             ->setNumberOfSeats($numberOfSeats)
             ->setOriginCountry($originCountry)
             ->setPower($power)
-            ->setPremiumFeatures($premiumFeatures)
+
             ->setPrice($price)
             ->setSAutoUrl($sAutoUrl)
             ->setSeller($seller)
@@ -159,14 +157,15 @@ class SourcingCarTest extends TestCase
             ->setUrl($url)
             ->setVin($vin)
             ->setYear($year)
-            ->setMeasure($measure)
             ->setThumbnailUrl($thumbUrl);
+        $sourcingCar->setPremiumFeatures($premiumFeatures)
+            ->setMeasure($measure);
+
 
         $data = [
             'id' => $sourcingCar->getId(),
             'adId' => $sourcingCar->getAdId(),
             'bodyType' => $sourcingCar->getBodyType(),
-            'buyerCountry' => $sourcingCar->getBuyerCountry(),
             'condition' => $sourcingCar->getCondition(),
             'cubicCapacity' => $sourcingCar->getCubicCapacity(),
             'daysOnStock' => $sourcingCar->getDaysOnStock(),
@@ -199,6 +198,6 @@ class SourcingCarTest extends TestCase
             'year' => $sourcingCar->getYear(),
         ];
 
-        $this->assertSame($data, $sourcingCar->toArray());
+        $this->assertEquals($data, $sourcingCar->toArray());
     }
 }

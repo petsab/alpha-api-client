@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\ResponseMapper;
 
-use Teas\AlphaApiClient\DataObject\Response\Measure;
+use Teas\AlphaApiClient\DataObject\Response\BaseCar;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
-use Teas\AlphaApiClient\DataObject\Response\SourcingCar;
 use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
-class SourcingCarResponseMapper extends AbstractResponseMapper
+class BaseCarResponseMapper extends AbstractResponseMapper
 {
     use NullableDateTimeTrait;
 
@@ -35,14 +34,12 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
 
     /**
      * @param array<mixed> $data
-     * @return SourcingCar
+     * @param BaseCar $car
      */
-    public function map(array $data): SourcingCar
+    public function fillBaseCarData(array $data, BaseCar $car): void
     {
-        $car = $this->factory->createSourcingCar($data['PK']);
         $car->setAdId($data['ad_id'])
             ->setBodyType($data['body_type'])
-            ->setBuyerCountry($data['buyer_country'])
             ->setCondition($data['condition'])
             ->setCubicCapacity($data['cubic_capacity'])
             ->setDaysOnStock($data['days_on_stock'])
@@ -52,7 +49,6 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setFuelType($data['fuel_type'])
             ->setInteriorMaterial($data['interior_material'])
             ->setMake($data['make'])
-            ->setMeasure($this->mapMeasure($data))
             ->setOccurrence($this->mapOccurrence($data))
             ->setMileage($data['mileage'])
             ->setMobileDeUrl($this->urlResponseMapper->map($data['mobile_de_url']))
@@ -60,7 +56,6 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setNumberOfSeats($data['number_of_seats'])
             ->setOriginCountry($data['origin_country'])
             ->setPower($data['power'])
-            ->setPremiumFeatures($data['premium_features'])
             ->setPrice($this->mapPrice($data))
             ->setSAutoUrl($this->urlResponseMapper->map($data['sauto_url']))
             ->setSeller($this->mapSeller($data))
@@ -72,8 +67,6 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setTechnicalInspectionValidTo($this->stringToDateTime($data['technical_inspection_valid_to']))
             ->setThumbnailUrl($this->urlResponseMapper->map($data['thumbnail_url']))
             ->setMetaUpdated($this->stringToDateTime($data['meta_updated_timestamp']));
-
-        return $car;
     }
 
     /**
@@ -126,27 +119,5 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
             ->setCountry($data['seller_country']);
 
         return $seller;
-    }
-
-    /**
-     * @param array<mixed> $data
-     * @return Measure
-     */
-    private function mapMeasure(array $data): Measure
-    {
-        $measure = $this->factory->createMeasure();
-        $measure->setCarRank($data['measure_car_rank'])
-            ->setCountRelevantCar($data['measure_count_relevant_car'])
-            ->setDelta($data['measure_delta'])
-            ->setLevel($data['measure_level'])
-            ->setLiquidity($data['measure_liquidity'])
-            ->setPpLevel($data['measure_pp_level'])
-            ->setRate($data['measure_rate'])
-            ->setRelativePricePosition($data['measure_relative_price_position'])
-            ->setRetailPricePosition($data['measure_retail_price_position'])
-            ->setSoldRangeCategory($data['measure_sold_range_category'])
-            ->setTotalScore($data['measure_total_score']);
-
-        return $measure;
     }
 }

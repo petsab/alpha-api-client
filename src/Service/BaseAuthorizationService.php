@@ -12,7 +12,6 @@ use Teas\AlphaApiClient\Enum\HttpHeader;
 
 abstract class BaseAuthorizationService
 {
-
     /**
      * @var AdapterInterface
      */
@@ -24,7 +23,6 @@ abstract class BaseAuthorizationService
     protected $tokenProvider;
 
     /**
-     * BaseAuthorizationService constructor.
      * @param AdapterInterface $adapter
      * @param TokenProviderInterface $tokenProvider
      */

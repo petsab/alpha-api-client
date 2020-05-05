@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\Factory;
 
 use DateTimeImmutable;
+use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Rating;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
-use Teas\AlphaApiClient\DataObject\Response\SourcingCar;
+use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Url;
 
 class ResponseDataObjectFactory
@@ -72,11 +73,11 @@ class ResponseDataObjectFactory
 
     /**
      * @param string $pk
-     * @return SourcingCar
+     * @return AvailableCar
      */
-    public function createSourcingCar(string $pk): SourcingCar
+    public function createAvailableCar(string $pk): AvailableCar
     {
-        return new SourcingCar($pk);
+        return new AvailableCar($pk);
     }
 
     /**
@@ -94,5 +95,14 @@ class ResponseDataObjectFactory
     public function createMeasure(): Measure
     {
         return new Measure();
+    }
+
+    /**
+     * @param string $pk
+     * @return Car
+     */
+    public function createCar(string $pk): Car
+    {
+        return new Car($pk);
     }
 }
