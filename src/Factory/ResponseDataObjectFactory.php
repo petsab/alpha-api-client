@@ -9,6 +9,7 @@ use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticItem;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticLevel;
+use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
@@ -143,5 +144,15 @@ class ResponseDataObjectFactory
     public function createAggregatedStatistic(array $levels, array $statistics): AggregatedStatistic
     {
         return new AggregatedStatistic($levels, $statistics);
+    }
+
+    /**
+     * @param array<object> $data
+     * @param array<string> $notFoundIds
+     * @return CarList
+     */
+    public function createCarList(array $data, array $notFoundIds): CarList
+    {
+        return new CarList($data, $notFoundIds);
     }
 }

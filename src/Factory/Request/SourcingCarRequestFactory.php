@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Teas\AlphaApiClient\Factory;
+namespace Teas\AlphaApiClient\Factory\Request;
 
 use Teas\AlphaApiClient\Request\Car\PostAvailableCarsRequest;
 use Teas\AlphaApiClient\Request\Car\PostCarsRequest;
