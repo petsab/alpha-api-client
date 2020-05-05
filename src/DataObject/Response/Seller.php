@@ -54,7 +54,6 @@ class Seller implements DataObjectInterface
     private $country;
 
     /**
-     * Seller constructor.
      * @param string|null $name
      */
     public function __construct(?string $name)
@@ -223,7 +222,7 @@ class Seller implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

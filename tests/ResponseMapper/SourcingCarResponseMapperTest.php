@@ -83,7 +83,8 @@ class UrlTest extends TestCase
         $this->assertSame($response['server'], $car->getServer());
         $this->assertSame($response['technical_inspection_valid_to'], $this->nullableDateTimeToString(
             $car->getTechnicalInspectionValidTo(),
-            'Y-m-d'));
+            'Y-m-d'
+        ));
         $this->assertSame($response['transmission'], $car->getTransmission());
         $this->assertSame($response['url']['full'], $car->getUrl()->getFull());
         $this->assertSame($response['vat_rate'], $car->getPrice()->getVatRate());

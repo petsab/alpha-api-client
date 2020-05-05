@@ -7,9 +7,21 @@ $finder = PhpCsFixer\Finder::create()
 return PhpCsFixer\Config::create()
     ->setCacheFile('.phpcsfixer.cache')
     ->setRules([
+        '@Symfony' => true,
         'ordered_imports' => false,
-        'no_extra_blank_lines' => ['tokens' => ['break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'useTrait']],
         'array_syntax' => ['syntax' => 'short'],
+        'no_superfluous_phpdoc_tags' => false,
+        'phpdoc_order' => true,
+        'phpdoc_separation' => false,
+        'phpdoc_align' => false,
+        'no_extra_blank_lines' => ['tokens' => [
+            'curly_brace_block',
+            'extra',
+            'parenthesis_brace_block',
+            'square_brace_block',
+            'throw',
+        ]],
+        'concat_space' => false,
     ])
     ->setFinder($finder)
 ;

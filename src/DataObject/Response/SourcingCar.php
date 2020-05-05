@@ -9,7 +9,8 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
 /**
- * Class SourcingCar
+ * Class SourcingCar.
+ *
  * @SuppressWarnings(PHPMD.TooManyFields)
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
@@ -189,7 +190,6 @@ class SourcingCar implements DataObjectInterface
     private $measure;
 
     /**
-     * SourcingCar constructor.
      * @param string $pk
      */
     public function __construct(string $pk)
@@ -844,7 +844,7 @@ class SourcingCar implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

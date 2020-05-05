@@ -49,7 +49,6 @@ class Price implements DataObjectInterface
     private $currency;
 
     /**
-     * Price constructor.
      * @param int $withVat
      * @param string $currency
      * @param int $withVatCzk
@@ -172,7 +171,7 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

@@ -23,7 +23,6 @@ class Occurrence implements DataObjectInterface
     private $last;
 
     /**
-     * Occurrence constructor.
      * @param DateTimeImmutable|null $first
      * @param DateTimeImmutable|null $last
      */
@@ -50,7 +49,7 @@ class Occurrence implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {
