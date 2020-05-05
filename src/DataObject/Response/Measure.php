@@ -273,7 +273,7 @@ class Measure implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

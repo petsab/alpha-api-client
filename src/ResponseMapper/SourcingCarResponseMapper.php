@@ -22,7 +22,6 @@ class SourcingCarResponseMapper extends AbstractResponseMapper
     private $urlResponseMapper;
 
     /**
-     * SourcingCarResponseMapper constructor.
      * @param ResponseDataObjectFactory $factory
      * @param UrlResponseMapper $urlResponseMapper
      */

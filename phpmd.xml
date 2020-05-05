@@ -9,7 +9,9 @@
     </rule>
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
-    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/design.xml">
+        <exclude name="CouplingBetweenObjects"/>
+    </rule>
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable"/>
         <exclude name="ShortMethodName"/>
@@ -31,5 +33,9 @@
             <property name="maximum" description="Maximum length for a variable, property or parameter name" value="30"/>
         </properties>
     </rule>
-
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="maximum" description="Maximum number of acceptable dependencies." value="20"/>
+        </properties>
+    </rule>
 </ruleset>

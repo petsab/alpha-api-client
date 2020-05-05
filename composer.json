@@ -15,7 +15,10 @@
   "require": {
     "php": "^7.2",
     "ext-json": "*",
-    "bootiq/service-layer": "^1.0.5"
+    "bootiq/service-layer": "^1.0.5",
+    "aws/aws-sdk-php": "^3.137",
+    "psr/simple-cache": "^1.0",
+    "psr/log": "^1.1"
   },
   "require-dev": {
     "povils/phpmnd": "^2.2",
@@ -27,7 +30,10 @@
     "squizlabs/php_codesniffer": "^3.5",
     "slevomat/coding-standard": "^6.2",
     "phpunit/phpunit": "^8.5",
-    "friendsofphp/php-cs-fixer": "^2.16"
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "monolog/monolog": "^2.0",
+    "laminas/laminas-cache": "^2.9",
+    "laminas/laminas-serializer": "^2.9"
   },
   "scripts": {
     "phpcs": "php vendor/bin/phpcs --standard=phpcs.xml --parallel=8",

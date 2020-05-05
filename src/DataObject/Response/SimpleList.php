@@ -14,7 +14,6 @@ class SimpleList implements DataObjectInterface
     private $data = [];
 
     /**
-     * ListResponse constructor.
      * @param array<object> $data
      */
     public function __construct(array $data)

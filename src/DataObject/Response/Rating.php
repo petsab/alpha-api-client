@@ -9,17 +9,16 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 class Rating implements DataObjectInterface
 {
     /**
-     * @var integer|null
+     * @var int|null
      */
     private $average;
 
     /**
-     * @var integer|null
+     * @var int|null
      */
     private $count;
 
     /**
-     * Rating constructor.
      * @param int|null $average
      * @param int|null $count
      */
@@ -46,7 +45,7 @@ class Rating implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

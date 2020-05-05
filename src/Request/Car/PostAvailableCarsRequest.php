@@ -18,7 +18,7 @@ class PostAvailableCarsRequest extends PostMethod
     private $searchParams;
 
     /**
-     * @var integer
+     * @var int
      */
     private $offset;
 
@@ -33,7 +33,6 @@ class PostAvailableCarsRequest extends PostMethod
     private $orderBy = [];
 
     /**
-     * PostAvailableCarsRequest constructor.
      * @param array<mixed> $searchParams
      * @param int $size
      * @param int $offset

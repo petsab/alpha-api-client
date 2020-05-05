@@ -14,7 +14,6 @@ abstract class AbstractResponseMapper
     protected $factory;
 
     /**
-     * SellerResponseMapper constructor.
      * @param ResponseDataObjectFactory $factory
      */
     public function __construct(ResponseDataObjectFactory $factory)

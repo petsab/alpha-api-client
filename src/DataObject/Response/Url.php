@@ -14,7 +14,6 @@ class Url implements DataObjectInterface
     private $full;
 
     /**
-     * Url constructor.
      * @param string $full
      */
     public function __construct(string $full)
@@ -31,7 +30,7 @@ class Url implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {
