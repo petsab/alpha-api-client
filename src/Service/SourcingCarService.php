@@ -145,7 +145,7 @@ class SourcingCarService extends BaseAuthorizationService
         }
 
         $responseData = json_decode($response->getResponseData(), true);
-        $notFoundIds = reset($responseData['warning']);
+        $notFoundIds = reset($responseData['warning']) ?: [];
         $mapper = $this->responseMapperFactory->createCarResponseMapper();
         $result = [];
 
