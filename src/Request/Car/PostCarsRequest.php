@@ -70,9 +70,6 @@ class PostCarsRequest extends PostMethod
      */
     public function getData()
     {
-        echo $this->getEndpoint();
-        echo json_encode(['PK_list' => $this->ids]);
-
         return ['PK_list' => $this->ids];
     }
 }
