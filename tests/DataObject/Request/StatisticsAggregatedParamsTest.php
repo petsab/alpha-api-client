@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\DataObject\Request;
 
 use PHPUnit\Framework\TestCase;

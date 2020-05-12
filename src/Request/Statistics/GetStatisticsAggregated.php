@@ -26,7 +26,6 @@ class GetStatisticsAggregated extends GetMethod
     private $params;
 
     /**
-     * GetStatisticsAggregated constructor.
      * @param array<string> $levels
      * @param array<string> $region
      * @param StatisticsAggregatedParams $params
@@ -39,7 +38,7 @@ class GetStatisticsAggregated extends GetMethod
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getEndpoint(): string
     {
@@ -50,7 +49,7 @@ class GetStatisticsAggregated extends GetMethod
     }
 
     /**
-     * @inheritDoc
+     * @return array<string>|null
      */
     public function getData()
     {
@@ -63,11 +62,12 @@ class GetStatisticsAggregated extends GetMethod
             }
             $data[$key] = $value;
         }
+
         return $data;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getDataRequestOption(): string
     {

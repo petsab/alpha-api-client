@@ -12,15 +12,19 @@ use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Exception\AwsAuthenticationException;
 use Teas\AlphaApiClient\Exception\CarNotFoundException;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
-use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
-use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
+use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
 use Teas\AlphaApiClient\Factory\Request\SourcingCarRequestFactory;
+use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 use Teas\AlphaApiClient\Request\Car\PostAvailableCarsRequest;
 
 use function json_decode;
 
 class SourcingCarService extends BaseAuthorizationService
 {
+    public const KEY_RESULT = 'result';
+    public const KEY_WARNING = 'warning';
+    public const KEY_MESSAGE = 'message';
+
     /**
      * @var SourcingCarRequestFactory
      */
@@ -32,15 +36,15 @@ class SourcingCarService extends BaseAuthorizationService
     private $responseMapperFactory;
 
     /**
-     * @var ResponseDataObjectFactory
+     * @var ListDOFactory
      */
-    private $responseDataObjectFactory;
+    private $listDOFactory;
 
     /**
      * @param AdapterInterface $adapter
      * @param SourcingCarRequestFactory $carRequestFactory
      * @param ResponseMapperFactory $responseMapperFactory
-     * @param ResponseDataObjectFactory $responseDataObjectFactory
+     * @param ListDOFactory $listResponseFactory
      * @param TokenProviderInterface $tokenProvider
      */
     public function __construct(
@@ -48,12 +52,12 @@ class SourcingCarService extends BaseAuthorizationService
         TokenProviderInterface $tokenProvider,
         SourcingCarRequestFactory $carRequestFactory,
         ResponseMapperFactory $responseMapperFactory,
-        ResponseDataObjectFactory $responseDataObjectFactory
+        ListDOFactory $listResponseFactory
     ) {
         parent::__construct($adapter, $tokenProvider);
         $this->carRequestFactory = $carRequestFactory;
         $this->responseMapperFactory = $responseMapperFactory;
-        $this->responseDataObjectFactory = $responseDataObjectFactory;
+        $this->listDOFactory = $listResponseFactory;
     }
 
     /**
@@ -61,10 +65,10 @@ class SourcingCarService extends BaseAuthorizationService
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
-     * @return SimpleList
-     * @throws ErrorResponseException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws AwsAuthenticationException
+     * @throws ErrorResponseException
+     * @return SimpleList
      */
     public function getAvailableCars(
         array $searchParams,
@@ -83,20 +87,20 @@ class SourcingCarService extends BaseAuthorizationService
         $mapper = $this->responseMapperFactory->createAvailableCarResponseMapper();
         $result = [];
 
-        foreach ($responseData['result'] as $data) {
+        foreach ($responseData[self::KEY_RESULT] as $data) {
             $result[] = $mapper->map($data);
         }
 
-        return $this->responseDataObjectFactory->createSimpleList($result);
+        return $this->listDOFactory->createSimpleList($result);
     }
 
     /**
      * @param string $id
-     * @return Car
-     * @throws AwsAuthenticationException
      * @throws CarNotFoundException
      * @throws ErrorResponseException
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws AwsAuthenticationException
+     * @return Car
      */
     public function getCar(string $id): Car
     {
@@ -113,7 +117,7 @@ class SourcingCarService extends BaseAuthorizationService
 
         $responseData = json_decode($response->getResponseData(), true);
         $mapper = $this->responseMapperFactory->createCarResponseMapper();
-        $data = reset($responseData['result']);
+        $data = reset($responseData[self::KEY_RESULT]);
 
         return $mapper->map($data);
     }
@@ -123,9 +127,8 @@ class SourcingCarService extends BaseAuthorizationService
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
-     * @return CarList
-     * @throws CarNotFoundException
      * @throws ErrorResponseException
+     * @return CarList
      */
     public function getCarsByIds(
         array $ids,
@@ -137,7 +140,7 @@ class SourcingCarService extends BaseAuthorizationService
         $response = $this->callRequest($request);
 
         if ($response->isError() && HttpCode::HTTP_CODE_NOT_FOUND === $response->getHttpCode()) {
-            throw new CarNotFoundException('No vehicle found.', $response->getHttpCode());
+            return $this->listDOFactory->createCarList([], $ids);
         }
 
         if ($response->isError()) {
@@ -145,14 +148,32 @@ class SourcingCarService extends BaseAuthorizationService
         }
 
         $responseData = json_decode($response->getResponseData(), true);
-        $notFoundIds = reset($responseData['warning']) ?: [];
+        $notFoundIds = $this->parseNotFoundIds($responseData);
         $mapper = $this->responseMapperFactory->createCarResponseMapper();
         $result = [];
 
-        foreach ($responseData['result'] as $data) {
+        foreach ($responseData[self::KEY_RESULT] as $data) {
             $result[] = $mapper->map($data);
         }
 
-        return $this->responseDataObjectFactory->createCarList($result, $notFoundIds);
+        return $this->listDOFactory->createCarList($result, $notFoundIds);
+    }
+
+    /**
+     * @param array<mixed> $responseData
+     * @return array<string>
+     */
+    private function parseNotFoundIds(array &$responseData): array
+    {
+        $warningData = reset($responseData[self::KEY_WARNING]) ?: [];
+        $message = $warningData[self::KEY_MESSAGE] ?? '';
+
+        if (empty($message)) {
+            return [];
+        }
+
+        $message = preg_replace(['/.*\[/', '/\].*/', "/'/", '/ /'], '', $message);
+
+        return explode(',', $message);
     }
 }

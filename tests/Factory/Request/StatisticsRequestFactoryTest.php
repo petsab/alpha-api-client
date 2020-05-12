@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Factory\Request;
+namespace TeasTest\AlphaApiClient\Factory\Request;
 
 use GuzzleHttp\RequestOptions;
 use PHPUnit\Framework\TestCase;
@@ -45,6 +45,13 @@ class StatisticsRequestFactoryTest extends TestCase
         $currency = uniqid();
         $params->setCurrency($currency);
 
+        $years = [];
+        for ($i = rand(1, 4); $i > 0; $i--) {
+            $years[] = rand(2000, 2020);
+        }
+        $years = array_unique($years);
+        $params->setYear($years);
+
         $request = $this->factory->createGetStatisticsAggregatedRequest($levels, $regions, $params);
 
         $this->assertInstanceOf(GetStatisticsAggregated::class, $request);
@@ -53,6 +60,7 @@ class StatisticsRequestFactoryTest extends TestCase
             [
                 'region' => implode(',', $regions),
                 'currency' => $currency,
+                'year' => implode(',', $years),
             ],
             $request->getData()
         );

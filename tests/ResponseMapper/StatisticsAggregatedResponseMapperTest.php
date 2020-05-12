@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TeasTest\AlphaApiClient\ResponseMapper;
 
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticItem;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatisticLevel;
-use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
+use Teas\AlphaApiClient\Factory\DataObject\Response\AggregateStatisticDOFactory;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
 
 class StatisticsAggregatedResponseMapperTest extends TestCase
 {
     public function testAll()
     {
-        $instance = new StatisticsAggregatedResponseMapper(new ResponseDataObjectFactory());
+        $instance = new StatisticsAggregatedResponseMapper(new AggregateStatisticDOFactory());
         $data = include __DIR__ . '/input/testStatisticsAggregatedResponseMapperTest.php';
 
         $result = $instance->map($data);

@@ -7,6 +7,8 @@ namespace TeasTest\AlphaApiClient\Request\Response;
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 
 class ResponseMapperFactoryTest extends TestCase
@@ -28,9 +30,21 @@ class ResponseMapperFactoryTest extends TestCase
         $this->assertInstanceOf(UrlResponseMapper::class, $urlMapper);
     }
 
-    public function testCreateSourcingCarMapper()
+    public function testCreateAvailableCarMapper()
     {
         $urlMapper = $this->factory->createAvailableCarResponseMapper();
         $this->assertInstanceOf(AvailableCarResponseMapper::class, $urlMapper);
+    }
+
+    public function testCreateCarMapper()
+    {
+        $urlMapper = $this->factory->createCarResponseMapper();
+        $this->assertInstanceOf(CarResponseMapper::class, $urlMapper);
+    }
+
+    public function testStatisticsAggregateResponseMapper()
+    {
+        $urlMapper = $this->factory->createStatisticsAggregatedResponseMapper();
+        $this->assertInstanceOf(StatisticsAggregatedResponseMapper::class, $urlMapper);
     }
 }

@@ -9,7 +9,6 @@
     <rule ref="PSR12"/>
 
     <file>src/</file>
-    <file>tests/</file>
 
     <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
 

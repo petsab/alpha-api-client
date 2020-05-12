@@ -29,7 +29,6 @@ class AggregatedStatisticItem implements DataObjectInterface
     private $price;
 
     /**
-     * AggregatedStatisticItem constructor.
      * @param string $type
      * @param int $amount
      * @param float|null $mileage
@@ -76,7 +75,7 @@ class AggregatedStatisticItem implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

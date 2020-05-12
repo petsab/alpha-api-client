@@ -8,12 +8,17 @@ use Teas\AlphaApiClient\DataObject\Response\BaseCar;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
-use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
+use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
-class BaseCarResponseMapper extends AbstractResponseMapper
+class BaseCarResponseMapper
 {
     use NullableDateTimeTrait;
+
+    /**
+     * @var CarDOFactory
+     */
+    protected $carDOFactory;
 
     /**
      * @var UrlResponseMapper
@@ -21,14 +26,14 @@ class BaseCarResponseMapper extends AbstractResponseMapper
     private $urlResponseMapper;
 
     /**
-     * @param ResponseDataObjectFactory $factory
+     * @param CarDOFactory $carDOFactory
      * @param UrlResponseMapper $urlResponseMapper
      */
     public function __construct(
-        ResponseDataObjectFactory $factory,
+        CarDOFactory $carDOFactory,
         UrlResponseMapper $urlResponseMapper
     ) {
-        parent::__construct($factory);
+        $this->carDOFactory = $carDOFactory;
         $this->urlResponseMapper = $urlResponseMapper;
     }
 
@@ -78,7 +83,7 @@ class BaseCarResponseMapper extends AbstractResponseMapper
         $first = $this->stringToDateTime($data['first_occurrence']);
         $last = $this->stringToDateTime($data['last_occurrence']);
 
-        return $this->factory->createOccurrence($first, $last);
+        return $this->carDOFactory->createOccurrence($first, $last);
     }
 
     /**
@@ -87,7 +92,7 @@ class BaseCarResponseMapper extends AbstractResponseMapper
      */
     private function mapPrice(array $data): Price
     {
-        $price = $this->factory->createPrice(
+        $price = $this->carDOFactory->createPrice(
             $data['price_with_vat'],
             $data['currency'],
             $data['price_with_vat_czk'],
@@ -107,8 +112,8 @@ class BaseCarResponseMapper extends AbstractResponseMapper
      */
     private function mapSeller(array $data): Seller
     {
-        $seller = $this->factory->creteSeller($data['seller']['name']);
-        $rating = $this->factory->createRating($data['seller']['rating_average'], $data['seller']['rating_count']);
+        $seller = $this->carDOFactory->creteSeller($data['seller']['name']);
+        $rating = $this->carDOFactory->createRating($data['seller']['rating_average'], $data['seller']['rating_count']);
         $seller->setPhone($data['seller']['phone'])
             ->setEmail($data['seller']['email'])
             ->setRating($rating)

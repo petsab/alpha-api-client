@@ -14,7 +14,7 @@ class CarResponseMapper extends BaseCarResponseMapper
      */
     public function map(array $data): Car
     {
-        $car = $this->factory->createCar($data['PK']);
+        $car = $this->carDOFactory->createCar($data['PK']);
         $this->fillBaseCarData($data, $car);
         $car->setAvailable($data['available_car']);
 

@@ -15,7 +15,7 @@ class AvailableCarResponseMapper extends BaseCarResponseMapper
      */
     public function map(array $data): AvailableCar
     {
-        $car = $this->factory->createAvailableCar($data['PK']);
+        $car = $this->carDOFactory->createAvailableCar($data['PK']);
         $this->fillBaseCarData($data, $car);
         $car->setMeasure($this->mapMeasure($data))
             ->setPremiumFeatures($data['premium_features']);
@@ -29,7 +29,7 @@ class AvailableCarResponseMapper extends BaseCarResponseMapper
      */
     private function mapMeasure(array $data): Measure
     {
-        $measure = $this->factory->createMeasure();
+        $measure = $this->carDOFactory->createMeasure();
         $measure->setCarRank($data['measure_car_rank'])
             ->setCountRelevantCar($data['measure_count_relevant_car'])
             ->setDelta($data['measure_delta'])

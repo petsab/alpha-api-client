@@ -19,7 +19,6 @@ class AggregatedStatistic implements DataObjectInterface
     private $statistics = [];
 
     /**
-     * AggregatedStatistic constructor.
      * @param array<AggregatedStatisticLevel> $levels
      * @param array<AggregatedStatisticItem> $statistics
      */
@@ -46,7 +45,7 @@ class AggregatedStatistic implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {

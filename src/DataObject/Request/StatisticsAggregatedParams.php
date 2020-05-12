@@ -156,7 +156,7 @@ final class StatisticsAggregatedParams implements DataObjectInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function toArray(): array
     {
@@ -182,6 +182,7 @@ final class StatisticsAggregatedParams implements DataObjectInterface
         if (null !== $this->currency) {
             $data['currency'] = $this->currency;
         }
+
         return $data;
     }
 }

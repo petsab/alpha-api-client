@@ -183,17 +183,6 @@ class BaseCar implements DataObjectInterface
     }
 
     /**
-     * @param string $id
-     * @return self
-     */
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getId(): string

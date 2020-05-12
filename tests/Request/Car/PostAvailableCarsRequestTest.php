@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TeasTest\AlphaApiClient\Request\Response;
+namespace TeasTest\AlphaApiClient\Request\Car;
 
 use BootIq\ServiceLayer\Enum\HttpMethod;
 use PHPUnit\Framework\TestCase;
@@ -45,5 +45,19 @@ class PostAvailableCarsRequestTest extends TestCase
         );
         $this->assertSame($url, $request->getEndpoint());
         $this->assertSame($body, $request->getData());
+    }
+
+    public function testPostAvailableCarsRequestWithoutSort()
+    {
+        $offset = rand(1, 1000);
+        $size = rand(50, 100);
+        $body = [];
+        $request = $this->factory->createPostAvailableCarsRequest($body, $size, $offset);
+        $url = sprintf(
+            'available_cars?size=%d&offset=%d',
+            $size,
+            $offset
+        );
+        $this->assertSame($url, $request->getEndpoint());
     }
 }

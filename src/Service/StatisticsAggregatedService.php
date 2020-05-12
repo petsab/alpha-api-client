@@ -9,8 +9,8 @@ use Teas\AlphaApiClient\DataObject\Request\StatisticsAggregatedParams;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Exception\InvalidArgumentException;
+use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
 use Teas\AlphaApiClient\Factory\Request\StatisticsRequestFactory;
-use Teas\AlphaApiClient\Factory\ResponseDataObjectFactory;
 use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 
 class StatisticsAggregatedService extends BaseAuthorizationService
@@ -26,38 +26,37 @@ class StatisticsAggregatedService extends BaseAuthorizationService
     private $responseMapperFactory;
 
     /**
-     * @var ResponseDataObjectFactory
+     * @var ListDOFactory
      */
-    private $responseDataObjectFactory;
+    private $listResponseFactory;
 
     /**
-     * StatisticsAggregatedService constructor.
      * @param AdapterInterface $adapter
      * @param TokenProviderInterface $tokenProvider
      * @param StatisticsRequestFactory $requestFactory
      * @param ResponseMapperFactory $responseMapperFactory
-     * @param ResponseDataObjectFactory $responseDataObjectFactory
+     * @param ListDOFactory $listResponseFactory
      */
     public function __construct(
         AdapterInterface $adapter,
         TokenProviderInterface $tokenProvider,
         StatisticsRequestFactory $requestFactory,
         ResponseMapperFactory $responseMapperFactory,
-        ResponseDataObjectFactory $responseDataObjectFactory
+        ListDOFactory $listResponseFactory
     ) {
         parent::__construct($adapter, $tokenProvider);
         $this->requestFactory = $requestFactory;
         $this->responseMapperFactory = $responseMapperFactory;
-        $this->responseDataObjectFactory = $responseDataObjectFactory;
+        $this->listResponseFactory = $listResponseFactory;
     }
 
     /**
-     * @param array $levels
-     * @param array $regions
+     * @param array<string> $levels
+     * @param array<string> $regions
      * @param StatisticsAggregatedParams $params
-     * @return SimpleList
      * @throws ErrorResponseException
      * @throws InvalidArgumentException
+     * @return SimpleList
      */
     public function getAggregatedStatistics(
         array $levels,
@@ -78,6 +77,6 @@ class StatisticsAggregatedService extends BaseAuthorizationService
             $result[] = $mapper->map($data);
         }
 
-        return $this->responseDataObjectFactory->createSimpleList($result);
+        return $this->listResponseFactory->createSimpleList($result);
     }
 }

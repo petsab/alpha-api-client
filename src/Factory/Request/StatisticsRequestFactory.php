@@ -15,8 +15,8 @@ class StatisticsRequestFactory
      * @param array<string> $levels
      * @param array<string> $regions
      * @param StatisticsAggregatedParams $params
-     * @return GetStatisticsAggregated
      * @throws InvalidArgumentException
+     * @return GetStatisticsAggregated
      */
     public function createGetStatisticsAggregatedRequest(
         array $levels,
@@ -24,12 +24,13 @@ class StatisticsRequestFactory
         StatisticsAggregatedParams $params
     ): GetStatisticsAggregated {
         if (empty($levels) || empty($regions)) {
-            throw new InvalidArgumentException("At least one level and region is required");
+            throw new InvalidArgumentException('At least one level and region is required');
         }
         $levelsDiff = array_diff($levels, AggregationLevel::LEVEL_AVAILABLE);
         if (!empty($levelsDiff)) {
             throw new InvalidArgumentException('Unknown levels: ' . implode(', ', $levelsDiff));
         }
+
         return new GetStatisticsAggregated(
             $levels,
             $regions,

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\Factory;
 
+use Teas\AlphaApiClient\Factory\DataObject\Response\AggregateStatisticDOFactory;
+use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
+use Teas\AlphaApiClient\Factory\DataObject\Response\DataObjectFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
@@ -16,7 +19,7 @@ class ResponseMapperFactory
      */
     public function createUrlResponseMapper(): UrlResponseMapper
     {
-        return new UrlResponseMapper(new ResponseDataObjectFactory());
+        return new UrlResponseMapper(new DataObjectFactory());
     }
 
     /**
@@ -25,7 +28,7 @@ class ResponseMapperFactory
     public function createAvailableCarResponseMapper(): AvailableCarResponseMapper
     {
         return new AvailableCarResponseMapper(
-            new ResponseDataObjectFactory(),
+            new CarDOFactory(),
             $this->createUrlResponseMapper()
         );
     }
@@ -36,7 +39,7 @@ class ResponseMapperFactory
     public function createCarResponseMapper(): CarResponseMapper
     {
         return new CarResponseMapper(
-            new ResponseDataObjectFactory(),
+            new CarDOFactory(),
             $this->createUrlResponseMapper()
         );
     }
@@ -47,7 +50,7 @@ class ResponseMapperFactory
     public function createStatisticsAggregatedResponseMapper(): StatisticsAggregatedResponseMapper
     {
         return new StatisticsAggregatedResponseMapper(
-            new ResponseDataObjectFactory()
+            new AggregateStatisticDOFactory()
         );
     }
 }

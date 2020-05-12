@@ -7,11 +7,11 @@ namespace TeasTest\AlphaApiClient\ResponseMapper;
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
 use Teas\AlphaApiClient\Factory\DataObject\Response\DataObjectFactory;
-use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
-class AvailableCarResponseMapperTest extends TestCase
+class AvailCableCarResponseMapperTest extends TestCase
 {
     use NullableDateTimeTrait;
 
@@ -46,7 +46,7 @@ class AvailableCarResponseMapperTest extends TestCase
     public function testCreateSourcingCarFromResponse(string $input)
     {
         $response = json_decode($input, true);
-        $mapper = new AvailableCarResponseMapper($this->carDOFactory, $this->urlResponseMapper);
+        $mapper = new CarResponseMapper($this->carDOFactory, $this->urlResponseMapper);
         $car = $mapper->map($response);
         $this->assertSame($response['PK'], $car->getId());
         $this->assertSame($response['ad_id'], $car->getAdId());
@@ -69,7 +69,6 @@ class AvailableCarResponseMapperTest extends TestCase
         $this->assertSame($response['model'], $car->getModel());
         $this->assertSame($response['number_of_seats'], $car->getNumberOfSeats());
         $this->assertSame($response['power'], $car->getPower());
-        $this->assertSame($response['premium_features'], $car->getPremiumFeatures());
         $this->assertSame($response['price_change'], $car->getPrice()->getChange());
         $this->assertSame($response['price_with_vat'], $car->getPrice()->getWithVat());
         $this->assertSame($response['price_with_vat_czk'], $car->getPrice()->getWithVatCzk());
@@ -95,17 +94,8 @@ class AvailableCarResponseMapperTest extends TestCase
         $this->assertSame($response['url']['full'], $car->getUrl()->getFull());
         $this->assertSame($response['vat_rate'], $car->getPrice()->getVatRate());
         $this->assertSame($response['vat_reclaimable'], $car->getPrice()->isVatReclaimable());
-        $this->assertSame($response['measure_car_rank'], $car->getMeasure()->getCarRank());
-        $this->assertSame($response['measure_count_relevant_car'], $car->getMeasure()->getCountRelevantCar());
-        $this->assertSame($response['measure_delta'], $car->getMeasure()->getDelta());
-        $this->assertSame($response['measure_level'], $car->getMeasure()->getLevel());
-        $this->assertSame($response['measure_liquidity'], $car->getMeasure()->getLiquidity());
-        $this->assertSame($response['measure_rate'], $car->getMeasure()->getRate());
-        $this->assertSame($response['measure_relative_price_position'], $car->getMeasure()->getRelativePricePosition());
-        $this->assertSame($response['measure_retail_price_position'], $car->getMeasure()->getRetailPricePosition());
-        $this->assertSame($response['measure_sold_range_category'], $car->getMeasure()->getSoldRangeCategory());
-        $this->assertSame($response['measure_total_score'], $car->getMeasure()->getTotalScore());
         $this->assertSame($response['thumbnail_url']['full'], $car->getThumbnailUrl()->getFull());
+        $this->assertSame($response['available_car'], $car->isAvailable());
     }
 
     /**
@@ -113,7 +103,7 @@ class AvailableCarResponseMapperTest extends TestCase
      */
     public function getCreateSourcingCarFromResponseInput()
     {
-        $path = __DIR__ . DIRECTORY_SEPARATOR . "input" . DIRECTORY_SEPARATOR . "testCreateAvailableCarFromResponse.php";
+        $path = __DIR__ . DIRECTORY_SEPARATOR . "input" . DIRECTORY_SEPARATOR . "testCreateCarFromResponse.php";
 
         return include $path;
     }

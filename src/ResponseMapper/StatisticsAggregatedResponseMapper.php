@@ -7,11 +7,25 @@ namespace Teas\AlphaApiClient\ResponseMapper;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
 use Teas\AlphaApiClient\Enum\AggregatedStatisticItemType;
 use Teas\AlphaApiClient\Enum\AggregationLevel;
+use Teas\AlphaApiClient\Factory\DataObject\Response\AggregateStatisticDOFactory;
 
-class StatisticsAggregatedResponseMapper extends AbstractResponseMapper
+class StatisticsAggregatedResponseMapper
 {
     /**
-     * @param array $data
+     * @var AggregateStatisticDOFactory
+     */
+    private $aggregateStatisticDOFactory;
+
+    /**
+     * @param AggregateStatisticDOFactory $aggregateStatisticDOFactory
+     */
+    public function __construct(AggregateStatisticDOFactory $aggregateStatisticDOFactory)
+    {
+        $this->aggregateStatisticDOFactory = $aggregateStatisticDOFactory;
+    }
+
+    /**
+     * @param array<mixed> $data
      * @return AggregatedStatistic
      */
     public function map(array $data): AggregatedStatistic
@@ -21,12 +35,12 @@ class StatisticsAggregatedResponseMapper extends AbstractResponseMapper
             if (!isset($data[$level])) {
                 continue;
             }
-            $levels[] = $this->factory->createAggregatedStatisticLevel($level, $data[$level]);
+            $levels[] = $this->aggregateStatisticDOFactory->createAggregatedStatisticLevel($level, $data[$level]);
         }
 
         $statistics = [];
         foreach (AggregatedStatisticItemType::TYPES_AVAILABLE as $type) {
-            $statistics[] = $this->factory->createAggregatedStatisticItem(
+            $statistics[] = $this->aggregateStatisticDOFactory->createAggregatedStatisticItem(
                 $type,
                 $data[$type],
                 $data[$type . '_mileage'],
@@ -34,7 +48,7 @@ class StatisticsAggregatedResponseMapper extends AbstractResponseMapper
             );
         }
 
-        return $this->factory->createAggregatedStatistic(
+        return $this->aggregateStatisticDOFactory->createAggregatedStatistic(
             $levels,
             $statistics
         );
