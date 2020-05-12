@@ -113,7 +113,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('map')
             ->willReturn($availableCar);
         $expected = new SimpleList([$availableCar]);
-        $result = $this->instance->getAvailableCars($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
         $this->assertEquals($expected, $result);
     }
 
@@ -165,7 +165,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('map')
             ->willReturn($availableCar);
         $expected = new SimpleList([$availableCar]);
-        $result = $this->instance->getAvailableCars($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
         $this->assertEquals($expected, $result);
     }
 
@@ -198,7 +198,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode([]));
         $this->expectException(ErrorResponseException::class);
-        $result = $this->instance->getAvailableCars($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
     }
 
     public function testGetCar()
@@ -338,7 +338,7 @@ class SourcingCarServiceTest extends TestCase
             ->with([$car1, $car2], [])
             ->willReturn(new CarList([$car1, $car2], []));
         $list = new CarList([$car1, $car2], []);
-        $result = $this->instance->getCarsByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
 
         $this->assertEquals($list, $result);
     }
@@ -390,7 +390,7 @@ class SourcingCarServiceTest extends TestCase
             ->with([$car1, $car2], ['Auto-1', 'Auto-2'])
             ->willReturn(new CarList([$car1, $car2], ['Auto-1', 'Auto-2']));
         $list = new CarList([$car1, $car2], ['Auto-1', 'Auto-2']);
-        $result = $this->instance->getCarsByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
 
         $this->assertEquals($list, $result);
     }
@@ -442,7 +442,7 @@ class SourcingCarServiceTest extends TestCase
             ->with([$car1, $car2], [])
             ->willReturn(new CarList([$car1, $car2], []));
         $list = new CarList([$car1, $car2], []);
-        $result = $this->instance->getCarsByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
 
         $this->assertEquals($list, $result);
     }
@@ -477,7 +477,7 @@ class SourcingCarServiceTest extends TestCase
             ->with([], $ids)
             ->willReturn(new CarList([], $ids));
         $list = new CarList([], $ids);
-        $result = $this->instance->getCarsByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
 
         $this->assertEquals($list, $result);
     }
@@ -507,6 +507,6 @@ class SourcingCarServiceTest extends TestCase
             ->method('getHttpCode')
             ->willReturn(HttpCode::HTTP_CODE_INTERNAL_SERVER_ERROR);
         $this->expectException(ErrorResponseException::class);
-        $result = $this->instance->getCarsByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
     }
 }

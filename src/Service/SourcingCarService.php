@@ -70,7 +70,7 @@ class SourcingCarService extends BaseAuthorizationService
      * @throws ErrorResponseException
      * @return SimpleList
      */
-    public function getAvailableCars(
+    public function getAvailableCarsList(
         array $searchParams,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
@@ -130,7 +130,7 @@ class SourcingCarService extends BaseAuthorizationService
      * @throws ErrorResponseException
      * @return CarList
      */
-    public function getCarsByIds(
+    public function getCarsListByIds(
         array $ids,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
