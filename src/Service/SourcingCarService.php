@@ -107,7 +107,7 @@ class SourcingCarService extends BaseAuthorizationService
         $response = $this->callRequest($request);
 
         if ($response->isError() && HttpCode::HTTP_CODE_NOT_FOUND === $response->getHttpCode()) {
-            throw new CarNotFoundException(sprintf('Car wit id: %s not found.', $id), $response->getHttpCode());
+            throw new CarNotFoundException(sprintf('Car id: %s not found.', $id), $response->getHttpCode());
         }
 
         if ($response->isError()) {
