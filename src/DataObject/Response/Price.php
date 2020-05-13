@@ -34,7 +34,7 @@ class Price implements DataObjectInterface
     private $retailPriceCzk;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $vatRate;
 
@@ -85,10 +85,10 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @param int $vatRate
+     * @param int|null $vatRate
      * @return Price
      */
-    public function setVatRate(int $vatRate): Price
+    public function setVatRate(?int $vatRate): Price
     {
         $this->vatRate = $vatRate;
 
@@ -147,9 +147,9 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getVatRate(): int
+    public function getVatRate(): ?int
     {
         return $this->vatRate;
     }
