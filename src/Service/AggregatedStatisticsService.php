@@ -7,6 +7,7 @@ namespace Teas\AlphaApiClient\Service;
 use BootIq\ServiceLayer\Adapter\AdapterInterface;
 use Teas\AlphaApiClient\DataObject\Request\StatisticsAggregatedParams;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Exception\InvalidArgumentException;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
@@ -15,8 +16,6 @@ use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 
 class AggregatedStatisticsService extends BaseAuthorizationService
 {
-    public const KEY_RESULT = 'result';
-
     /**
      * @var StatisticsRequestFactory
      */
@@ -76,7 +75,7 @@ class AggregatedStatisticsService extends BaseAuthorizationService
         $mapper = $this->responseMapperFactory->createStatisticsAggregatedResponseMapper();
         $result = [];
 
-        foreach ($responseData[self::KEY_RESULT] as $data) {
+        foreach ($responseData[ResponseDataKey::RESULT] as $data) {
             $result[] = $mapper->map($data);
         }
 

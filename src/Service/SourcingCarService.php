@@ -9,6 +9,7 @@ use BootIq\ServiceLayer\Enum\HttpCode;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\AwsAuthenticationException;
 use Teas\AlphaApiClient\Exception\CarNotFoundException;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
@@ -21,9 +22,7 @@ use function json_decode;
 
 class SourcingCarService extends BaseAuthorizationService
 {
-    public const KEY_RESULT = 'result';
-    public const KEY_WARNING = 'warning';
-    public const KEY_MESSAGE = 'message';
+    public const WARNING_UNAVAILABLE_ITEMS = 'unavailable_items';
 
     /**
      * @var SourcingCarRequestFactory
@@ -65,9 +64,9 @@ class SourcingCarService extends BaseAuthorizationService
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws AwsAuthenticationException
      * @throws ErrorResponseException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @return SimpleList
      */
     public function getAvailableCarsList(
@@ -87,7 +86,7 @@ class SourcingCarService extends BaseAuthorizationService
         $mapper = $this->responseMapperFactory->createAvailableCarResponseMapper();
         $result = [];
 
-        foreach ($responseData[self::KEY_RESULT] as $data) {
+        foreach ($responseData[ResponseDataKey::RESULT] as $data) {
             $result[] = $mapper->map($data);
         }
 
@@ -96,15 +95,15 @@ class SourcingCarService extends BaseAuthorizationService
 
     /**
      * @param string $id
-     * @throws CarNotFoundException
      * @throws ErrorResponseException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws AwsAuthenticationException
+     * @throws CarNotFoundException
      * @return Car
      */
     public function getCar(string $id): Car
     {
-        $request = $this->carRequestFactory->createPostCarsRequest([$id], 1, 0);
+        $request = $this->carRequestFactory->createPostCarsRequest([$id]);
         $response = $this->callRequest($request);
 
         if ($response->isError() && HttpCode::HTTP_CODE_NOT_FOUND === $response->getHttpCode()) {
@@ -117,23 +116,23 @@ class SourcingCarService extends BaseAuthorizationService
 
         $responseData = json_decode($response->getResponseData(), true);
         $mapper = $this->responseMapperFactory->createCarResponseMapper();
-        $data = reset($responseData[self::KEY_RESULT]);
+        $data = reset($responseData[ResponseDataKey::RESULT]);
 
         return $mapper->map($data);
     }
 
     /**
      * @param array<string> $ids
-     * @param int $size
-     * @param int $offset
+     * @param int|null $size
+     * @param int|null $offset
      * @param array<string> $orderBy
      * @throws ErrorResponseException
      * @return CarList
      */
     public function getCarsListByIds(
         array $ids,
-        int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
-        int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
+        ?int $size = null,
+        ?int $offset = null,
         array $orderBy = []
     ): CarList {
         $request = $this->carRequestFactory->createPostCarsRequest($ids, $size, $offset, $orderBy);
@@ -152,7 +151,7 @@ class SourcingCarService extends BaseAuthorizationService
         $mapper = $this->responseMapperFactory->createCarResponseMapper();
         $result = [];
 
-        foreach ($responseData[self::KEY_RESULT] as $data) {
+        foreach ($responseData[ResponseDataKey::RESULT] as $data) {
             $result[] = $mapper->map($data);
         }
 
@@ -165,15 +164,18 @@ class SourcingCarService extends BaseAuthorizationService
      */
     private function parseNotFoundIds(array &$responseData): array
     {
-        $warningData = reset($responseData[self::KEY_WARNING]) ?: [];
-        $message = $warningData[self::KEY_MESSAGE] ?? '';
+        $warnings = $responseData[ResponseDataKey::WARNINGS] ?? [];
 
-        if (empty($message)) {
+        if (empty($warnings)) {
             return [];
         }
 
-        $message = preg_replace(['/.*\[/', '/\].*/', "/'/", '/ /'], '', $message);
+        foreach ($warnings as $warning) {
+            if (self::WARNING_UNAVAILABLE_ITEMS === $warning[ResponseDataKey::WARNING_TYPE]) {
+                return $warning[ResponseDataKey::ITEM_IDS];
+            }
+        }
 
-        return explode(',', $message);
+        return [];
     }
 }

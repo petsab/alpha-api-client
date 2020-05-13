@@ -64,4 +64,16 @@ class PostCarsRequestTest extends TestCase
         );
         $this->assertSame($url, $request->getEndpoint());
     }
+
+    public function testPostCarsRequestWithoutQueryParams()
+    {
+        $ids = [];
+        for ($i = 0; $i < rand(1, 5); $i++) {
+            $ids[] = uniqid();
+        }
+
+        $request = $this->factory->createPostCarsRequest($ids);
+        $url = 'cars?';
+        $this->assertSame($url, $request->getEndpoint());
+    }
 }

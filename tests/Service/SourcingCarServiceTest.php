@@ -10,6 +10,7 @@ use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\CarNotFoundException;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
@@ -98,7 +99,7 @@ class SourcingCarServiceTest extends TestCase
         $response->expects(self::exactly(2))
             ->method('isError')
             ->willReturn(false);
-        $responseData = [SourcingCarService::KEY_RESULT => [[uniqid()]]];
+        $responseData = [ResponseDataKey::RESULT => [[uniqid()]]];
         $response->expects(self::once())
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
@@ -150,7 +151,7 @@ class SourcingCarServiceTest extends TestCase
         $this->tokenProvider->expects(self::once())
             ->method('renewToken')
             ->willReturn(uniqid());
-        $responseData = [SourcingCarService::KEY_RESULT => [[uniqid()]]];
+        $responseData = [ResponseDataKey::RESULT => [[uniqid()]]];
         $response->expects(self::once())
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
@@ -211,7 +212,7 @@ class SourcingCarServiceTest extends TestCase
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with([$id], 1, 0)
+            ->with([$id])
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -223,7 +224,7 @@ class SourcingCarServiceTest extends TestCase
         $response->expects(self::exactly(3))
             ->method('isError')
             ->willReturn(false);
-        $responseData = [SourcingCarService::KEY_RESULT => [[uniqid()]]];
+        $responseData = [ResponseDataKey::RESULT => [[uniqid()]]];
         $response->expects(self::once())
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
@@ -246,7 +247,7 @@ class SourcingCarServiceTest extends TestCase
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with([$id], 1, 0)
+            ->with([$id])
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -273,7 +274,7 @@ class SourcingCarServiceTest extends TestCase
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with([$id], 1, 0)
+            ->with([$id])
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -300,12 +301,10 @@ class SourcingCarServiceTest extends TestCase
         $car1 = $this->createMock(Car::class);
         $car2 = $this->createMock(Car::class);
         $ids = [uniqid(), uniqid()];
-        $size = rand(1, 20);
-        $offset = rand(100, 200);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with($ids, $size, $offset)
+            ->with($ids)
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -318,8 +317,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('isError')
             ->willReturn(false);
         $responseData = [
-            SourcingCarService::KEY_RESULT => [[uniqid()], [uniqid()]],
-            SourcingCarService::KEY_WARNING => [],
+            ResponseDataKey::RESULT => [[uniqid()], [uniqid()]],
         ];
         $response->expects(self::once())
             ->method('getResponseData')
@@ -338,7 +336,7 @@ class SourcingCarServiceTest extends TestCase
             ->with([$car1, $car2], [])
             ->willReturn(new CarList([$car1, $car2], []));
         $list = new CarList([$car1, $car2], []);
-        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
+        $result = $this->instance->getCarsListByIds($ids);
 
         $this->assertEquals($list, $result);
     }
@@ -351,12 +349,10 @@ class SourcingCarServiceTest extends TestCase
         $car1 = $this->createMock(Car::class);
         $car2 = $this->createMock(Car::class);
         $ids = [uniqid(), uniqid(), uniqid(), uniqid()];
-        $size = rand(1, 20);
-        $offset = rand(100, 200);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with($ids, $size, $offset)
+            ->with($ids)
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -368,10 +364,14 @@ class SourcingCarServiceTest extends TestCase
         $response->expects(self::exactly(3))
             ->method('isError')
             ->willReturn(false);
-        $warningData = [['message' => "PK ['Auto-1', 'Auto-2'] not found!"]];
+        $notFoundIds = ['Auto-1', 'Auto-2'];
+        $warningData = [[
+            ResponseDataKey::ITEM_IDS => $notFoundIds,
+            ResponseDataKey::WARNING_TYPE => SourcingCarService::WARNING_UNAVAILABLE_ITEMS,
+        ]];
         $responseData = [
-            SourcingCarService::KEY_RESULT => [[uniqid()], [uniqid()]],
-            SourcingCarService::KEY_WARNING => $warningData,
+            ResponseDataKey::RESULT => [[uniqid()], [uniqid()]],
+            ResponseDataKey::WARNINGS => $warningData,
         ];
         $response->expects(self::once())
             ->method('getResponseData')
@@ -387,15 +387,15 @@ class SourcingCarServiceTest extends TestCase
             ->willReturn($car2);
         $this->listDOFactory->expects(self::once())
             ->method('createCarList')
-            ->with([$car1, $car2], ['Auto-1', 'Auto-2'])
-            ->willReturn(new CarList([$car1, $car2], ['Auto-1', 'Auto-2']));
-        $list = new CarList([$car1, $car2], ['Auto-1', 'Auto-2']);
-        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
+            ->with([$car1, $car2], $notFoundIds)
+            ->willReturn(new CarList([$car1, $car2], $notFoundIds));
+        $list = new CarList([$car1, $car2], $notFoundIds);
+        $result = $this->instance->getCarsListByIds($ids);
 
         $this->assertEquals($list, $result);
     }
 
-    public function testGetCarsByIdsWithEmptyWarningData()
+    public function testGetCarsByIdsWithSize()
     {
         $request = $this->createMock(PostCarsRequest::class);
         $response = $this->createMock(ResponseInterface::class);
@@ -403,12 +403,11 @@ class SourcingCarServiceTest extends TestCase
         $car1 = $this->createMock(Car::class);
         $car2 = $this->createMock(Car::class);
         $ids = [uniqid(), uniqid(), uniqid(), uniqid()];
-        $size = rand(1, 20);
-        $offset = rand(100, 200);
+        $size = rand(1, 3);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostCarsRequest')
-            ->with($ids, $size, $offset)
+            ->with($ids, $size)
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -420,10 +419,14 @@ class SourcingCarServiceTest extends TestCase
         $response->expects(self::exactly(3))
             ->method('isError')
             ->willReturn(false);
-        $warningData = [['message' => ""]];
+        $notFoundIds = [];
+        $warningData = [[
+            'message' => uniqid(),
+            ResponseDataKey::WARNING_TYPE => uniqid(),
+        ]];
         $responseData = [
-            SourcingCarService::KEY_RESULT => [[uniqid()], [uniqid()]],
-            SourcingCarService::KEY_WARNING => $warningData,
+            ResponseDataKey::RESULT => [[uniqid()], [uniqid()]],
+            ResponseDataKey::WARNINGS => $warningData,
         ];
         $response->expects(self::once())
             ->method('getResponseData')
@@ -439,10 +442,10 @@ class SourcingCarServiceTest extends TestCase
             ->willReturn($car2);
         $this->listDOFactory->expects(self::once())
             ->method('createCarList')
-            ->with([$car1, $car2], [])
-            ->willReturn(new CarList([$car1, $car2], []));
-        $list = new CarList([$car1, $car2], []);
-        $result = $this->instance->getCarsListByIds($ids, $size, $offset);
+            ->with([$car1, $car2], $notFoundIds)
+            ->willReturn(new CarList([$car1, $car2], $notFoundIds));
+        $list = new CarList([$car1, $car2], $notFoundIds);
+        $result = $this->instance->getCarsListByIds($ids, $size);
 
         $this->assertEquals($list, $result);
     }
@@ -481,6 +484,7 @@ class SourcingCarServiceTest extends TestCase
 
         $this->assertEquals($list, $result);
     }
+
     public function testGetCarsByIdsWithError()
     {
         $request = $this->createMock(PostCarsRequest::class);

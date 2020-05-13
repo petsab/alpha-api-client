@@ -42,6 +42,14 @@ class StatisticsAggregatedParamsTest extends TestCase
         $instance->setCurrency($currency);
         $this->assertEquals($currency, $instance->getCurrency());
 
+        $power = $this->getRandomStringArray();
+        $instance->setPower($power);
+        $this->assertEquals($power, $instance->getPower());
+
+        $mileageRange = $this->getRandomStringArray();
+        $instance->setMileageRange($mileageRange);
+        $this->assertEquals($mileageRange, $instance->getMileageRange());
+
         $this->assertEquals(
             [
                 'make' => $make,
@@ -51,6 +59,8 @@ class StatisticsAggregatedParamsTest extends TestCase
                 'fuel_type' => $fuelType,
                 'drive' => $drive,
                 'currency' => $currency,
+                'power' => $power,
+                'mileage_range' => $mileageRange,
             ],
             $instance->toArray()
         );
@@ -62,6 +72,7 @@ class StatisticsAggregatedParamsTest extends TestCase
         for ($i = 0; $i < rand(1, 5); $i++) {
             $array[] = uniqid();
         }
+
         return $array;
     }
 
@@ -71,6 +82,7 @@ class StatisticsAggregatedParamsTest extends TestCase
         for ($i = 0; $i < rand(1, 5); $i++) {
             $array[] = rand(1900, 2020);
         }
+
         return $array;
     }
 }

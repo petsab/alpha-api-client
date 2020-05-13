@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Request\StatisticsAggregatedParams;
 use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
 use Teas\AlphaApiClient\Factory\Request\StatisticsRequestFactory;
@@ -94,7 +95,7 @@ class AggregatedStatisticsServiceTest extends TestCase
         $response->expects(self::exactly(2))
             ->method('isError')
             ->willReturn(false);
-        $responseData = [AggregatedStatisticsService::KEY_RESULT => [[uniqid()]]];
+        $responseData = [ResponseDataKey::RESULT => [[uniqid()]]];
         $response->expects(self::once())
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));

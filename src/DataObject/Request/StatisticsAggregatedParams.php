@@ -44,6 +44,16 @@ final class StatisticsAggregatedParams implements DataObjectInterface
     private $currency;
 
     /**
+     * @var array<string>
+     */
+    private $power = [];
+
+    /**
+     * @var array<string>
+     */
+    private $mileageRange = [];
+
+    /**
      * @return array<string>
      */
     public function getMake(): array
@@ -156,7 +166,42 @@ final class StatisticsAggregatedParams implements DataObjectInterface
     }
 
     /**
+     * @return array<string>
+     */
+    public function getPower(): array
+    {
+        return $this->power;
+    }
+
+    /**
+     * @param array<string> $power
+     */
+    public function setPower(array $power): void
+    {
+        $this->power = $power;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getMileageRange(): array
+    {
+        return $this->mileageRange;
+    }
+
+    /**
+     * @param array<string> $mileageRange
+     */
+    public function setMileageRange(array $mileageRange): void
+    {
+        $this->mileageRange = $mileageRange;
+    }
+
+    /**
      * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function toArray(): array
     {
@@ -164,7 +209,7 @@ final class StatisticsAggregatedParams implements DataObjectInterface
         if (!empty($this->make)) {
             $data['make'] = $this->make;
         }
-        if (!empty($this->make)) {
+        if (!empty($this->model)) {
             $data['model'] = $this->model;
         }
         if (!empty($this->year)) {
@@ -181,6 +226,12 @@ final class StatisticsAggregatedParams implements DataObjectInterface
         }
         if (null !== $this->currency) {
             $data['currency'] = $this->currency;
+        }
+        if (!empty($this->power)) {
+            $data['power'] = $this->power;
+        }
+        if (!empty($this->mileageRange)) {
+            $data['mileage_range'] = $this->mileageRange;
         }
 
         return $data;

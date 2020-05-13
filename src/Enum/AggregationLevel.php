@@ -12,6 +12,8 @@ final class AggregationLevel
     public const LEVEL_FUEL_TYPE = 'fuel_type';
     public const LEVEL_DRIVE = 'drive';
     public const LEVEL_YEAR = 'year';
+    public const LEVEL_POWER = 'power';
+    public const LEVEL_MILEAGE_RANGE = 'mileage_range';
     public const LEVEL_REGION = 'region';
     public const LEVEL_AVAILABLE = [
         self::LEVEL_MAKE,
@@ -21,5 +23,7 @@ final class AggregationLevel
         self::LEVEL_DRIVE,
         self::LEVEL_YEAR,
         self::LEVEL_REGION,
+        self::LEVEL_POWER,
+        self::LEVEL_MILEAGE_RANGE,
     ];
 }

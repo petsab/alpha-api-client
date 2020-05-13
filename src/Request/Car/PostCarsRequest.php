@@ -14,12 +14,12 @@ class PostCarsRequest extends PostMethod
     private $ids = [];
 
     /**
-     * @var int
+     * @var int|null
      */
     private $offset;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $size;
 
@@ -30,14 +30,14 @@ class PostCarsRequest extends PostMethod
 
     /**
      * @param array<mixed> $ids
-     * @param int $size
-     * @param int $offset
+     * @param int|null $size
+     * @param int|null $offset
      * @param array<string> $orderBy
      */
     public function __construct(
         array $ids,
-        int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
-        int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
+        ?int $size,
+        ?int $offset,
         array $orderBy = []
     ) {
         $this->offset = $offset;
@@ -52,8 +52,13 @@ class PostCarsRequest extends PostMethod
     public function getEndpoint(): string
     {
         $queryParams = [];
-        $queryParams[] = 'size=' . $this->size;
-        $queryParams[] = 'offset=' . $this->offset;
+
+        if (null !== $this->size) {
+            $queryParams[] = 'size=' . $this->size;
+        }
+        if (null !== $this->offset) {
+            $queryParams[] = 'offset=' . $this->offset;
+        }
 
         if (!empty($this->orderBy)) {
             $queryParams[] = 'order_by=' . implode(PostAvailableCarsRequest::QUERY_ARRAY_VALUES_GLUE, $this->orderBy);
