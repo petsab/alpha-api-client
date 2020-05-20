@@ -50,7 +50,7 @@ class AvailableCarResponseMapperTest extends TestCase
         $car = $mapper->map($response);
         $this->assertSame($response['PK'], $car->getId());
         $this->assertSame($response['ad_id'], $car->getAdId());
-        $this->assertSame($response['body_type'], $car->getBodyType());
+        $this->assertSame($response['car_style'], $car->getCarStyle());
         $this->assertSame($response['condition'], $car->getCondition());
         $this->assertSame($response['cubic_capacity'], $car->getCubicCapacity());
         $this->assertSame($response['days_on_stock'], $car->getDaysOnStock());

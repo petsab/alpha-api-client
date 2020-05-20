@@ -32,7 +32,7 @@ class BaseCar implements DataObjectInterface
     /**
      * @var string|null
      */
-    protected $bodyType;
+    protected $carStyle;
 
     /**
      * @var string|null
@@ -212,18 +212,18 @@ class BaseCar implements DataObjectInterface
     /**
      * @return string|null
      */
-    public function getBodyType(): ?string
+    public function getCarStyle(): ?string
     {
-        return $this->bodyType;
+        return $this->carStyle;
     }
 
     /**
-     * @param string|null $bodyType
+     * @param string|null $carStyle
      * @return self
      */
-    public function setBodyType(?string $bodyType): self
+    public function setCarStyle(?string $carStyle): self
     {
-        $this->bodyType = $bodyType;
+        $this->carStyle = $carStyle;
 
         return $this;
     }
@@ -768,7 +768,7 @@ class BaseCar implements DataObjectInterface
         return [
             'id' => $this->id,
             'adId' => $this->adId,
-            'bodyType' => $this->bodyType,
+            'carStyle' => $this->carStyle,
             'condition' => $this->condition,
             'cubicCapacity' => $this->cubicCapacity,
             'daysOnStock' => $this->daysOnStock,

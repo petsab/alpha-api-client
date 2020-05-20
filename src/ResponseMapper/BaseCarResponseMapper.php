@@ -44,7 +44,7 @@ class BaseCarResponseMapper
     public function fillBaseCarData(array $data, BaseCar $car): void
     {
         $car->setAdId($data['ad_id'])
-            ->setBodyType($data['body_type'])
+            ->setCarStyle($data['car_style'])
             ->setCondition($data['condition'])
             ->setCubicCapacity($data['cubic_capacity'])
             ->setDaysOnStock($data['days_on_stock'])

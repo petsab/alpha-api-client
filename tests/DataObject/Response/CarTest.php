@@ -18,7 +18,7 @@ class CarTest extends TestCase
     {
         $id = uniqid();
         $adId = uniqid();
-        $bodyType = uniqid();
+        $carStyle = uniqid();
         $condition = uniqid();
         $cubicCapacity = rand(1, 100);
         $daysOnStock = rand(1, 100);
@@ -109,7 +109,7 @@ class CarTest extends TestCase
         $car->setAvailable($isAvailable);
         $car->setAdId($adId)
             ->setCondition($condition)
-            ->setBodyType($bodyType)
+            ->setCarStyle($carStyle)
             ->setCondition($condition)
             ->setCubicCapacity($cubicCapacity)
             ->setDaysOnStock($daysOnStock)
@@ -142,7 +142,7 @@ class CarTest extends TestCase
         $data = [
             'id' => $car->getId(),
             'adId' => $car->getAdId(),
-            'bodyType' => $car->getBodyType(),
+            'carStyle' => $car->getCarStyle(),
             'condition' => $car->getCondition(),
             'cubicCapacity' => $car->getCubicCapacity(),
             'daysOnStock' => $car->getDaysOnStock(),
