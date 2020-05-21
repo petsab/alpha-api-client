@@ -6,6 +6,7 @@ namespace Teas\AlphaApiClient\Service;
 
 use BootIq\ServiceLayer\Adapter\AdapterInterface;
 use BootIq\ServiceLayer\Enum\HttpCode;
+use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
@@ -60,22 +61,20 @@ class SourcingCarService extends BaseAuthorizationService
     }
 
     /**
-     * @param array<mixed> $searchParams
+     * @param AvailableCarsFilter $filter
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
-     * @throws AwsAuthenticationException
-     * @throws ErrorResponseException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @return SimpleList
+     * @throws ErrorResponseException
      */
     public function getAvailableCarsList(
-        array $searchParams,
+        AvailableCarsFilter $filter,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
         array $orderBy = []
     ): SimpleList {
-        $request = $this->carRequestFactory->createPostAvailableCarsRequest($searchParams, $size, $offset, $orderBy);
+        $request = $this->carRequestFactory->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy);
         $response = $this->callRequest($request);
 
         if ($response->isError()) {

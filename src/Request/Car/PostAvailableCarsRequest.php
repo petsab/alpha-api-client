@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\Request\Car;
 
 use BootIq\ServiceLayer\Request\PostMethod;
+use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 
 class PostAvailableCarsRequest extends PostMethod
 {
@@ -13,9 +14,9 @@ class PostAvailableCarsRequest extends PostMethod
     public const QUERY_ARRAY_VALUES_GLUE = ',';
 
     /**
-     * @var array<mixed>
+     * @var AvailableCarsFilter
      */
-    private $searchParams;
+    private $filter;
 
     /**
      * @var int
@@ -33,13 +34,13 @@ class PostAvailableCarsRequest extends PostMethod
     private $orderBy = [];
 
     /**
-     * @param array<mixed> $searchParams
+     * @param AvailableCarsFilter $filter
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
      */
     public function __construct(
-        array $searchParams,
+        AvailableCarsFilter $filter,
         int $size = self::DEFAULT_SIZE,
         int $offset = self::DEFAULT_OFFSET,
         array $orderBy = []
@@ -47,7 +48,7 @@ class PostAvailableCarsRequest extends PostMethod
         $this->offset = $offset;
         $this->size = $size;
         $this->orderBy = $orderBy;
-        $this->searchParams = $searchParams;
+        $this->filter = $filter;
     }
 
     /**
@@ -74,6 +75,6 @@ class PostAvailableCarsRequest extends PostMethod
      */
     public function getData()
     {
-        return $this->searchParams;
+        return $this->filter->toArray();
     }
 }

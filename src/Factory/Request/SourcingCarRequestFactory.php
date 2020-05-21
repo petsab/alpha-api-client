@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\Factory\Request;
 
+use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\Request\Car\PostAvailableCarsRequest;
 use Teas\AlphaApiClient\Request\Car\PostCarsRequest;
 
 class SourcingCarRequestFactory
 {
     /**
-     * @param array<mixed> $body
-     * @param int $offset
+     * @param AvailableCarsFilter $filter
      * @param int $size
+     * @param int $offset
      * @param array<string> $orderBy
      * @return PostAvailableCarsRequest
      */
     public function createPostAvailableCarsRequest(
-        array $body,
+        AvailableCarsFilter $filter,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
         array $orderBy = []
     ): PostAvailableCarsRequest {
-        return new PostAvailableCarsRequest($body, $size, $offset, $orderBy);
+        return new PostAvailableCarsRequest($filter, $size, $offset, $orderBy);
     }
 
     /**
