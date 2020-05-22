@@ -27,7 +27,7 @@ class AvailableCarsFilter implements DataObjectInterface
     private $daysOnStock;
 
     /**
-     * @var FilterCar|null
+     * @var array<FilterCar>
      */
     private $car;
 
@@ -123,11 +123,11 @@ class AvailableCarsFilter implements DataObjectInterface
     }
 
     /**
-     * @param FilterCar|null $car
+     * @param array<FilterCar> $cars
      */
-    public function setCar(?FilterCar $car): void
+    public function setCar(array $cars): void
     {
-        $this->car = $car;
+        $this->car = $cars;
     }
 
     /**
@@ -251,9 +251,9 @@ class AvailableCarsFilter implements DataObjectInterface
     }
 
     /**
-     * @return FilterCar|null
+     * @return array<FilterCar>
      */
-    public function getCar(): ?FilterCar
+    public function getCar(): array
     {
         return $this->car;
     }
@@ -381,7 +381,9 @@ class AvailableCarsFilter implements DataObjectInterface
             $data['days_on_stock'] = $this->daysOnStock->toArray();
         }
         if (!empty($this->car)) {
-            $data['car'] = $this->car->toArray();
+            $data['car'] = array_map(function (FilterCar $car) {
+                return $car->toArray();
+            }, $this->car);
         }
         if (!empty($this->fuelType)) {
             $data['fuel_type'] = $this->fuelType;

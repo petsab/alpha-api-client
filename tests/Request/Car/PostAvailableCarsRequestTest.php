@@ -6,6 +6,7 @@ namespace TeasTest\AlphaApiClient\Request\Car;
 
 use BootIq\ServiceLayer\Enum\HttpMethod;
 use PHPUnit\Framework\TestCase;
+use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\Factory\Request\SourcingCarRequestFactory;
 use Teas\AlphaApiClient\Request\Car\PostAvailableCarsRequest;
 
@@ -30,11 +31,12 @@ class PostAvailableCarsRequestTest extends TestCase
         for ($i = 0; $i < rand(1, 5); $i++) {
             $orderBy[] = uniqid();
         }
-        $b1 = [uniqid() => uniqid()];
-        $b2 = [uniqid() => uniqid()];
-        $body = [$b1, $b2];
-
-        $request = $this->factory->createPostAvailableCarsRequest($body, $size, $offset, $orderBy);
+        $filter = $this->createMock(AvailableCarsFilter::class);
+        $filterData = [uniqid() => uniqid()];
+        $filter->expects(self::once())
+            ->method('toArray')
+            ->willReturn($filterData);
+        $request = $this->factory->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy);
         $this->assertInstanceOf(PostAvailableCarsRequest::class, $request);
         $this->assertEquals(HttpMethod::METHOD_POST, $request->getMethod());
         $url = sprintf(
@@ -44,15 +46,15 @@ class PostAvailableCarsRequestTest extends TestCase
             implode(PostAvailableCarsRequest::QUERY_ARRAY_VALUES_GLUE, $orderBy)
         );
         $this->assertSame($url, $request->getEndpoint());
-        $this->assertSame($body, $request->getData());
+        $this->assertSame($filterData, $request->getData());
     }
 
     public function testPostAvailableCarsRequestWithoutSort()
     {
         $offset = rand(1, 1000);
         $size = rand(50, 100);
-        $body = [];
-        $request = $this->factory->createPostAvailableCarsRequest($body, $size, $offset);
+        $filter = $this->createMock(AvailableCarsFilter::class);
+        $request = $this->factory->createPostAvailableCarsRequest($filter, $size, $offset);
         $url = sprintf(
             'available_cars?size=%d&offset=%d',
             $size,

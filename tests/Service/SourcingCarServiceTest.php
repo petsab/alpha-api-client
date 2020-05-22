@@ -6,6 +6,7 @@ use BootIq\ServiceLayer\Adapter\AdapterInterface;
 use BootIq\ServiceLayer\Enum\HttpCode;
 use BootIq\ServiceLayer\Response\ResponseInterface;
 use PHPUnit\Framework\TestCase;
+use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
@@ -81,13 +82,13 @@ class SourcingCarServiceTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $mapper = $this->createMock(AvailableCarResponseMapper::class);
         $availableCar = $this->createMock(AvailableCar::class);
-        $searchParams = [];
+        $filter = $this->createMock(AvailableCarsFilter::class);
         $size = rand(1, 20);
         $offset = rand(100, 200);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostAvailableCarsRequest')
-            ->with($searchParams, $size, $offset)
+            ->with($filter, $size, $offset)
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -114,7 +115,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('map')
             ->willReturn($availableCar);
         $expected = new SimpleList([$availableCar]);
-        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
         $this->assertEquals($expected, $result);
     }
 
@@ -124,13 +125,13 @@ class SourcingCarServiceTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $mapper = $this->createMock(AvailableCarResponseMapper::class);
         $availableCar = $this->createMock(AvailableCar::class);
-        $searchParams = [];
+        $filter = $this->createMock(AvailableCarsFilter::class);
         $size = rand(1, 20);
         $offset = rand(100, 200);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostAvailableCarsRequest')
-            ->with($searchParams, $size, $offset)
+            ->with($filter, $size, $offset)
             ->willReturn($request);
         $this->adapter->expects(self::exactly(2))
             ->method('call')
@@ -166,7 +167,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('map')
             ->willReturn($availableCar);
         $expected = new SimpleList([$availableCar]);
-        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
         $this->assertEquals($expected, $result);
     }
 
@@ -174,13 +175,13 @@ class SourcingCarServiceTest extends TestCase
     {
         $request = $this->createMock(PostAvailableCarsRequest::class);
         $response = $this->createMock(ResponseInterface::class);
-        $searchParams = [];
+        $filter = $this->createMock(AvailableCarsFilter::class);
         $size = rand(1, 20);
         $offset = rand(100, 200);
 
         $this->carRequestFactory->expects(self::once())
             ->method('createPostAvailableCarsRequest')
-            ->with($searchParams, $size, $offset)
+            ->with($filter, $size, $offset)
             ->willReturn($request);
         $this->adapter->expects(self::once())
             ->method('call')
@@ -199,7 +200,7 @@ class SourcingCarServiceTest extends TestCase
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode([]));
         $this->expectException(ErrorResponseException::class);
-        $result = $this->instance->getAvailableCarsList($searchParams, $size, $offset);
+        $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
     }
 
     public function testGetCar()

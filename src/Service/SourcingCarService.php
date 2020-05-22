@@ -65,8 +65,8 @@ class SourcingCarService extends BaseAuthorizationService
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
-     * @return SimpleList
      * @throws ErrorResponseException
+     * @return SimpleList
      */
     public function getAvailableCarsList(
         AvailableCarsFilter $filter,

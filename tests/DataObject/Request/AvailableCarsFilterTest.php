@@ -56,17 +56,27 @@ class AvailableCarsFilterTest extends TestCase
         $filter->setDaysOnStock($daysOnStock);
         $this->assertSame($daysOnStock, $filter->getDaysOnStock());
 
-        $car = $this->createMock(FilterCar::class);
-        $carData = [
+        $car1 = $this->createMock(FilterCar::class);
+        $car1Data = [
             'make' => uniqid(),
             'model' => uniqid(),
             'year' => rand(2000, 2020),
         ];
-        $car->expects(self::exactly(2))
+        $car1->expects(self::exactly(2))
             ->method('toArray')
-            ->willReturn($carData);
-        $filter->setCar($car);
-        $this->assertSame($car, $filter->getCar());
+            ->willReturn($car1Data);
+        $car2 = $this->createMock(FilterCar::class);
+        $car2Data = [
+            'make' => uniqid(),
+            'model' => uniqid(),
+            'year' => rand(2000, 2020),
+        ];
+        $car2->expects(self::exactly(2))
+            ->method('toArray')
+            ->willReturn($car2Data);
+        $cars = [$car1, $car2];
+        $filter->setCar($cars);
+        $this->assertSame($cars, $filter->getCar());
 
         $fuelType = [uniqid(), uniqid()];
         $filter->setFuelType($fuelType);
@@ -121,7 +131,9 @@ class AvailableCarsFilterTest extends TestCase
             'seller' => $sellerData,
             'price' => $price->toArray(),
             'days_on_stock' => $daysOnStock->toArray(),
-            'car' => $car->toArray(),
+            'car' => array_map(function (FilterCar $car) {
+                return $car->toArray();
+            }, $cars),
             'fuel_type' => $fuelType,
             'transmission' => $transmission,
             'body_type' => $bodyType,
