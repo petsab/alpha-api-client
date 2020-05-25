@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\Exception;
 
-class ErrorResponseException extends AlphaDataProviderException
+class ErrorResponseException extends AlphaApiClientException
 {
 }

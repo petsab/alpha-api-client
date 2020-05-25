@@ -10,4 +10,5 @@ final class ResponseDataKey
     public const WARNINGS = 'warnings';
     public const WARNING_TYPE = 'warning_type';
     public const ITEM_IDS = 'item_ids';
+    public const BAD_REQUEST_DETAIL = 'detail';
 }

@@ -13,9 +13,12 @@ use Teas\AlphaApiClient\Exception\InvalidArgumentException;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
 use Teas\AlphaApiClient\Factory\Request\StatisticsRequestFactory;
 use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
+use Teas\AlphaApiClient\Traits\ErrorResponseTrait;
 
 class AggregatedStatisticsService extends BaseAuthorizationService
 {
+    use ErrorResponseTrait;
+
     /**
      * @var StatisticsRequestFactory
      */
@@ -66,11 +69,7 @@ class AggregatedStatisticsService extends BaseAuthorizationService
     ): SimpleList {
         $request = $this->requestFactory->createGetStatisticsAggregatedRequest($levels, $regions, $params);
         $response = $this->callRequest($request);
-
-        if ($response->isError()) {
-            throw new ErrorResponseException($response->getResponseData(), $response->getHttpCode());
-        }
-
+        $this->processCommonError($response);
         $responseData = json_decode($response->getResponseData(), true);
         $mapper = $this->responseMapperFactory->createStatisticsAggregatedResponseMapper();
         $result = [];

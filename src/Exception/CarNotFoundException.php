@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\Exception;
 
-class CarNotFoundException extends AlphaDataProviderException
+class CarNotFoundException extends AlphaApiClientException
 {
 }

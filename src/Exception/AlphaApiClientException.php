@@ -6,6 +6,6 @@ namespace Teas\AlphaApiClient\Exception;
 
 use Exception;
 
-class AlphaDataProviderException extends Exception
+class AlphaApiClientException extends Exception
 {
 }

@@ -196,8 +196,7 @@ class SourcingCarServiceTest extends TestCase
         $response->expects(self::exactly(2))
             ->method('getHttpCode')
             ->willReturn(HttpCode::HTTP_CODE_INTERNAL_SERVER_ERROR);
-        $response->expects(self::once())
-            ->method('getResponseData')
+        $response->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode([]));
         $this->expectException(ErrorResponseException::class);
         $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
