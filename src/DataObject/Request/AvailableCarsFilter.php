@@ -8,11 +8,12 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class AvailableCarsFilter implements DataObjectInterface
 {
     /**
-     * @var FilterSeller
+     * @var FilterSeller|null
      */
     private $seller;
 
@@ -72,7 +73,7 @@ class AvailableCarsFilter implements DataObjectInterface
     private $cubicCapacity;
 
     /**
-     * @var FilterBuyer
+     * @var FilterBuyer|null
      */
     private $buyer;
 
@@ -97,10 +98,10 @@ class AvailableCarsFilter implements DataObjectInterface
     private $uniformity;
 
     /**
-     * @param FilterSeller $seller
-     * @param FilterBuyer $buyer
+     * @param FilterSeller|null $seller
+     * @param FilterBuyer|null $buyer
      */
-    public function __construct(FilterSeller $seller, FilterBuyer $buyer)
+    public function __construct(?FilterSeller $seller, ?FilterBuyer $buyer)
     {
         $this->seller = $seller;
         $this->buyer = $buyer;
@@ -227,9 +228,9 @@ class AvailableCarsFilter implements DataObjectInterface
     }
 
     /**
-     * @return FilterSeller
+     * @return FilterSeller|null
      */
-    public function getSeller(): FilterSeller
+    public function getSeller(): ?FilterSeller
     {
         return $this->seller;
     }
@@ -323,9 +324,9 @@ class AvailableCarsFilter implements DataObjectInterface
     }
 
     /**
-     * @return FilterBuyer
+     * @return FilterBuyer|null
      */
-    public function getBuyer(): FilterBuyer
+    public function getBuyer(): ?FilterBuyer
     {
         return $this->buyer;
     }
@@ -370,10 +371,13 @@ class AvailableCarsFilter implements DataObjectInterface
      */
     public function toArray(): array
     {
-        $data = [
-            'buyer' => $this->buyer->toArray(),
-            'seller' => $this->seller->toArray(),
-        ];
+        $data = [];
+        if (!empty($this->buyer)) {
+            $data['buyer'] = $this->buyer->toArray();
+        }
+        if (!empty($this->seller)) {
+            $data['seller'] = $this->seller->toArray();
+        }
         if (!empty($this->price)) {
             $data['price'] = $this->price->toArray();
         }
