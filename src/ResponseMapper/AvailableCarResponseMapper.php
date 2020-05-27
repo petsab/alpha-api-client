@@ -6,6 +6,7 @@ namespace Teas\AlphaApiClient\ResponseMapper;
 
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
+use Teas\AlphaApiClient\DataObject\Response\Percentile;
 
 class AvailableCarResponseMapper extends BaseCarResponseMapper
 {
@@ -18,7 +19,8 @@ class AvailableCarResponseMapper extends BaseCarResponseMapper
         $car = $this->carDOFactory->createAvailableCar($data['PK']);
         $this->fillBaseCarData($data, $car);
         $car->setMeasure($this->mapMeasure($data))
-            ->setPremiumFeatures($data['premium_features']);
+            ->setPremiumFeatures($data['premium_features'])
+            ->setPercentile($this->mapPercentile($data));
 
         return $car;
     }
@@ -43,5 +45,27 @@ class AvailableCarResponseMapper extends BaseCarResponseMapper
             ->setTotalScore($data['measure_total_score']);
 
         return $measure;
+    }
+
+    /**
+     * @param array<mixed> $data
+     * @return Percentile
+     */
+    private function mapPercentile(array $data): Percentile
+    {
+        $percentile = $this->carDOFactory->createPercentile();
+        $percentile->setValue0($data['measure_percentile_0_price'])
+            ->setValue10($data['measure_percentile_10_price'])
+            ->setValue20($data['measure_percentile_20_price'])
+            ->setValue30($data['measure_percentile_30_price'])
+            ->setValue40($data['measure_percentile_40_price'])
+            ->setValue50($data['measure_percentile_50_price'])
+            ->setValue60($data['measure_percentile_60_price'])
+            ->setValue70($data['measure_percentile_70_price'])
+            ->setValue80($data['measure_percentile_80_price'])
+            ->setValue90($data['measure_percentile_90_price'])
+            ->setValue100($data['measure_percentile_100_price']);
+
+        return $percentile;
     }
 }

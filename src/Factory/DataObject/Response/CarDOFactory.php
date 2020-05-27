@@ -9,6 +9,7 @@ use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
+use Teas\AlphaApiClient\DataObject\Response\Percentile;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Rating;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
@@ -36,17 +37,17 @@ class CarDOFactory
     }
 
     /**
-     * @param int $withVat
-     * @param string $currency
-     * @param int $withVatCzk
-     * @param int $withVatEur
+     * @param int|null $withVat
+     * @param string|null $currency
+     * @param int|null $withVatCzk
+     * @param int|null $withVatEur
      * @return Price
      */
     public function createPrice(
-        int $withVat,
-        string $currency,
-        int $withVatCzk,
-        int $withVatEur
+        ?int $withVat,
+        ?string $currency,
+        ?int $withVatCzk,
+        ?int $withVatEur
     ): Price {
         return new Price($withVat, $currency, $withVatCzk, $withVatEur);
     }
@@ -84,5 +85,13 @@ class CarDOFactory
     public function createCar(string $pk): Car
     {
         return new Car($pk);
+    }
+
+    /**
+     * @return Percentile
+     */
+    public function createPercentile(): Percentile
+    {
+        return new Percentile();
     }
 }

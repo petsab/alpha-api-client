@@ -9,22 +9,22 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 class Url implements DataObjectInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $full;
 
     /**
-     * @param string $full
+     * @param string|null $full
      */
-    public function __construct(string $full)
+    public function __construct(?string $full)
     {
         $this->full = $full;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFull(): string
+    public function getFull(): ?string
     {
         return $this->full;
     }

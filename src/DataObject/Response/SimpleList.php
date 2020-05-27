@@ -6,7 +6,7 @@ namespace Teas\AlphaApiClient\DataObject\Response;
 
 use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 
-class SimpleList implements DataObjectInterface
+class SimpleList implements DataObjectInterface, ListInterface
 {
     /**
      * @var array<object>
@@ -22,7 +22,7 @@ class SimpleList implements DataObjectInterface
     }
 
     /**
-     * @return array<mixed>
+     * @return array<object>
      */
     public function getData(): array
     {

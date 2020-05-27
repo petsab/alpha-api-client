@@ -17,6 +17,11 @@ class AvailableCar extends BaseCar
     private $measure;
 
     /**
+     * @var Percentile
+     */
+    private $percentile;
+
+    /**
      * @return Measure
      */
     public function getMeasure(): Measure
@@ -55,6 +60,25 @@ class AvailableCar extends BaseCar
     }
 
     /**
+     * @return Percentile
+     */
+    public function getPercentile(): Percentile
+    {
+        return $this->percentile;
+    }
+
+    /**
+     * @param Percentile $percentile
+     * @return AvailableCar
+     */
+    public function setPercentile(Percentile $percentile): AvailableCar
+    {
+        $this->percentile = $percentile;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toArray(): array
@@ -62,6 +86,7 @@ class AvailableCar extends BaseCar
         $data = parent::toArray();
         $data['premiumFeatures'] = $this->premiumFeatures;
         $data['measure'] = $this->measure->toArray();
+        $data['percentile'] = $this->percentile->toArray();
 
         return $data;
     }

@@ -10,7 +10,7 @@ return [[
       "car_style": "CARSTYLE_OTHER",
       "condition": "CONDITION_USED",
       "cubic_capacity": 1497,
-      "currency": "CURRENCY_EUR",
+      "currency": null,
       "days_on_stock": 500,
       "drive_type": "DRIVE_4X2",
       "feature_score": 0.9310344828,
@@ -142,10 +142,10 @@ return [[
         "PARKINGCAMERA_REAR_ONLY"
       ],
       "price_change": null,
-      "price_with_vat": 6027,
-      "price_with_vat_czk": 166000,
-      "price_with_vat_eur": 6014,
-      "retail_price_czk": 238000,
+      "price_with_vat": null,
+      "price_with_vat_czk": null,
+      "price_with_vat_eur": null,
+      "retail_price_czk": null,
       "sauto_url": {
         "full": "https://www.sauto.cz/hledani#!manufacturer=99&model=727&fuel=5&gearbox=3&powerMin=50&yearMin=2007&yearMax=2007&tachometrMax=200000"
       },

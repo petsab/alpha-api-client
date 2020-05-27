@@ -14,12 +14,12 @@ class Price implements DataObjectInterface
     private $change;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $withVat;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $withVatCzk;
 
@@ -29,7 +29,7 @@ class Price implements DataObjectInterface
     private $withVatEur;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $retailPriceCzk;
 
@@ -44,17 +44,17 @@ class Price implements DataObjectInterface
     private $vatReclaimable;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $currency;
 
     /**
-     * @param int $withVat
-     * @param string $currency
-     * @param int $withVatCzk
+     * @param int|null $withVat
+     * @param string|null $currency
+     * @param int|null $withVatCzk
      * @param int|null $withVatEur
      */
-    public function __construct(int $withVat, string $currency, int $withVatCzk, ?int $withVatEur)
+    public function __construct(?int $withVat, ?string $currency, ?int $withVatCzk, ?int $withVatEur)
     {
         $this->withVat = $withVat;
         $this->withVatCzk = $withVatCzk;
@@ -74,10 +74,10 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @param int $retailPriceCzk
+     * @param int|null $retailPriceCzk
      * @return Price
      */
-    public function setRetailPriceCzk(int $retailPriceCzk): Price
+    public function setRetailPriceCzk(?int $retailPriceCzk): Price
     {
         $this->retailPriceCzk = $retailPriceCzk;
 
@@ -115,17 +115,17 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getWithVat(): int
+    public function getWithVat(): ?int
     {
         return $this->withVat;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getWithVatCzk(): int
+    public function getWithVatCzk(): ?int
     {
         return $this->withVatCzk;
     }
@@ -139,9 +139,9 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRetailPriceCzk(): int
+    public function getRetailPriceCzk(): ?int
     {
         return $this->retailPriceCzk;
     }
@@ -163,9 +163,9 @@ class Price implements DataObjectInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }

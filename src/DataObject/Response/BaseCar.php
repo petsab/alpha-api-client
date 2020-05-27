@@ -80,7 +80,7 @@ class BaseCar implements DataObjectInterface
     protected $interiorMaterial;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $make;
 
@@ -400,18 +400,18 @@ class BaseCar implements DataObjectInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMake(): string
+    public function getMake(): ?string
     {
         return $this->make;
     }
 
     /**
-     * @param string $make
+     * @param string|null $make
      * @return self
      */
-    public function setMake(string $make): self
+    public function setMake(?string $make): self
     {
         $this->make = $make;
 

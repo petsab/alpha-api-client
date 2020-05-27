@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
+use Teas\AlphaApiClient\DataObject\Response\Percentile;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
 use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
@@ -125,6 +126,24 @@ class AvailableCarTest extends TestCase
             ->method('toArray')
             ->willReturn(['full' => uniqid()]);
 
+        $percentile = $this->createMock(Percentile::class);
+        $percentileData = [
+            'value0' => (float) rand() / (float) getrandmax(),
+            'value10' => (float) rand() / (float) getrandmax(),
+            'value20' => (float) rand() / (float) getrandmax(),
+            'value30' => (float) rand() / (float) getrandmax(),
+            'value40' => (float) rand() / (float) getrandmax(),
+            'value50' => (float) rand() / (float) getrandmax(),
+            'value60' => (float) rand() / (float) getrandmax(),
+            'value70' => (float) rand() / (float) getrandmax(),
+            'value80' => (float) rand() / (float) getrandmax(),
+            'value90' => (float) rand() / (float) getrandmax(),
+            'value100' => (float) rand() / (float) getrandmax(),
+        ];
+        $percentile->expects(self::exactly(2))
+            ->method('toArray')
+            ->willReturn($percentileData);
+
         $availableCar = new AvailableCar($id);
         $availableCar->setAdId($adId)
             ->setCondition($condition)
@@ -146,7 +165,6 @@ class AvailableCarTest extends TestCase
             ->setNumberOfSeats($numberOfSeats)
             ->setOriginCountry($originCountry)
             ->setPower($power)
-
             ->setPrice($price)
             ->setSAutoUrl($sAutoUrl)
             ->setSeller($seller)
@@ -159,7 +177,8 @@ class AvailableCarTest extends TestCase
             ->setYear($year)
             ->setThumbnailUrl($thumbUrl);
         $availableCar->setPremiumFeatures($premiumFeatures)
-            ->setMeasure($measure);
+            ->setMeasure($measure)
+            ->setPercentile($percentile);
 
 
         $data = [
@@ -196,6 +215,7 @@ class AvailableCarTest extends TestCase
             'url' => $availableCar->getUrl()->toArray(),
             'vin' => $availableCar->getVin(),
             'year' => $availableCar->getYear(),
+            'percentile' => $availableCar->getPercentile()->toArray(),
         ];
 
         $this->assertEquals($data, $availableCar->toArray());
