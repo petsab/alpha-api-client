@@ -22,7 +22,7 @@ class SimpleList implements DataObjectInterface, ListInterface
     }
 
     /**
-     * @return array<object>
+     * @return array<mixed>
      */
     public function getData(): array
     {

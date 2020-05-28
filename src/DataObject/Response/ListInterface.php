@@ -7,7 +7,7 @@ namespace Teas\AlphaApiClient\DataObject\Response;
 interface ListInterface
 {
     /**
-     * @return array<object>
+     * @return array<mixed>
      */
     public function getData(): array;
 }
