@@ -9,12 +9,12 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 class SimpleList implements DataObjectInterface, ListInterface
 {
     /**
-     * @var array<object>
+     * @var array<Car|AvailableCar|TopSellingCar|AggregatedStatistic>
      */
     private $data = [];
 
     /**
-     * @param array<object> $data
+     * @param array<Car|AvailableCar|TopSellingCar|AggregatedStatistic> $data
      */
     public function __construct(array $data)
     {
@@ -22,7 +22,7 @@ class SimpleList implements DataObjectInterface, ListInterface
     }
 
     /**
-     * @return array<mixed>
+     * {@inheritdoc}
      */
     public function getData(): array
     {

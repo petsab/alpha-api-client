@@ -10,6 +10,7 @@ use Teas\AlphaApiClient\Factory\DataObject\Response\DataObjectFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\TopSellingCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 
 class ResponseMapperFactory
@@ -52,5 +53,13 @@ class ResponseMapperFactory
         return new StatisticsAggregatedResponseMapper(
             new AggregateStatisticDOFactory()
         );
+    }
+
+    /**
+     * @return TopSellingCarResponseMapper
+     */
+    public function createTopSellingCarResponseMapper(): TopSellingCarResponseMapper
+    {
+        return new TopSellingCarResponseMapper(new DataObjectFactory());
     }
 }

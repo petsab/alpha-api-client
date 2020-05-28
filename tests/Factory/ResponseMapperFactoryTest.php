@@ -9,6 +9,7 @@ use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\TopSellingCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 
 class ResponseMapperFactoryTest extends TestCase
@@ -46,5 +47,11 @@ class ResponseMapperFactoryTest extends TestCase
     {
         $urlMapper = $this->factory->createStatisticsAggregatedResponseMapper();
         $this->assertInstanceOf(StatisticsAggregatedResponseMapper::class, $urlMapper);
+    }
+
+    public function testCreateTopSellingCarsResponseMapper()
+    {
+        $topSellingCarMapper = $this->factory->createTopSellingCarResponseMapper();
+        $this->assertInstanceOf(TopSellingCarResponseMapper::class, $topSellingCarMapper);
     }
 }

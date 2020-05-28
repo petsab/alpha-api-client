@@ -12,7 +12,7 @@ class CarList extends SimpleList
     private $notFoundIds = [];
 
     /**
-     * @param array<object> $data
+     * @param array<Car|AvailableCar|TopSellingCar|AggregatedStatistic> $data
      * @param array<string> $notFoundIds
      */
     public function __construct(array $data, array $notFoundIds)

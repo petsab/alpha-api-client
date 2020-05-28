@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TeasTest\AlphaApiClient\Request;
+namespace TeasTest\AlphaApiClient\Factory\Request;
 
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
