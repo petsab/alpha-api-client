@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\Service;
 
 use BootIq\ServiceLayer\Adapter\AdapterInterface;
+use BootIq\ServiceLayer\Enum\HttpCode;
 use Teas\AlphaApiClient\DataObject\Request\SoldCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Enum\ResponseDataKey;
@@ -68,6 +69,11 @@ class SoldCarService extends BaseAuthorizationService
     ): SimpleList {
         $request = $this->carRequestFactory->createPostTopSellingCarsRequest($filter, $size);
         $response = $this->callRequest($request);
+
+        if ($response->isError() && HttpCode::HTTP_CODE_NOT_FOUND === $response->getHttpCode()) {
+            return $this->listDOFactory->createSimpleList([]);
+        }
+
         $this->processCommonError($response);
         $responseData = json_decode($response->getResponseData(), true);
         $mapper = $this->responseMapperFactory->createTopSellingCarResponseMapper();
