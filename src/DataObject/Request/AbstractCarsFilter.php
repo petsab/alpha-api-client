@@ -9,7 +9,7 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 abstract class AbstractCarsFilter implements DataObjectInterface
 {
     /**
-     * @var FilterSeller|null
+     * @var FilterSeller
      */
     protected $seller;
 
@@ -69,9 +69,9 @@ abstract class AbstractCarsFilter implements DataObjectInterface
     protected $cubicCapacity;
 
     /**
-     * @param FilterSeller|null $seller
+     * @param FilterSeller $seller
      */
-    public function __construct(?FilterSeller $seller)
+    public function __construct(FilterSeller $seller)
     {
         $this->seller = $seller;
     }
@@ -165,9 +165,9 @@ abstract class AbstractCarsFilter implements DataObjectInterface
     }
 
     /**
-     * @return FilterSeller|null
+     * @return FilterSeller
      */
-    public function getSeller(): ?FilterSeller
+    public function getSeller(): FilterSeller
     {
         return $this->seller;
     }

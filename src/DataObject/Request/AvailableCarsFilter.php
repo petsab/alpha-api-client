@@ -11,7 +11,7 @@ namespace Teas\AlphaApiClient\DataObject\Request;
 class AvailableCarsFilter extends AbstractCarsFilter
 {
     /**
-     * @var FilterBuyer|null
+     * @var FilterBuyer
      */
     private $buyer;
 
@@ -36,10 +36,10 @@ class AvailableCarsFilter extends AbstractCarsFilter
     private $uniformity;
 
     /**
-     * @param FilterSeller|null $seller
-     * @param FilterBuyer|null $buyer
+     * @param FilterSeller $seller
+     * @param FilterBuyer $buyer
      */
-    public function __construct(?FilterSeller $seller, ?FilterBuyer $buyer)
+    public function __construct(FilterSeller $seller, FilterBuyer $buyer)
     {
         parent::__construct($seller);
         $this->buyer = $buyer;
@@ -78,9 +78,9 @@ class AvailableCarsFilter extends AbstractCarsFilter
     }
 
     /**
-     * @return FilterBuyer|null
+     * @return FilterBuyer
      */
-    public function getBuyer(): ?FilterBuyer
+    public function getBuyer(): FilterBuyer
     {
         return $this->buyer;
     }
