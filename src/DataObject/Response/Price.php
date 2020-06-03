@@ -21,21 +21,6 @@ class Price implements DataObjectInterface
     /**
      * @var int|null
      */
-    private $withVatCzk;
-
-    /**
-     * @var int|null
-     */
-    private $withVatEur;
-
-    /**
-     * @var int|null
-     */
-    private $retailPriceCzk;
-
-    /**
-     * @var int|null
-     */
     private $vatRate;
 
     /**
@@ -49,17 +34,27 @@ class Price implements DataObjectInterface
     private $currency;
 
     /**
+     * @var string|null
+     */
+    private $originalCurrency;
+
+    /**
+     * @var int|null
+     */
+    private $originalWithVat;
+
+    /**
      * @param int|null $withVat
      * @param string|null $currency
-     * @param int|null $withVatCzk
-     * @param int|null $withVatEur
+     * @param int|null $originalWithVat
+     * @param string|null $originalCurrency
      */
-    public function __construct(?int $withVat, ?string $currency, ?int $withVatCzk, ?int $withVatEur)
+    public function __construct(?int $withVat, ?string $currency, ?int $originalWithVat, ?string $originalCurrency)
     {
         $this->withVat = $withVat;
-        $this->withVatCzk = $withVatCzk;
-        $this->withVatEur = $withVatEur;
         $this->currency = $currency;
+        $this->originalCurrency = $originalCurrency;
+        $this->originalWithVat = $originalWithVat;
     }
 
     /**
@@ -69,17 +64,6 @@ class Price implements DataObjectInterface
     public function setChange(?float $change): Price
     {
         $this->change = $change;
-
-        return $this;
-    }
-
-    /**
-     * @param int|null $retailPriceCzk
-     * @return Price
-     */
-    public function setRetailPriceCzk(?int $retailPriceCzk): Price
-    {
-        $this->retailPriceCzk = $retailPriceCzk;
 
         return $this;
     }
@@ -125,30 +109,6 @@ class Price implements DataObjectInterface
     /**
      * @return int|null
      */
-    public function getWithVatCzk(): ?int
-    {
-        return $this->withVatCzk;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getWithVatEur(): ?int
-    {
-        return $this->withVatEur;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getRetailPriceCzk(): ?int
-    {
-        return $this->retailPriceCzk;
-    }
-
-    /**
-     * @return int|null
-     */
     public function getVatRate(): ?int
     {
         return $this->vatRate;
@@ -171,19 +131,34 @@ class Price implements DataObjectInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getOriginalCurrency(): ?string
+    {
+        return $this->originalCurrency;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOriginalWithVat(): ?int
+    {
+        return $this->originalWithVat;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toArray(): array
     {
         return [
-            'change' => $this->change,
             'withVat' => $this->withVat,
-            'withVatCzk' => $this->withVatCzk,
-            'withVatEur' => $this->withVatEur,
-            'retailPriceCzk' => $this->retailPriceCzk,
             'vatRate' => $this->vatRate,
             'vatReclaimable' => $this->vatReclaimable,
             'currency' => $this->currency,
+            'originalWithVat' => $this->originalWithVat,
+            'originalCurrency' => $this->originalCurrency,
+            'change' => $this->change,
         ];
     }
 }

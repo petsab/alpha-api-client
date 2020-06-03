@@ -6,15 +6,16 @@ namespace TeasTest\AlphaApiClient\DataObject\Response;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Teas\AlphaApiClient\DataObject\Response\Measure;
+use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
-use Teas\AlphaApiClient\DataObject\Response\Percentile;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
-use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
+use Teas\AlphaApiClient\DataObject\Response\SimilarCar;
+use Teas\AlphaApiClient\DataObject\Response\Similarity;
+use Teas\AlphaApiClient\DataObject\Response\SoldCar;
 use Teas\AlphaApiClient\DataObject\Response\Url;
 
-class AvailableCarTest extends TestCase
+class SimilarCarTest extends TestCase
 {
     public function testAll()
     {
@@ -27,10 +28,8 @@ class AvailableCarTest extends TestCase
         $drive = uniqid();
         $featureScore = (float) rand(1, 100);
         $features = [];
-        $premiumFeatures = [];
         for ($i = 0; $i < rand(5, 10); $i++) {
             $features[] = uniqid();
-            $premiumFeatures[] = uniqid();
         }
         $fuelType = uniqid();
         $interiorMaterial = uniqid();
@@ -47,7 +46,6 @@ class AvailableCarTest extends TestCase
         $transmission = uniqid();
         $vin = uniqid();
         $year = rand(1, 100);
-        $turnover = (float) rand(1, 100);
 
         $occurrence = $this->createMock(Occurrence::class);
         $occurrenceData = [
@@ -104,31 +102,22 @@ class AvailableCarTest extends TestCase
             ->method('toArray')
             ->willReturn(['full' => uniqid()]);
 
-        $measure = $this->createMock(Measure::class);
-        $measureData = [
-            'carRank' => uniqid(),
-            'countRelevantCar' => uniqid(),
-            'delta' => uniqid(),
-            'level' => uniqid(),
-            'liquidity' => uniqid(),
-            'ppLevel' => uniqid(),
-            'rate' => uniqid(),
-            'relativePricePosition' => uniqid(),
-            'retailPricePosition' => uniqid(),
-            'soldRangeCategory' => uniqid(),
-            'totalScore' => uniqid(),
-        ];
-        $measure->expects(self::exactly(2))
-            ->method('toArray')
-            ->willReturn($measureData);
-
         $thumbUrl = $this->createMock(Url::class);
         $thumbUrl->expects(self::exactly(2))
             ->method('toArray')
             ->willReturn(['full' => uniqid()]);
 
-        $availableCar = new AvailableCar($id);
-        $availableCar->setAdId($adId)
+        $similarity = $this->createMock(Similarity::class);
+        $similarityData = [
+            'level' => rand(1, 10),
+            'score' => (float)rand() / (float)getrandmax(),
+        ];
+        $similarity->expects(self::exactly(2))
+            ->method('toArray')
+            ->willReturn($similarityData);
+
+        $car = new SimilarCar($id);
+        $car->setAdId($adId)
             ->setCondition($condition)
             ->setCarStyle($carStyle)
             ->setCondition($condition)
@@ -150,8 +139,8 @@ class AvailableCarTest extends TestCase
             ->setPower($power)
             ->setPrice($price)
             ->setSAutoUrl($sAutoUrl)
-            ->setSeller($seller)
             ->setServer($server)
+            ->setSeller($seller)
             ->setSumRelativePriceDifference($sumRelativePriceDifference)
             ->setTechnicalInspectionValidTo($technicalInspectionValidTo)
             ->setTransmission($transmission)
@@ -159,48 +148,43 @@ class AvailableCarTest extends TestCase
             ->setVin($vin)
             ->setYear($year)
             ->setThumbnailUrl($thumbUrl);
-        $availableCar->setPremiumFeatures($premiumFeatures)
-            ->setMeasure($measure)
-            ->setTurnover($turnover);
-
+        $car->setSimilarity($similarity);
 
         $data = [
-            'id' => $availableCar->getId(),
-            'adId' => $availableCar->getAdId(),
-            'carStyle' => $availableCar->getCarStyle(),
-            'condition' => $availableCar->getCondition(),
-            'cubicCapacity' => $availableCar->getCubicCapacity(),
-            'daysOnStock' => $availableCar->getDaysOnStock(),
-            'driveType' => $availableCar->getDriveType(),
-            'featureScore' => $availableCar->getFeatureScore(),
-            'features' => $availableCar->getFeatures(),
-            'occurrence' => $availableCar->getOccurrence()->toArray(),
-            'fuelType' => $availableCar->getFuelType(),
-            'interiorMaterial' => $availableCar->getInteriorMaterial(),
-            'make' => $availableCar->getMake(),
-            'measure' => $availableCar->getMeasure()->toArray(),
-            'metaUpdated' => $availableCar->getMetaUpdated()->format(DATE_ATOM),
-            'mileage' => $availableCar->getMileage(),
-            'mobileDeUrl' => $availableCar->getMobileDeUrl()->toArray(),
-            'model' => $availableCar->getModel(),
-            'numberOfSeats' => $availableCar->getNumberOfSeats(),
-            'originCountry' => $availableCar->getOriginCountry(),
-            'power' => $availableCar->getPower(),
-            'premiumFeatures' => $availableCar->getPremiumFeatures(),
-            'price' => $availableCar->getPrice()->toArray(),
-            'sAutoUrl' => $availableCar->getSAutoUrl()->toArray(),
-            'seller' => $availableCar->getSeller()->toArray(),
-            'server' => $availableCar->getServer(),
-            'sumRelativePriceDifference' => $availableCar->getSumRelativePriceDifference(),
-            'technicalInspectionValidTo' => $availableCar->getTechnicalInspectionValidTo()->format('Y-m-d'),
-            'thumbnailUrl' => $availableCar->getThumbnailUrl()->toArray(),
-            'transmission' => $availableCar->getTransmission(),
-            'turnover' => $availableCar->getTurnover(),
-            'url' => $availableCar->getUrl()->toArray(),
-            'vin' => $availableCar->getVin(),
-            'year' => $availableCar->getYear(),
+            'id' => $car->getId(),
+            'adId' => $car->getAdId(),
+            'carStyle' => $car->getCarStyle(),
+            'condition' => $car->getCondition(),
+            'cubicCapacity' => $car->getCubicCapacity(),
+            'daysOnStock' => $car->getDaysOnStock(),
+            'driveType' => $car->getDriveType(),
+            'featureScore' => $car->getFeatureScore(),
+            'features' => $car->getFeatures(),
+            'occurrence' => $car->getOccurrence()->toArray(),
+            'fuelType' => $car->getFuelType(),
+            'interiorMaterial' => $car->getInteriorMaterial(),
+            'make' => $car->getMake(),
+            'metaUpdated' => $car->getMetaUpdated()->format(DATE_ATOM),
+            'mileage' => $car->getMileage(),
+            'mobileDeUrl' => $car->getMobileDeUrl()->toArray(),
+            'model' => $car->getModel(),
+            'numberOfSeats' => $car->getNumberOfSeats(),
+            'originCountry' => $car->getOriginCountry(),
+            'power' => $car->getPower(),
+            'price' => $car->getPrice()->toArray(),
+            'sAutoUrl' => $car->getSAutoUrl()->toArray(),
+            'server' => $car->getServer(),
+            'seller' => $car->getSeller()->toArray(),
+            'sumRelativePriceDifference' => $car->getSumRelativePriceDifference(),
+            'technicalInspectionValidTo' => $car->getTechnicalInspectionValidTo()->format('Y-m-d'),
+            'thumbnailUrl' => $car->getThumbnailUrl()->toArray(),
+            'transmission' => $car->getTransmission(),
+            'url' => $car->getUrl()->toArray(),
+            'vin' => $car->getVin(),
+            'year' => $car->getYear(),
+            'similarity' => $car->getSimilarity()->toArray(),
         ];
 
-        $this->assertEquals($data, $availableCar->toArray());
+        $this->assertEquals($data, $car->toArray());
     }
 }

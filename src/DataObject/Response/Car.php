@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\DataObject\Response;
 
-class Car extends BaseCar
+class Car extends AbstractExtendedCar
 {
     /**
      * @var bool

@@ -16,6 +16,13 @@ class CarResponseMapper extends BaseCarResponseMapper
     {
         $car = $this->carDOFactory->createCar($data['PK']);
         $this->fillBaseCarData($data, $car);
+
+        if (isset($data['measure_car_rank'])) {
+            $car->setMeasure($this->mapMeasure($data));
+        }
+
+        $car->setPremiumFeatures($data['premium_features'] ?? []);
+        $car->setTurnover($data['turnover'] ?? null);
         $car->setAvailable($data['available_car']);
 
         return $car;

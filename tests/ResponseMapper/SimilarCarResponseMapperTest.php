@@ -8,10 +8,11 @@ use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
 use Teas\AlphaApiClient\Factory\DataObject\Response\DataObjectFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\SimilarCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
-class AvailableCarResponseMapperTest extends TestCase
+class SimilarCarResponseMapperTest extends TestCase
 {
     use NullableDateTimeTrait;
 
@@ -39,14 +40,14 @@ class AvailableCarResponseMapperTest extends TestCase
     }
 
     /**
-     * @dataProvider getCreateSourcingCarFromResponseInput
+     * @dataProvider getCreateSimilarCarFromResponseInput
      * @param string $input
      * @throws \Exception
      */
     public function testCreateSourcingCarFromResponse(string $input)
     {
         $response = json_decode($input, true);
-        $mapper = new AvailableCarResponseMapper($this->carDOFactory, $this->urlResponseMapper);
+        $mapper = new SimilarCarResponseMapper($this->carDOFactory, $this->urlResponseMapper);
         $car = $mapper->map($response);
         $this->assertSame($response['PK'], $car->getId());
         $this->assertSame($response['ad_id'], $car->getAdId());
@@ -69,7 +70,6 @@ class AvailableCarResponseMapperTest extends TestCase
         $this->assertSame($response['model'], $car->getModel());
         $this->assertSame($response['number_of_seats'], $car->getNumberOfSeats());
         $this->assertSame($response['power'], $car->getPower());
-        $this->assertSame($response['premium_features'], $car->getPremiumFeatures());
         $this->assertSame($response['price_change'], $car->getPrice()->getChange());
         $this->assertSame($response['price_with_vat'], $car->getPrice()->getWithVat());
         $this->assertSame($response['original_price_with_vat'], $car->getPrice()->getOriginalWithVat());
@@ -94,37 +94,17 @@ class AvailableCarResponseMapperTest extends TestCase
         $this->assertSame($response['url']['full'], $car->getUrl()->getFull());
         $this->assertSame($response['vat_rate'], $car->getPrice()->getVatRate());
         $this->assertSame($response['vat_reclaimable'], $car->getPrice()->isVatReclaimable());
-        $this->assertSame($response['measure_car_rank'], $car->getMeasure()->getCarRank());
-        $this->assertSame($response['measure_count_relevant_car'], $car->getMeasure()->getCountRelevantCar());
-        $this->assertSame($response['measure_delta'], $car->getMeasure()->getDelta());
-        $this->assertSame($response['measure_level'], $car->getMeasure()->getLevel());
-        $this->assertSame($response['measure_liquidity'], $car->getMeasure()->getLiquidity());
-        $this->assertSame($response['measure_rate'], $car->getMeasure()->getRate());
-        $this->assertSame($response['measure_relative_price_position'], $car->getMeasure()->getRelativePricePosition());
-        $this->assertSame($response['measure_retail_price_position'], $car->getMeasure()->getRetailPricePosition());
-        $this->assertSame($response['measure_sold_range_category'], $car->getMeasure()->getSoldRangeCategory());
-        $this->assertSame($response['measure_total_score'], $car->getMeasure()->getTotalScore());
-        $this->assertSame($response['measure_percentile_0_price'], $car->getMeasure()->getPercentile()->getValue0());
-        $this->assertSame($response['measure_percentile_10_price'], $car->getMeasure()->getPercentile()->getValue10());
-        $this->assertSame($response['measure_percentile_20_price'], $car->getMeasure()->getPercentile()->getValue20());
-        $this->assertSame($response['measure_percentile_30_price'], $car->getMeasure()->getPercentile()->getValue30());
-        $this->assertSame($response['measure_percentile_40_price'], $car->getMeasure()->getPercentile()->getValue40());
-        $this->assertSame($response['measure_percentile_50_price'], $car->getMeasure()->getPercentile()->getValue50());
-        $this->assertSame($response['measure_percentile_60_price'], $car->getMeasure()->getPercentile()->getValue60());
-        $this->assertSame($response['measure_percentile_70_price'], $car->getMeasure()->getPercentile()->getValue70());
-        $this->assertSame($response['measure_percentile_80_price'], $car->getMeasure()->getPercentile()->getValue80());
-        $this->assertSame($response['measure_percentile_90_price'], $car->getMeasure()->getPercentile()->getValue90());
-        $this->assertSame($response['measure_percentile_100_price'], $car->getMeasure()->getPercentile()->getValue100());
         $this->assertSame($response['thumbnail_url']['full'], $car->getThumbnailUrl()->getFull());
-        $this->assertSame($response['turnover'], $car->getTurnover());
+        $this->assertSame($response['similarity_level'], $car->getSimilarity()->getLevel());
+        $this->assertSame($response['similarity_score'], $car->getSimilarity()->getScore());
     }
 
     /**
      * @return array
      */
-    public function getCreateSourcingCarFromResponseInput()
+    public function getCreateSimilarCarFromResponseInput()
     {
-        $path = __DIR__ . DIRECTORY_SEPARATOR . "input" . DIRECTORY_SEPARATOR . "testCreateAvailableCarFromResponse.php";
+        $path = __DIR__ . DIRECTORY_SEPARATOR . "input" . DIRECTORY_SEPARATOR . "testCreateSimilarCarFromResponse.php";
 
         return include $path;
     }

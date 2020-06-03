@@ -15,15 +15,17 @@ class SourcingCarRequestFactory
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
+     * @param string|null $currency
      * @return PostAvailableCarsRequest
      */
     public function createPostAvailableCarsRequest(
         AvailableCarsFilter $filter,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
-        array $orderBy = []
+        array $orderBy = [],
+        ?string $currency = null
     ): PostAvailableCarsRequest {
-        return new PostAvailableCarsRequest($filter, $size, $offset, $orderBy);
+        return new PostAvailableCarsRequest($filter, $size, $offset, $orderBy, $currency);
     }
 
     /**

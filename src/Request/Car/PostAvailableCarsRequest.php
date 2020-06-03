@@ -34,21 +34,29 @@ class PostAvailableCarsRequest extends PostMethod
     private $orderBy = [];
 
     /**
+     * @var string|null
+     */
+    private $currency;
+
+    /**
      * @param AvailableCarsFilter $filter
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
+     * @param string|null $currency
      */
     public function __construct(
         AvailableCarsFilter $filter,
         int $size = self::DEFAULT_SIZE,
         int $offset = self::DEFAULT_OFFSET,
-        array $orderBy = []
+        array $orderBy = [],
+        ?string $currency = null
     ) {
         $this->offset = $offset;
         $this->size = $size;
         $this->orderBy = $orderBy;
         $this->filter = $filter;
+        $this->currency = $currency;
     }
 
     /**
@@ -62,6 +70,10 @@ class PostAvailableCarsRequest extends PostMethod
 
         if (!empty($this->orderBy)) {
             $queryParams[] = 'order_by=' . implode(self::QUERY_ARRAY_VALUES_GLUE, $this->orderBy);
+        }
+
+        if (!empty($this->currency)) {
+            $queryParams[] = 'currency=' . $this->currency;
         }
 
         return sprintf(

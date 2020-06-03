@@ -9,6 +9,7 @@ use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
 use Teas\AlphaApiClient\Factory\DataObject\Response\DataObjectFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\SimilarCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\TopSellingCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
@@ -61,5 +62,16 @@ class ResponseMapperFactory
     public function createTopSellingCarResponseMapper(): TopSellingCarResponseMapper
     {
         return new TopSellingCarResponseMapper(new DataObjectFactory());
+    }
+
+    /**
+     * @return SimilarCarResponseMapper
+     */
+    public function createSimilarCarResponseMapper(): SimilarCarResponseMapper
+    {
+        return new SimilarCarResponseMapper(
+            new CarDOFactory(),
+            $this->createUrlResponseMapper()
+        );
     }
 }

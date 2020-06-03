@@ -6,6 +6,7 @@ namespace TeasTest\AlphaApiClient\DataObject\Response;
 
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Response\Measure;
+use Teas\AlphaApiClient\DataObject\Response\Percentile;
 
 class MeasureTest extends TestCase
 {
@@ -22,7 +23,23 @@ class MeasureTest extends TestCase
         $retailPricePosition = rand(1, 100);
         $soldCategoryRange = uniqid();
         $totalScore = (float) rand(1, 100);
-
+        $percentile = $this->createMock(Percentile::class);
+        $percentileData = [
+            'value0' => (float) rand() / (float) getrandmax(),
+            'value10' => (float) rand() / (float) getrandmax(),
+            'value20' => (float) rand() / (float) getrandmax(),
+            'value30' => (float) rand() / (float) getrandmax(),
+            'value40' => (float) rand() / (float) getrandmax(),
+            'value50' => (float) rand() / (float) getrandmax(),
+            'value60' => (float) rand() / (float) getrandmax(),
+            'value70' => (float) rand() / (float) getrandmax(),
+            'value80' => (float) rand() / (float) getrandmax(),
+            'value90' => (float) rand() / (float) getrandmax(),
+            'value100' => (float) rand() / (float) getrandmax(),
+        ];
+        $percentile->expects(self::exactly(2))
+            ->method('toArray')
+            ->willReturn($percentileData);
 
         $measure = new Measure();
         $measure->setCarRank($carRank)
@@ -35,7 +52,8 @@ class MeasureTest extends TestCase
             ->setRelativePricePosition($relativePricePosition)
             ->setRetailPricePosition($retailPricePosition)
             ->setSoldRangeCategory($soldCategoryRange)
-            ->setTotalScore($totalScore);
+            ->setTotalScore($totalScore)
+            ->setPercentile($percentile);
 
 
         $this->assertSame($carRank, $measure->getCarRank());
@@ -49,6 +67,7 @@ class MeasureTest extends TestCase
         $this->assertSame($retailPricePosition, $measure->getRetailPricePosition());
         $this->assertSame($soldCategoryRange, $measure->getSoldRangeCategory());
         $this->assertSame($totalScore, $measure->getTotalScore());
+        $this->assertSame($percentile, $measure->getPercentile());
 
         $data = [
             'carRank' => $measure->getCarRank(),
@@ -62,6 +81,7 @@ class MeasureTest extends TestCase
             'retailPricePosition' => $measure->getRetailPricePosition(),
             'soldRangeCategory' => $measure->getSoldRangeCategory(),
             'totalScore' => $measure->getTotalScore(),
+            'percentile' => $measure->getPercentile()->toArray(),
         ];
         $this->assertSame($data, $measure->toArray());
     }

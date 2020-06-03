@@ -1,0 +1,116 @@
+<?php
+
+declare(strict_types=1);
+
+return [[
+    '
+    {
+      "PK": "mobile_de-296537750",
+      "ad_id": "mobile_de-296537750",
+      "car_style": "CARSTYLE_ESTATE_CAR",
+      "condition": null,
+      "cubic_capacity": 999,
+      "currency": "CURRENCY_EUR",
+      "days_on_stock": 0,
+      "drive_type": "DRIVE_4X2",
+      "feature_score": 0.1097047497,
+      "features": [
+        "FEATURE_SIDE_MIRRORS_WITH_ELECTIC_ADJUSTMENT",
+        "FEATURE_CORNERING_LIGHTS",
+        "FEATURE_SERVICE_BOOK",
+        "FEATURE_ROOF_RAILS",
+        "FEATURE_START_STOP_SYSTEM",
+        "FEATURE_USB",
+        "FEATURE_HEADLAMP_WASHERS",
+        "FEATURE_ELECTRIC_WINDOWS_FRONT_ELECTRIC_WINDOWS",
+        "FEATURE_FATIGUE_WARNING_SYSTEM",
+        "FEATURE_IMMOBILIZER",
+        "FEATURE_MULTIFUNCTIONAL_STEERING_WHEEL",
+        "FEATURE_HIGH_BEAM_ASSIST",
+        "FEATURE_ON_BOARD_COMPUTER",
+        "FEATURE_LEATHER_STEERING_WHEEL",
+        "FEATURE_EMERGENCY_BRAKING_ASSIST_EBA_BAS",
+        "FEATURE_NAVIGATION_SYSTEM",
+        "FEATURE_ABS",
+        "FEATURE_ESP",
+        "FEATURE_WLAN_WIFI_HOTSPOT",
+        "FEATURE_CD_PLAYER",
+        "FEATURE_TOUCH_SCREEN",
+        "FEATURE_FRONT_FOG_LIGHTS",
+        "FEATURE_INTEGRATED_MUSIC_STREAMING",
+        "FEATURE_APPLE_CARPLAY",
+        "FEATURE_NON_SMOKER_CAR",
+        "FEATURE_BLUETOOTH",
+        "FEATURE_FRONT_SEATS_HEATED",
+        "FEATURE_TRACTION_CONTROL_TC_ASR",
+        "FEATURE_ALLOY_WHEELS",
+        "FEATURE_ANDROID_AUTO",
+        "FEATURE_CENTRAL_LOCKING",
+        "FEATURE_POWER_ASSISTED_STEERING",
+        "FEATURE_LIGHT_SENSOR",
+        "PARKINGSENSORS_FRONT_REAR",
+        "FEATURE_REAR_SEATS_ISOFIX",
+        "FEATURE_TYRE_PRESSURE_MONITORING",
+        "FEATURE_RADIO",
+        "FEATURE_ARMREST",
+        "FEATURE_RAIN_SENSOR",
+        "FEATURE_DAYTIME_RUNNING_LIGHTS",
+        "AIRCONDITIONING_AUTOMATIC_2_ZONES",
+        "FEATURE_FRONT_SEATS_PASSENGER_SEAT_ISOFIX_POINT"
+      ],
+      "first_occurrence": "2020-04-02",
+      "fuel_type": "FUELTYPE_PETROL",
+      "interior_material": "INTERIORMATERIAL_CLOTH",
+      "last_occurrence": "2020-04-02",
+      "make": "MAKE_VOLKSWAGEN",
+      "meta_updated_timestamp": "2020-05-26T11:51:41+00:01",
+      "mileage": 12473,
+      "mobile_de_url": {
+        "full": null
+      },
+      "model": "MAKE_VOLKSWAGEN-MODELFAMILY_GOLF",
+      "number_of_seats": null,
+      "origin_country": null,
+      "original_currency": null,
+      "original_price_with_vat": null,
+      "power": 85,
+      "price_change": null,
+      "price_with_vat": 17340,
+      "price_with_vat_czk": 482722,
+      "price_with_vat_eur": 17340,
+      "retail_price_czk": null,
+      "sauto_url": {
+        "full": null
+      },
+      "seller": {
+        "address": "Topsloh 2-6 (An der B 51) DE-49124 Georgsmarienhutte (Osnabruck)",
+        "city": "DE-49124 Georgsmarienhutte (Osnabruck)",
+        "email": null,
+        "name": "Hulsmann & Tegeler (VW-Partner)",
+        "phone": "+49 (0)5401 480910, +49 (0)5401 86250, +49 (0)5401 480911",
+        "rating_average": 4,
+        "rating_count": 22,
+        "type": "SELLERTYPE_DEALERSHIP",
+        "zip": "49124"
+      },
+      "seller_country": "DE",
+      "server": "mobile_de",
+      "similarity_level": 6,
+      "similarity_score": 1.0,
+      "sum_relative_price_difference": null,
+      "technical_inspection_valid_to": null,
+      "thumbnail_url": {
+        "full": "https://i.imgur.com/rqqd8gW.jpg"
+      },
+      "transmission": "TRANSMISSION_MANUAL",
+      "url": {
+        "full": "https://suchen.mobile.de/auto-inserat/volkswagen-golf-vii-variant-1-0-tsi-join-navi-pdc-lm-klima-georgsmarienh%C3%BCtte-osnabr%C3%BCck/296537750.html"
+      },
+      "vat_rate": 19,
+      "vat_reclaimable": true,
+      "vin": null,
+      "year": 2019
+    }
+    ',
+],
+];

@@ -13,32 +13,26 @@ class PriceTest extends TestCase
     {
         $change = (float) rand(1, 100);
         $withVat = rand(1, 100);
-        $withVatCzk = rand(1, 100);
-        $withVatEur = rand(1, 100);
-        $retailPriceCzk = rand(1, 100);
         $vatRate = rand(1, 100);
         $currency = uniqid();
+        $originalCurrency = uniqid();
+        $originalWithVat = rand(1, 100);
         $vatReclaimable = rand(1, 10) > 5;
-        $price = new Price($withVat, $currency, $withVatCzk, $withVatEur);
+        $price = new Price($withVat, $currency, $originalWithVat, $originalCurrency);
         $price->setChange($change);
         $price->setVatReclaimable($vatReclaimable);
-        $price->setRetailPriceCzk($retailPriceCzk);
         $price->setVatRate($vatRate);
         $this->assertSame($change, $price->getChange());
         $this->assertSame($withVat, $price->getWithVat());
-        $this->assertSame($withVatCzk, $price->getWithVatCzk());
-        $this->assertSame($withVatEur, $price->getWithVatEur());
-        $this->assertSame($retailPriceCzk, $price->getRetailPriceCzk());
         $data = [
             'change' => $price->getChange(),
             'withVat' => $price->getWithVat(),
-            'withVatCzk' => $price->getWithVatCzk(),
-            'withVatEur' => $price->getWithVatEur(),
-            'retailPriceCzk' => $price->getRetailPriceCzk(),
             'vatRate' => $price->getVatRate(),
             'vatReclaimable' => $price->isVatReclaimable(),
             'currency' => $price->getCurrency(),
+            'originalCurrency' => $price->getOriginalCurrency(),
+            'originalWithVat' => $price->getOriginalWithVat(),
         ];
-        $this->assertSame($data, $price->toArray());
+        $this->assertEquals($data, $price->toArray());
     }
 }

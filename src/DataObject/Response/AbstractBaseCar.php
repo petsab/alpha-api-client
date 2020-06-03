@@ -9,13 +9,11 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
 /**
- * Class BaseCar.
- *
  * @SuppressWarnings(PHPMD.TooManyFields)
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
-class BaseCar implements DataObjectInterface
+abstract class AbstractBaseCar implements DataObjectInterface, CarInterface
 {
     use NullableDateTimeTrait;
 
@@ -85,14 +83,14 @@ class BaseCar implements DataObjectInterface
     protected $make;
 
     /**
-     * @var int|null
-     */
-    protected $mileage;
-
-    /**
      * @var DateTimeImmutable|null
      */
     protected $metaUpdated;
+
+    /**
+     * @var int|null
+     */
+    protected $mileage;
 
     /**
      * @var Url
@@ -609,25 +607,6 @@ class BaseCar implements DataObjectInterface
     }
 
     /**
-     * @return string|null
-     */
-    public function getServer(): ?string
-    {
-        return $this->server;
-    }
-
-    /**
-     * @param string|null $server
-     * @return self
-     */
-    public function setServer(?string $server): self
-    {
-        $this->server = $server;
-
-        return $this;
-    }
-
-    /**
      * @return float|null
      */
     public function getSumRelativePriceDifference(): ?float
@@ -761,6 +740,25 @@ class BaseCar implements DataObjectInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getServer(): ?string
+    {
+        return $this->server;
+    }
+
+    /**
+     * @param string|null $server
+     * @return self
+     */
+    public function setServer(?string $server): self
+    {
+        $this->server = $server;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toArray(): array
@@ -791,8 +789,8 @@ class BaseCar implements DataObjectInterface
             'power' => $this->power,
             'price' => $this->price->toArray(),
             'sAutoUrl' => $this->sAutoUrl->toArray(),
-            'seller' => $this->seller->toArray(),
             'server' => $this->server,
+            'seller' => $this->seller->toArray(),
             'sumRelativePriceDifference' => $this->sumRelativePriceDifference,
             'technicalInspectionValidTo' => $this->nullableDateTimeToString(
                 $this->technicalInspectionValidTo,

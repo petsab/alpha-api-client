@@ -13,6 +13,8 @@ use Teas\AlphaApiClient\DataObject\Response\Percentile;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Rating;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
+use Teas\AlphaApiClient\DataObject\Response\SimilarCar;
+use Teas\AlphaApiClient\DataObject\Response\Similarity;
 
 class CarDOFactory
 {
@@ -39,17 +41,17 @@ class CarDOFactory
     /**
      * @param int|null $withVat
      * @param string|null $currency
-     * @param int|null $withVatCzk
-     * @param int|null $withVatEur
+     * @param int|null $originalWithVatCzk
+     * @param string|null $originalCurrency
      * @return Price
      */
     public function createPrice(
         ?int $withVat,
         ?string $currency,
-        ?int $withVatCzk,
-        ?int $withVatEur
+        ?int $originalWithVatCzk,
+        ?string $originalCurrency
     ): Price {
-        return new Price($withVat, $currency, $withVatCzk, $withVatEur);
+        return new Price($withVat, $currency, $originalWithVatCzk, $originalCurrency);
     }
 
     /**
@@ -93,5 +95,24 @@ class CarDOFactory
     public function createPercentile(): Percentile
     {
         return new Percentile();
+    }
+
+    /**
+     * @param int|null $level
+     * @param float|null $score
+     * @return Similarity
+     */
+    public function createSimilarity(?int $level, ?float $score): Similarity
+    {
+        return new Similarity($level, $score);
+    }
+
+    /**
+     * @param string $pk
+     * @return SimilarCar
+     */
+    public function createSimilarCar(string $pk): SimilarCar
+    {
+        return new SimilarCar($pk);
     }
 }

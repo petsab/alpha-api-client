@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\Factory\DataObject\Response;
 
-use Teas\AlphaApiClient\DataObject\Response\AggregatedStatistic;
-use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
-use Teas\AlphaApiClient\DataObject\Response\Car;
+use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
-use Teas\AlphaApiClient\DataObject\Response\TopSellingCar;
 
 class ListDOFactory
 {
     /**
-     * @param array<Car|AvailableCar|TopSellingCar|AggregatedStatistic> $data
+     * @param array<DataObjectInterface> $data
      * @return SimpleList
      */
     public function createSimpleList(array $data): SimpleList
@@ -23,7 +20,7 @@ class ListDOFactory
     }
 
     /**
-     * @param array<Car|AvailableCar|TopSellingCar|AggregatedStatistic> $data
+     * @param array<DataObjectInterface> $data
      * @param array<string> $notFoundIds
      * @return CarList
      */

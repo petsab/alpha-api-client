@@ -31,25 +31,27 @@ class PostAvailableCarsRequestTest extends TestCase
         for ($i = 0; $i < rand(1, 5); $i++) {
             $orderBy[] = uniqid();
         }
+        $currency = uniqid();
         $filter = $this->createMock(AvailableCarsFilter::class);
         $filterData = [uniqid() => uniqid()];
         $filter->expects(self::once())
             ->method('toArray')
             ->willReturn($filterData);
-        $request = $this->factory->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy);
+        $request = $this->factory->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy, $currency);
         $this->assertInstanceOf(PostAvailableCarsRequest::class, $request);
         $this->assertEquals(HttpMethod::METHOD_POST, $request->getMethod());
         $url = sprintf(
-            'available_cars?size=%d&offset=%d&order_by=%s',
+            'available_cars?size=%d&offset=%d&order_by=%s&currency=%s',
             $size,
             $offset,
-            implode(PostAvailableCarsRequest::QUERY_ARRAY_VALUES_GLUE, $orderBy)
+            implode(PostAvailableCarsRequest::QUERY_ARRAY_VALUES_GLUE, $orderBy),
+            $currency
         );
         $this->assertSame($url, $request->getEndpoint());
         $this->assertSame($filterData, $request->getData());
     }
 
-    public function testPostAvailableCarsRequestWithoutSort()
+    public function testPostAvailableCarsRequestWithoutSortAndCurrency()
     {
         $offset = rand(1, 1000);
         $size = rand(50, 100);

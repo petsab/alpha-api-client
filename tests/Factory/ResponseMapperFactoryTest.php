@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\Factory\ResponseMapperFactory;
 use Teas\AlphaApiClient\ResponseMapper\AvailableCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\CarResponseMapper;
+use Teas\AlphaApiClient\ResponseMapper\SimilarCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\StatisticsAggregatedResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\TopSellingCarResponseMapper;
 use Teas\AlphaApiClient\ResponseMapper\UrlResponseMapper;
@@ -27,31 +28,37 @@ class ResponseMapperFactoryTest extends TestCase
 
     public function testCreateUrlResponseMapper()
     {
-        $urlMapper = $this->factory->createUrlResponseMapper();
-        $this->assertInstanceOf(UrlResponseMapper::class, $urlMapper);
+        $mapper = $this->factory->createUrlResponseMapper();
+        $this->assertInstanceOf(UrlResponseMapper::class, $mapper);
     }
 
     public function testCreateAvailableCarMapper()
     {
-        $urlMapper = $this->factory->createAvailableCarResponseMapper();
-        $this->assertInstanceOf(AvailableCarResponseMapper::class, $urlMapper);
+        $mapper = $this->factory->createAvailableCarResponseMapper();
+        $this->assertInstanceOf(AvailableCarResponseMapper::class, $mapper);
     }
 
     public function testCreateCarMapper()
     {
-        $urlMapper = $this->factory->createCarResponseMapper();
-        $this->assertInstanceOf(CarResponseMapper::class, $urlMapper);
+        $mapper = $this->factory->createCarResponseMapper();
+        $this->assertInstanceOf(CarResponseMapper::class, $mapper);
     }
 
     public function testStatisticsAggregateResponseMapper()
     {
-        $urlMapper = $this->factory->createStatisticsAggregatedResponseMapper();
-        $this->assertInstanceOf(StatisticsAggregatedResponseMapper::class, $urlMapper);
+        $mapper = $this->factory->createStatisticsAggregatedResponseMapper();
+        $this->assertInstanceOf(StatisticsAggregatedResponseMapper::class, $mapper);
     }
 
     public function testCreateTopSellingCarsResponseMapper()
     {
-        $topSellingCarMapper = $this->factory->createTopSellingCarResponseMapper();
-        $this->assertInstanceOf(TopSellingCarResponseMapper::class, $topSellingCarMapper);
+        $mapper = $this->factory->createTopSellingCarResponseMapper();
+        $this->assertInstanceOf(TopSellingCarResponseMapper::class, $mapper);
+    }
+
+    public function testCreateSimilarCarMapper()
+    {
+        $mapper = $this->factory->createSimilarCarResponseMapper();
+        $this->assertInstanceOf(SimilarCarResponseMapper::class, $mapper);
     }
 }

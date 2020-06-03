@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\ResponseMapper;
 
-use Teas\AlphaApiClient\DataObject\Response\BaseCar;
+use Teas\AlphaApiClient\DataObject\Response\AbstractBaseCar;
+use Teas\AlphaApiClient\DataObject\Response\Measure;
 use Teas\AlphaApiClient\DataObject\Response\Occurrence;
+use Teas\AlphaApiClient\DataObject\Response\Percentile;
 use Teas\AlphaApiClient\DataObject\Response\Price;
 use Teas\AlphaApiClient\DataObject\Response\Seller;
 use Teas\AlphaApiClient\Factory\DataObject\Response\CarDOFactory;
@@ -39,9 +41,9 @@ class BaseCarResponseMapper
 
     /**
      * @param array<mixed> $data
-     * @param BaseCar $car
+     * @param AbstractBaseCar $car
      */
-    public function fillBaseCarData(array $data, BaseCar $car): void
+    public function fillBaseCarData(array $data, AbstractBaseCar $car): void
     {
         $car->setAdId($data['ad_id'])
             ->setCarStyle($data['car_style'])
@@ -63,8 +65,8 @@ class BaseCarResponseMapper
             ->setPower($data['power'])
             ->setPrice($this->mapPrice($data))
             ->setSAutoUrl($this->urlResponseMapper->map($data['sauto_url']))
-            ->setSeller($this->mapSeller($data))
             ->setServer($data['server'])
+            ->setSeller($this->mapSeller($data))
             ->setTransmission($data['transmission'])
             ->setUrl($this->urlResponseMapper->map($data['url']))
             ->setVin($data['vin'])
@@ -95,11 +97,10 @@ class BaseCarResponseMapper
         $price = $this->carDOFactory->createPrice(
             $data['price_with_vat'],
             $data['currency'],
-            $data['price_with_vat_czk'],
-            $data['price_with_vat_eur']
+            $data['original_price_with_vat'],
+            $data['original_currency']
         );
         $price->setChange($data['price_change'])
-            ->setRetailPriceCzk($data['retail_price_czk'])
             ->setVatReclaimable($data['vat_reclaimable'])
             ->setVatRate($data['vat_rate']);
 
@@ -124,5 +125,53 @@ class BaseCarResponseMapper
             ->setCountry($data['seller_country']);
 
         return $seller;
+    }
+
+    /**
+     * @param array<mixed> $data
+     * @return Measure
+     */
+    protected function mapMeasure(array $data): Measure
+    {
+        $measure = $this->carDOFactory->createMeasure();
+        $measure->setCarRank($data['measure_car_rank'])
+            ->setCountRelevantCar($data['measure_count_relevant_car'])
+            ->setDelta($data['measure_delta'])
+            ->setLevel($data['measure_level'])
+            ->setLiquidity($data['measure_liquidity'])
+            ->setPpLevel($data['measure_pp_level'])
+            ->setRate($data['measure_rate'])
+            ->setRelativePricePosition($data['measure_relative_price_position'])
+            ->setRetailPricePosition($data['measure_retail_price_position'])
+            ->setSoldRangeCategory($data['measure_sold_range_category'])
+            ->setTotalScore($data['measure_total_score']);
+        $percentile = isset($data['measure_percentile_0_price'])
+            ? $this->mapPercentile($data)
+            : null;
+        $measure->setPercentile($percentile);
+
+        return $measure;
+    }
+
+    /**
+     * @param array<mixed> $data
+     * @return Percentile
+     */
+    protected function mapPercentile(array $data): Percentile
+    {
+        $percentile = $this->carDOFactory->createPercentile();
+        $percentile->setValue0($data['measure_percentile_0_price'])
+            ->setValue10($data['measure_percentile_10_price'])
+            ->setValue20($data['measure_percentile_20_price'])
+            ->setValue30($data['measure_percentile_30_price'])
+            ->setValue40($data['measure_percentile_40_price'])
+            ->setValue50($data['measure_percentile_50_price'])
+            ->setValue60($data['measure_percentile_60_price'])
+            ->setValue70($data['measure_percentile_70_price'])
+            ->setValue80($data['measure_percentile_80_price'])
+            ->setValue90($data['measure_percentile_90_price'])
+            ->setValue100($data['measure_percentile_100_price']);
+
+        return $percentile;
     }
 }

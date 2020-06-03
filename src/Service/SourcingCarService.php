@@ -68,6 +68,7 @@ class SourcingCarService extends BaseAuthorizationService
      * @param int $size
      * @param int $offset
      * @param array<string> $orderBy
+     * @param string|null $currency
      * @throws ErrorResponseException
      * @return SimpleList
      */
@@ -75,9 +76,11 @@ class SourcingCarService extends BaseAuthorizationService
         AvailableCarsFilter $filter,
         int $size = PostAvailableCarsRequest::DEFAULT_SIZE,
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
-        array $orderBy = []
+        array $orderBy = [],
+        ?string $currency = null
     ): SimpleList {
-        $request = $this->carRequestFactory->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy);
+        $request = $this->carRequestFactory
+            ->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy, $currency);
         $response = $this->callRequest($request);
         $this->processCommonError($response);
         $responseData = json_decode($response->getResponseData(), true);

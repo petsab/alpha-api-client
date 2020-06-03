@@ -160,6 +160,7 @@ class CarTest extends TestCase
             'numberOfSeats' => $car->getNumberOfSeats(),
             'originCountry' => $car->getOriginCountry(),
             'power' => $car->getPower(),
+            'premiumFeatures' => $car->getPremiumFeatures(),
             'price' => $car->getPrice()->toArray(),
             'sAutoUrl' => $car->getSAutoUrl()->toArray(),
             'seller' => $car->getSeller()->toArray(),
@@ -172,6 +173,8 @@ class CarTest extends TestCase
             'vin' => $car->getVin(),
             'year' => $car->getYear(),
             'available' => $car->isAvailable(),
+            'measure' => null,
+            'turnover' => null,
         ];
 
         $this->assertEquals($data, $car->toArray());

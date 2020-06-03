@@ -9,12 +9,12 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 class SimpleList implements DataObjectInterface, ListInterface
 {
     /**
-     * @var array<mixed>
+     * @var array<DataObjectInterface>
      */
     private $data = [];
 
     /**
-     * @param array<mixed> $data
+     * @param array<DataObjectInterface> $data
      */
     public function __construct(array $data)
     {

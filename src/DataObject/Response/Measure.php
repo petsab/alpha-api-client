@@ -64,6 +64,11 @@ class Measure implements DataObjectInterface
     private $totalScore;
 
     /**
+     * @var Percentile|null
+     */
+    private $percentile;
+
+    /**
      * @return int|null
      */
     public function getCarRank(): ?int
@@ -273,6 +278,25 @@ class Measure implements DataObjectInterface
     }
 
     /**
+     * @return Percentile|null
+     */
+    public function getPercentile(): ?Percentile
+    {
+        return $this->percentile;
+    }
+
+    /**
+     * @param Percentile|null $percentile
+     * @return Measure
+     */
+    public function setPercentile(?Percentile $percentile): Measure
+    {
+        $this->percentile = $percentile;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toArray(): array
@@ -289,6 +313,7 @@ class Measure implements DataObjectInterface
             'retailPricePosition' => $this->retailPricePosition,
             'soldRangeCategory' => $this->soldRangeCategory,
             'totalScore' => $this->totalScore,
+            'percentile' => ($this->percentile ? $this->percentile->toArray() : null),
         ];
     }
 }
