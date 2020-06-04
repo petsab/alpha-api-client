@@ -150,12 +150,6 @@ class AvailableCarsFilterTest extends TestCase
         $this->assertEquals($data, $filter->toArray());
     }
 
-//    public function testAllEmpty()
-//    {
-//        $filter = new AvailableCarsFilter(null, null);
-//        $this->assertEquals([], $filter->toArray());
-//    }
-
     private function createIntegerRange(): IntegerRange
     {
         return new IntegerRange(rand(1, 100), rand(1, 100));

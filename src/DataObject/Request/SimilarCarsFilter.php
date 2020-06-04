@@ -9,232 +9,232 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 class SimilarCarsFilter implements DataObjectInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $make;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $modelFamily;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $year;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $carStyle;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $fuelType;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $sellerCountry;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $power;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $drive;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $transmission;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $mileage;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMake(): string
+    public function getMake(): ?string
     {
         return $this->make;
     }
 
     /**
-     * @param string $make
+     * @param string|null $make
      */
-    public function setMake(string $make): void
+    public function setMake(?string $make): void
     {
         $this->make = $make;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getModelFamily(): string
+    public function getModelFamily(): ?string
     {
         return $this->modelFamily;
     }
 
     /**
-     * @param string $modelFamily
+     * @param string|null $modelFamily
      */
-    public function setModelFamily(string $modelFamily): void
+    public function setModelFamily(?string $modelFamily): void
     {
         $this->modelFamily = $modelFamily;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getYear(): int
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
     /**
-     * @param int $year
+     * @param int|null $year
      */
-    public function setYear(int $year): void
+    public function setYear(?int $year): void
     {
         $this->year = $year;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCarStyle(): string
+    public function getCarStyle(): ?string
     {
         return $this->carStyle;
     }
 
     /**
-     * @param string $carStyle
+     * @param string|null $carStyle
      */
-    public function setCarStyle(string $carStyle): void
+    public function setCarStyle(?string $carStyle): void
     {
         $this->carStyle = $carStyle;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFuelType(): string
+    public function getFuelType(): ?string
     {
         return $this->fuelType;
     }
 
     /**
-     * @param string $fuelType
+     * @param string|null $fuelType
      */
-    public function setFuelType(string $fuelType): void
+    public function setFuelType(?string $fuelType): void
     {
         $this->fuelType = $fuelType;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSellerCountry(): string
+    public function getSellerCountry(): ?string
     {
         return $this->sellerCountry;
     }
 
     /**
-     * @param string $sellerCountry
+     * @param string|null $sellerCountry
      */
-    public function setSellerCountry(string $sellerCountry): void
+    public function setSellerCountry(?string $sellerCountry): void
     {
         $this->sellerCountry = $sellerCountry;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPower(): int
+    public function getPower(): ?int
     {
         return $this->power;
     }
 
     /**
-     * @param int $power
+     * @param int|null $power
      */
-    public function setPower(int $power): void
+    public function setPower(?int $power): void
     {
         $this->power = $power;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDrive(): string
+    public function getDrive(): ?string
     {
         return $this->drive;
     }
 
     /**
-     * @param string $drive
+     * @param string|null $drive
      */
-    public function setDrive(string $drive): void
+    public function setDrive(?string $drive): void
     {
         $this->drive = $drive;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTransmission(): string
+    public function getTransmission(): ?string
     {
         return $this->transmission;
     }
 
     /**
-     * @param string $transmission
+     * @param string|null $transmission
      */
-    public function setTransmission(string $transmission): void
+    public function setTransmission(?string $transmission): void
     {
         $this->transmission = $transmission;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMileage(): int
+    public function getMileage(): ?int
     {
         return $this->mileage;
     }
 
     /**
-     * @param int $mileage
+     * @param int|null $mileage
      */
-    public function setMileage(int $mileage): void
+    public function setMileage(?int $mileage): void
     {
         $this->mileage = $mileage;
     }
