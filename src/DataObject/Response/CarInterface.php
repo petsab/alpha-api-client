@@ -8,5 +8,5 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 
 interface CarInterface extends DataObjectInterface
 {
-    public function getId(): int;
+    public function getId(): string;
 }
