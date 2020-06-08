@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Request\SimilarCarsFilter;
 use Teas\AlphaApiClient\DataObject\Request\SoldCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\SimilarCar;
+use Teas\AlphaApiClient\DataObject\Response\SimpleCarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\DataObject\Response\TopSellingCar;
 use Teas\AlphaApiClient\Enum\ResponseDataKey;
@@ -105,16 +106,16 @@ class SimilarCarServiceTest extends TestCase
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
         $this->listDOFactory->expects(self::once())
-            ->method('createSimpleList')
+            ->method('createSimpleCarList')
             ->with([$similarCar])
-            ->willReturn(new SimpleList([$similarCar]));
+            ->willReturn(new SimpleCarList([$similarCar]));
         $this->responseMapperFactory->expects(self::once())
             ->method('createSimilarCarResponseMapper')
             ->willReturn($mapper);
         $mapper->expects(self::once())
             ->method('map')
             ->willReturn($similarCar);
-        $expected = new SimpleList([$similarCar]);
+        $expected = new SimpleCarList([$similarCar]);
         $result = $this->instance->getSimilarCarsList($filter, $window, $currency);
         $this->assertEquals($expected, $result);
     }

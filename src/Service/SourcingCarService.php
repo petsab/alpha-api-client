@@ -9,7 +9,7 @@ use BootIq\ServiceLayer\Enum\HttpCode;
 use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
-use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\DataObject\Response\SimpleCarList;
 use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\AwsAuthenticationException;
 use Teas\AlphaApiClient\Exception\CarNotFoundException;
@@ -70,7 +70,7 @@ class SourcingCarService extends BaseAuthorizationService
      * @param array<string> $orderBy
      * @param string|null $currency
      * @throws ErrorResponseException
-     * @return SimpleList
+     * @return SimpleCarList
      */
     public function getAvailableCarsList(
         AvailableCarsFilter $filter,
@@ -78,7 +78,7 @@ class SourcingCarService extends BaseAuthorizationService
         int $offset = PostAvailableCarsRequest::DEFAULT_OFFSET,
         array $orderBy = [],
         ?string $currency = null
-    ): SimpleList {
+    ): SimpleCarList {
         $request = $this->carRequestFactory
             ->createPostAvailableCarsRequest($filter, $size, $offset, $orderBy, $currency);
         $response = $this->callRequest($request);
@@ -91,7 +91,7 @@ class SourcingCarService extends BaseAuthorizationService
             $result[] = $mapper->map($data);
         }
 
-        return $this->listDOFactory->createSimpleList($result);
+        return $this->listDOFactory->createSimpleCarList($result);
     }
 
     /**

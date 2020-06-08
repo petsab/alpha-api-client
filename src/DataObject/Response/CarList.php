@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\DataObject\Response;
 
-class CarList extends SimpleList
+class CarList extends SimpleCarList
 {
     /**
      * @var array<string>

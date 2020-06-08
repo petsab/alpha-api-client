@@ -6,15 +6,15 @@ namespace Teas\AlphaApiClient\DataObject\Response;
 
 use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 
-class SimpleList implements DataObjectInterface, ListInterface
+class SimpleCarList implements DataObjectInterface, CarListInterface
 {
     /**
-     * @var array<DataObjectInterface>
+     * @var array<CarInterface>
      */
     private $data = [];
 
     /**
-     * @param array<DataObjectInterface> $data
+     * @param array<CarInterface> $data
      */
     public function __construct(array $data)
     {

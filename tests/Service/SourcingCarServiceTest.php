@@ -10,6 +10,7 @@ use Teas\AlphaApiClient\DataObject\Request\AvailableCarsFilter;
 use Teas\AlphaApiClient\DataObject\Response\AvailableCar;
 use Teas\AlphaApiClient\DataObject\Response\Car;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
+use Teas\AlphaApiClient\DataObject\Response\SimpleCarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\CarNotFoundException;
@@ -105,16 +106,16 @@ class SourcingCarServiceTest extends TestCase
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
         $this->listDOFactory->expects(self::once())
-            ->method('createSimpleList')
+            ->method('createSimpleCarList')
             ->with([$availableCar])
-            ->willReturn(new SimpleList([$availableCar]));
+            ->willReturn(new SimpleCarList([$availableCar]));
         $this->responseMapperFactory->expects(self::once())
             ->method('createAvailableCarResponseMapper')
             ->willReturn($mapper);
         $mapper->expects(self::once())
             ->method('map')
             ->willReturn($availableCar);
-        $expected = new SimpleList([$availableCar]);
+        $expected = new SimpleCarList([$availableCar]);
         $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
         $this->assertEquals($expected, $result);
     }
@@ -157,16 +158,16 @@ class SourcingCarServiceTest extends TestCase
             ->method('getResponseData')
             ->willReturn(\GuzzleHttp\json_encode($responseData));
         $this->listDOFactory->expects(self::once())
-            ->method('createSimpleList')
+            ->method('createSimpleCarList')
             ->with([$availableCar])
-            ->willReturn(new SimpleList([$availableCar]));
+            ->willReturn(new SimpleCarList([$availableCar]));
         $this->responseMapperFactory->expects(self::once())
             ->method('createAvailableCarResponseMapper')
             ->willReturn($mapper);
         $mapper->expects(self::once())
             ->method('map')
             ->willReturn($availableCar);
-        $expected = new SimpleList([$availableCar]);
+        $expected = new SimpleCarList([$availableCar]);
         $result = $this->instance->getAvailableCarsList($filter, $size, $offset);
         $this->assertEquals($expected, $result);
     }

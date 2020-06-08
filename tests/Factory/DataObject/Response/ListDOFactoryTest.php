@@ -6,6 +6,7 @@ namespace TeasTest\AlphaApiClient\Factory\DataObject\Response;
 
 use PHPUnit\Framework\TestCase;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
+use Teas\AlphaApiClient\DataObject\Response\SimpleCarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
 
@@ -23,5 +24,12 @@ class ListDOFactoryTest extends TestCase
         $factory = new ListDOFactory();
         $list = $factory->createCarList([], []);
         $this->assertInstanceOf(CarList::class, $list);
+    }
+
+    public function testCreateSimpleCarList()
+    {
+        $factory = new ListDOFactory();
+        $list = $factory->createSimpleCarList([]);
+        $this->assertInstanceOf(SimpleCarList::class, $list);
     }
 }

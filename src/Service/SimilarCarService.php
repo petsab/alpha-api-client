@@ -6,7 +6,7 @@ namespace Teas\AlphaApiClient\Service;
 
 use BootIq\ServiceLayer\Adapter\AdapterInterface;
 use Teas\AlphaApiClient\DataObject\Request\SimilarCarsFilter;
-use Teas\AlphaApiClient\DataObject\Response\SimpleList;
+use Teas\AlphaApiClient\DataObject\Response\SimpleCarList;
 use Teas\AlphaApiClient\Enum\ResponseDataKey;
 use Teas\AlphaApiClient\Exception\ErrorResponseException;
 use Teas\AlphaApiClient\Factory\DataObject\Response\ListDOFactory;
@@ -60,9 +60,9 @@ class SimilarCarService extends BaseAuthorizationService
      * @param int $window
      * @param string|null $currency
      * @throws ErrorResponseException
-     * @return SimpleList
+     * @return SimpleCarList
      */
-    public function getSimilarCarsList(SimilarCarsFilter $filter, int $window, ?string $currency = null): SimpleList
+    public function getSimilarCarsList(SimilarCarsFilter $filter, int $window, ?string $currency = null): SimpleCarList
     {
         $request = $this->carRequestFactory->createPostSimilarCarsRequest($filter, $window, $currency);
         $response = $this->callRequest($request);
@@ -75,6 +75,6 @@ class SimilarCarService extends BaseAuthorizationService
             $result[] = $mapper->map($data);
         }
 
-        return $this->listDOFactory->createSimpleList($result);
+        return $this->listDOFactory->createSimpleCarList($result);
     }
 }
