@@ -9,7 +9,7 @@ use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 interface ListInterface
 {
     /**
-     * @return array<DataObjectInterface>
+     * @return array<DataObjectInterface|CarInterface>
      */
     public function getData(): array;
 }

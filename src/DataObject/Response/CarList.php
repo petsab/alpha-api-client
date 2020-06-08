@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Teas\AlphaApiClient\DataObject\Response;
 
-use Teas\AlphaApiClient\DataObject\DataObjectInterface;
-
 class CarList extends SimpleList
 {
     /**
@@ -14,7 +12,7 @@ class CarList extends SimpleList
     private $notFoundIds = [];
 
     /**
-     * @param array<DataObjectInterface> $data
+     * @param array<CarInterface> $data
      * @param array<string> $notFoundIds
      */
     public function __construct(array $data, array $notFoundIds)
