@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\Factory\DataObject\Response;
 
 use Teas\AlphaApiClient\DataObject\DataObjectInterface;
+use Teas\AlphaApiClient\DataObject\Response\CarInterface;
 use Teas\AlphaApiClient\DataObject\Response\CarList;
 use Teas\AlphaApiClient\DataObject\Response\SimpleList;
 
 class ListDOFactory
 {
     /**
-     * @param array<DataObjectInterface> $data
+     * @param array<DataObjectInterface|CarInterface> $data
      * @return SimpleList
      */
     public function createSimpleList(array $data): SimpleList
@@ -20,7 +21,7 @@ class ListDOFactory
     }
 
     /**
-     * @param array<DataObjectInterface> $data
+     * @param array<CarInterface> $data
      * @param array<string> $notFoundIds
      * @return CarList
      */

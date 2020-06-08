@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Teas\AlphaApiClient\DataObject\Response;
 
 use DateTimeImmutable;
-use Teas\AlphaApiClient\DataObject\DataObjectInterface;
 use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
 
 /**
