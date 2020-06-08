@@ -13,7 +13,7 @@ use Teas\AlphaApiClient\Traits\NullableDateTimeTrait;
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
-abstract class AbstractBaseCar implements DataObjectInterface, CarInterface
+abstract class AbstractBaseCar implements CarInterface
 {
     use NullableDateTimeTrait;
 
