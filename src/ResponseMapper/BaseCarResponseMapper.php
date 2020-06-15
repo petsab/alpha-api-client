@@ -94,10 +94,11 @@ class BaseCarResponseMapper
      */
     private function mapPrice(array $data): Price
     {
+        $originalPrice = null === $data['original_price_with_vat'] ? null : intval($data['original_price_with_vat']);
         $price = $this->carDOFactory->createPrice(
             $data['price_with_vat'],
             $data['currency'],
-            $data['original_price_with_vat'],
+            $originalPrice,
             $data['original_currency']
         );
         $price->setChange($data['price_change'])
